@@ -3,13 +3,14 @@ package net.stouma915.hydrogenmod.item
 import net.minecraft.world.effect.{MobEffectInstance, MobEffects}
 import net.minecraft.world.food.FoodProperties
 import net.minecraft.world.item.Item.Properties
-import net.minecraft.world.item.{CreativeModeTab, Item}
+import net.minecraft.world.item.Item
 import net.stouma915.hydrogenmod.HydrogenMod
+import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object HydrogenItem {
   val item: Item = new Item(
     new Properties()
-      .tab(CreativeModeTab.TAB_MISC)
+      .tab(HydrogenModTab.tab)
       .food(
         new FoodProperties.Builder()
           .alwaysEat()
