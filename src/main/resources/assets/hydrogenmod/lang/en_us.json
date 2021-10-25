@@ -1,4 +1,5 @@
 {
   "itemGroup.hydrogenmod": "Hydrogen Mod",
-  "item.hydrogenmod.hydrogen": "Hydrogen"
+  "item.hydrogenmod.hydrogen": "Hydrogen",
+  "item.hydrogenmod.oxygen": "Oxygen"
 }

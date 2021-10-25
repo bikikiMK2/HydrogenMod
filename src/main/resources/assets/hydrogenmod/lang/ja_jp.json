@@ -1,4 +1,5 @@
 {
   "itemGroup.hydrogenmod": "水素Mod",
-  "item.hydrogenmod.hydrogen": "水素"
+  "item.hydrogenmod.hydrogen": "水素",
+  "item.hydrogenmod.oxygen": "酸素"
 }

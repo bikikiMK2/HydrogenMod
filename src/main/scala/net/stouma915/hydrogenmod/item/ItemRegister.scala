@@ -11,11 +11,11 @@ import net.stouma915.hydrogenmod.HydrogenMod
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object ItemRegister {
-  private val hydrogen = HydrogenItem.item
-
   @SubscribeEvent
   def registerItems(
       event: RegistryEvent.Register[Item]
-  ): Unit =
-    event.getRegistry.register(hydrogen)
+  ): Unit = {
+    event.getRegistry.register(HydrogenItem.item)
+    event.getRegistry.register(OxygenItem.item)
+  }
 }
