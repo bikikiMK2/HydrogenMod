@@ -5,5 +5,6 @@
   "item.minecraft.potion.effect.hydrogen_water": "Hydrogen Water",
   "item.minecraft.splash_potion.effect.hydrogen_water": "Splash Hydrogen Water",
   "item.minecraft.tipped_arrow.effect.hydrogen_water": "Arrow of Hydrogen Water",
-  "item.minecraft.lingering_potion.effect.hydrogen_water": "Lingering Hydrogen Water"
+  "item.minecraft.lingering_potion.effect.hydrogen_water": "Lingering Hydrogen Water",
+  "effect.hydrogenmod.hydrogen_water_effect": "Hydrogen Water"
 }
