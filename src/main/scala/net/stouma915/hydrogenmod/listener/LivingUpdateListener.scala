@@ -3,7 +3,10 @@ package net.stouma915.hydrogenmod.listener
 import net.minecraft.world.entity.player.Player
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.stouma915.hydrogenmod.potion.effect.HydrogenWaterEffect
+import net.stouma915.hydrogenmod.potion.effect.{
+  HydrogenWaterEffect,
+  OxygenWaterEffect
+}
 
 class LivingUpdateListener {
   @SubscribeEvent
@@ -23,5 +26,8 @@ class LivingUpdateListener {
       val player = event.getEntityLiving.asInstanceOf[Player]
       if (player.getFoodData.getFoodLevel < 20)
         player.getFoodData.setFoodLevel(player.getFoodData.getFoodLevel + 1)
+    } else if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect)) {
+      event.getEntityLiving.heal(0.1f)
+      event.getEntityLiving.setAirSupply(event.getEntityLiving.getMaxAirSupply)
     }
 }

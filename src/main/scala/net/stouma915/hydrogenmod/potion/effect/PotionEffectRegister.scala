@@ -14,5 +14,6 @@ object PotionEffectRegister {
   @SubscribeEvent
   def registerEffect(event: RegistryEvent.Register[MobEffect]): Unit = {
     event.getRegistry.register(HydrogenWaterEffect.effect)
+    event.getRegistry.register(OxygenWaterEffect.effect)
   }
 }

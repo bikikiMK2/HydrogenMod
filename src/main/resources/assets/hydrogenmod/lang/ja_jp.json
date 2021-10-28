@@ -10,5 +10,6 @@
   "item.minecraft.splash_potion.effect.oxygen_water": "スプラッシュ酸素水",
   "item.minecraft.tipped_arrow.effect.oxygen_water": "酸素水の矢",
   "item.minecraft.lingering_potion.effect.oxygen_water": "残留酸素水",
-  "effect.hydrogenmod.hydrogen_water_effect": "水素水"
+  "effect.hydrogenmod.hydrogen_water_effect": "水素水",
+  "effect.hydrogenmod.oxygen_water_effect": "酸素水"
 }
