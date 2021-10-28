@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 @Mod(HydrogenMod.MODID)
 public class HydrogenMod {
-    public static final String MODID = "hydrogenmod";
+    static final String MODID = "hydrogenmod";
 
     public HydrogenMod() {
         Arrays.asList(
