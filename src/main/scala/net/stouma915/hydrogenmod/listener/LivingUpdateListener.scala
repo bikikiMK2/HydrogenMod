@@ -14,7 +14,8 @@ class LivingUpdateListener {
       // TODO: match構文に置き換える。
       // matchを使おうとするとMinecraftがフリーズする。(java.lang.NoClassDefFoundError: scala/runtime/BoxedUnit)
       // if (event.getEntityLiving.isInstanceOf[Player]) {
-      //   val player = ...
+      //   val player = event.getEntityLiving.asInstanceOf[Player]
+      //   ...
       // }
       // 上記の状態ではIntelliJ IDEAからmatchを使用せよと指摘を受けるため、returnを使用して回避する。
       if (!event.getEntityLiving.isInstanceOf[Player]) return
