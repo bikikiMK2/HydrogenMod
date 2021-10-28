@@ -16,7 +16,7 @@ class LivingUpdateListener {
       // if (event.getEntityLiving.isInstanceOf[Player]) {
       //   val player = ...
       // }
-      // この状態ではIntelliJ IDEAからmatchを使用せよと指摘を受けるため、returnを使用して回避する。
+      // 上記の状態ではIntelliJ IDEAからmatchを使用せよと指摘を受けるため、returnを使用して回避する。
       if (!event.getEntityLiving.isInstanceOf[Player]) return
 
       val player = event.getEntityLiving.asInstanceOf[Player]
