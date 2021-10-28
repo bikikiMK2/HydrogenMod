@@ -14,5 +14,6 @@ object PotionRegister {
   @SubscribeEvent
   def registerPotion(event: RegistryEvent.Register[Potion]): Unit = {
     event.getRegistry.register(HydrogenWaterPotion.potion)
+    event.getRegistry.register(OxygenWaterPotion.potion)
   }
 }
