@@ -10,7 +10,6 @@ public class HydrogenMod {
     public static final String MODID = "hydrogenmod";
 
     public HydrogenMod() {
-        MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new LivingEntityUseItemFinishListener());
         MinecraftForge.EVENT_BUS.register(new PlayerInteractListener());
     }
