@@ -10,7 +10,7 @@ import net.stouma915.hydrogenmod.potion.effect.{
 
 class LivingUpdateListener {
   @SubscribeEvent
-  def onLivingUpdate(event: LivingUpdateEvent): Unit =
+  def onLivingUpdate(event: LivingUpdateEvent): Unit = {
     if (event.getEntityLiving.hasEffect(HydrogenWaterEffect.effect)) {
       event.getEntityLiving.heal(0.5f)
 
@@ -26,8 +26,10 @@ class LivingUpdateListener {
       val player = event.getEntityLiving.asInstanceOf[Player]
       if (player.getFoodData.getFoodLevel < 20)
         player.getFoodData.setFoodLevel(player.getFoodData.getFoodLevel + 1)
-    } else if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect)) {
+    }
+    if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect)) {
       event.getEntityLiving.heal(0.1f)
       event.getEntityLiving.setAirSupply(event.getEntityLiving.getMaxAirSupply)
     }
+  }
 }

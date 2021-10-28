@@ -8,26 +8,30 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object HydrogenItem {
-  val item: Item = new Item(
-    new Properties()
-      .tab(HydrogenModTab.tab)
-      .food(
-        new FoodProperties.Builder()
-          .alwaysEat()
-          .nutrition(256)
-          .effect(
-            () => new MobEffectInstance(MobEffects.REGENERATION, 1200),
-            1.0f
-          )
-          .effect(
-            () => new MobEffectInstance(MobEffects.LUCK, 1200),
-            1.0f
-          )
-          .effect(
-            () => new MobEffectInstance(MobEffects.SATURATION, 1200),
-            1.0f
-          )
-          .build()
-      )
-  ).setRegistryName(HydrogenMod.MODID, "hydrogen")
+  val item: Item =
+    new HydrogenItem().setRegistryName(HydrogenMod.MODID, "hydrogen")
 }
+
+class HydrogenItem
+    extends Item(
+      new Properties()
+        .tab(HydrogenModTab.tab)
+        .food(
+          new FoodProperties.Builder()
+            .alwaysEat()
+            .nutrition(256)
+            .effect(
+              () => new MobEffectInstance(MobEffects.REGENERATION, 1200),
+              1.0f
+            )
+            .effect(
+              () => new MobEffectInstance(MobEffects.LUCK, 1200),
+              1.0f
+            )
+            .effect(
+              () => new MobEffectInstance(MobEffects.SATURATION, 1200),
+              1.0f
+            )
+            .build()
+        )
+    )
