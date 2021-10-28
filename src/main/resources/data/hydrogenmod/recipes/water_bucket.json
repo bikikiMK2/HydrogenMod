@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAB",
+    " C ",
+    "   "
+  ],
+  "key": {
+    "A": {
+      "item": "hydrogenmod:hydrogen"
+    },
+    "B": {
+      "item": "hydrogenmod:oxygen"
+    },
+    "C": {
+      "item": "minecraft:bucket"
+    }
+  },
+  "result": {
+    "item": "minecraft:water_bucket",
+    "count": 1
+  },
+  "group": "hydrogenmod"
+}
