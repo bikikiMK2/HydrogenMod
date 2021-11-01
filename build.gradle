@@ -1,37 +1,36 @@
 buildscript {
     repositories {
         maven {
-            url = 'https://maven.minecraftforge.net'
+            url = "https://maven.minecraftforge.net"
         }
+
         mavenCentral()
     }
+
     dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
+        classpath "net.minecraftforge.gradle:ForgeGradle:5.1.+"
     }
 }
 
-apply plugin: 'net.minecraftforge.gradle'
+apply plugin: "net.minecraftforge.gradle"
+apply plugin: "scala"
+apply plugin: "java-library"
 
-apply plugin: 'eclipse'
-apply plugin: 'scala'
-
-version = '1.0.0'
-group = 'net.stouma915.hydrogenmod'
-archivesBaseName = 'hydrogenmod'
+version = "1.0.0"
+group = "net.stouma915.hydrogenmod"
+archivesBaseName = "hydrogenmod"
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(16)
 
-println('Java: ' + System.getProperty('java.version') + ' JVM: ' + System.getProperty('java.vm.version') + '(' + System.getProperty('java.vendor') + ') Arch: ' + System.getProperty('os.arch'))
-
 minecraft {
-    mappings channel: 'official', version: '1.17.1'
+    mappings channel: "official", version: "1.17.1"
 
     runs {
         client {
-            workingDirectory project.file('run')
+            workingDirectory project.file("run").canonicalPath
 
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            property "forge.logging.markers", "REGISTRIES"
+            property "forge.logging.console.level", "debug"
 
             mods {
                 hydrogenmod {
@@ -41,10 +40,10 @@ minecraft {
         }
 
         server {
-            workingDirectory project.file('run')
+            workingDirectory project.file("run").canonicalPath
 
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            property "forge.logging.markers", "REGISTRIES"
+            property "forge.logging.console.level", "debug"
 
             mods {
                 hydrogenmod {
@@ -54,12 +53,12 @@ minecraft {
         }
 
         data {
-            workingDirectory project.file('run')
+            workingDirectory project.file("run").canonicalPath
 
-            property 'forge.logging.markers', 'REGISTRIES'
-            property 'forge.logging.console.level', 'debug'
+            property "forge.logging.markers", "REGISTRIES"
+            property "forge.logging.console.level", "debug"
 
-            args '--mod', 'hydrogenmod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args "--mod", "hydrogenmod", "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/")
 
             mods {
                 hydrogenmod {
@@ -73,7 +72,7 @@ minecraft {
 sourceSets {
     main {
         scala {
-            srcDirs = ['src/main/scala', 'src/main/java']
+            srcDirs = ["src/main/scala", "src/main/java"]
         }
 
         java {
@@ -81,32 +80,31 @@ sourceSets {
         }
 
         resources {
-            srcDir 'src/generated/resources'
+            srcDir "src/generated/resources"
         }
     }
 }
 
 repositories {
+    mavenCentral()
+    mavenLocal()
 }
 
 dependencies {
-    implementation 'org.scala-lang:scala-library:2.13.6'
-    runtimeOnly 'org.scala-lang:scala-library:2.13.6'
-    minecraft 'net.minecraftforge:forge:1.17.1-37.0.103'
+    minecraft "net.minecraftforge:forge:1.17.1-37.0.103"
+    api "org.scala-lang:scala-library:2.13.6"
 }
 
 jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "hydrogenmod",
-                "Specification-Vendor"    : "stouma915",
-                "Specification-Version"   : "1",
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : project.jar.archiveVersion,
-                "Implementation-Vendor"   : "stouma915",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
-        ])
+    archiveName("hydrogenmod-${project.version}.jar")
+
+    configurations.api.canBeResolved(true)
+
+    from {
+        configurations.api.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
     }
 }
 
-jar.finalizedBy('reobfJar')
+jar.finalizedBy("reobfJar")

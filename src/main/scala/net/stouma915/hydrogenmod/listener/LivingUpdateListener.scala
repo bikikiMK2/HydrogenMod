@@ -14,18 +14,11 @@ class LivingUpdateListener {
     if (event.getEntityLiving.hasEffect(HydrogenWaterEffect.effect)) {
       event.getEntityLiving.heal(0.5f)
 
-      // TODO: match構文に置き換える。
-      // matchを使おうとするとMinecraftがフリーズする。(java.lang.NoClassDefFoundError: scala/runtime/BoxedUnit)
-      // if (event.getEntityLiving.isInstanceOf[Player]) {
-      //   val player = event.getEntityLiving.asInstanceOf[Player]
-      //   ...
-      // }
-      // 上記の状態ではIntelliJ IDEAからmatchを使用せよと指摘を受けるため、returnを使用して回避する。
-      if (!event.getEntityLiving.isInstanceOf[Player]) return
-
-      val player = event.getEntityLiving.asInstanceOf[Player]
-      if (player.getFoodData.getFoodLevel < 20)
-        player.getFoodData.setFoodLevel(player.getFoodData.getFoodLevel + 1)
+      event.getEntityLiving match {
+        case player: Player if player.getFoodData.getFoodLevel < 20 =>
+          player.getFoodData.setFoodLevel(player.getFoodData.getFoodLevel + 1)
+        case _ =>
+      }
     }
     if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect)) {
       event.getEntityLiving.heal(0.1f)
