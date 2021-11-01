@@ -86,8 +86,6 @@ sourceSets {
 }
 
 repositories {
-    mavenCentral()
-    mavenLocal()
 }
 
 dependencies {
