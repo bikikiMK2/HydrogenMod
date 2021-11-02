@@ -14,8 +14,9 @@ object ItemRegister {
   @SubscribeEvent
   def registerItems(
       event: RegistryEvent.Register[Item]
-  ): Unit = {
-    event.getRegistry.register(HydrogenItem.item)
-    event.getRegistry.register(OxygenItem.item)
-  }
+  ): Unit =
+    IndexedSeq(
+      HydrogenItem.item,
+      OxygenItem.item
+    ).foreach(event.getRegistry.register)
 }
