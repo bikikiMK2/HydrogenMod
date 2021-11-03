@@ -95,10 +95,4 @@ processResources {
 
 jar {
     archiveName("hydrogenmod-${project.version}.jar")
-
-    from {
-        configurations.embed.collect {
-            it.isDirectory() ? it : zipTree(it)
-        }
-    }
 }
