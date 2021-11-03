@@ -14,7 +14,6 @@ buildscript {
 
 plugins {
     id "scala"
-    id "java-library"
 }
 
 apply plugin: "net.minecraftforge.gradle"
