@@ -12,9 +12,12 @@ buildscript {
     }
 }
 
+plugins {
+    id "scala"
+    id "java-library"
+}
+
 apply plugin: "net.minecraftforge.gradle"
-apply plugin: "scala"
-apply plugin: "java-library"
 
 version = "1.0.0"
 group = "net.stouma915.hydrogenmod"
@@ -69,18 +72,28 @@ sourceSets {
     }
 }
 
+configurations {
+    embed
+
+    implementation.extendsFrom(embed)
+}
+
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     minecraft "net.minecraftforge:forge:1.17.1-37.0.103"
-    api "org.scala-lang:scala-library:2.13.6"
+    embed "org.scala-lang:scala-library:2.13.6"
 }
 
 jar {
     archiveName("hydrogenmod-${project.version}.jar")
 
-    configurations.api.canBeResolved(true)
+    configurations.embed.canBeResolved(true)
 
     from {
-        configurations.api.collect {
+        configurations.embed.collect {
             it.isDirectory() ? it : zipTree(it)
         }
     }
