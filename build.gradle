@@ -97,5 +97,3 @@ jar {
         }
     }
 }
-
-jar.finalizedBy("reobfJar")
