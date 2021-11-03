@@ -75,7 +75,6 @@ configurations {
     embed
 
     implementation.extendsFrom(embed)
-    embed.canBeResolved(true)
 }
 
 repositories {
@@ -88,6 +87,8 @@ dependencies {
 }
 
 processResources {
+    configurations.embed.canBeResolved(true)
+
     from configurations.embed.collect {
         it.isDirectory() ? it : zipTree(it)
     }
