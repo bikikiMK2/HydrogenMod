@@ -75,6 +75,7 @@ configurations {
     embed
 
     implementation.extendsFrom(embed)
+    embed.canBeResolved(true)
 }
 
 repositories {
@@ -86,10 +87,14 @@ dependencies {
     embed "org.scala-lang:scala-library:2.13.6"
 }
 
+processResources {
+    from configurations.embed.collect {
+        it.isDirectory() ? it : zipTree(it)
+    }
+}
+
 jar {
     archiveName("hydrogenmod-${project.version}.jar")
-
-    configurations.embed.canBeResolved(true)
 
     from {
         configurations.embed.collect {
