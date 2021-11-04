@@ -17,6 +17,7 @@ object ItemRegister {
   ): Unit =
     IndexedSeq(
       HydrogenItem.item,
-      OxygenItem.item
+      OxygenItem.item,
+      MetalRodItem.item
     ).foreach(event.getRegistry.register)
 }

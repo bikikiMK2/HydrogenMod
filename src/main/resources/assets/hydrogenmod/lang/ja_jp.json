@@ -2,6 +2,7 @@
   "itemGroup.hydrogenmod": "水素Mod",
   "item.hydrogenmod.hydrogen": "水素",
   "item.hydrogenmod.oxygen": "酸素",
+  "item.hydrogenmod.metal_rod": "金属の棒",
   "item.minecraft.potion.effect.hydrogen_water": "水素水",
   "item.minecraft.splash_potion.effect.hydrogen_water": "スプラッシュ水素水",
   "item.minecraft.tipped_arrow.effect.hydrogen_water": "水素水の矢",
