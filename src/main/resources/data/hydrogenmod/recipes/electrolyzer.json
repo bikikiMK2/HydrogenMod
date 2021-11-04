@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "A A",
+    "AAA"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:glass"
+    }
+  },
+  "result": {
+    "item": "hydrogenmod:electrolyzer",
+    "count": 1
+  },
+  "group": "hydrogenmod"
+}
