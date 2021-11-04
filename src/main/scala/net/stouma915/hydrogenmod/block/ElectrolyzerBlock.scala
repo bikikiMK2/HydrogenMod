@@ -17,4 +17,5 @@ class ElectrolyzerBlock
         .sound(SoundType.GLASS)
         .noOcclusion()
         .destroyTime(0.45f)
+        .requiresCorrectToolForDrops()
     )
