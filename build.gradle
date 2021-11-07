@@ -83,7 +83,7 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:1.17.1-37.0.103"
-    embed "org.scala-lang:scala-library:2.13.6"
+    embed "org.scala-lang:scala3-library_3:3.1.0"
 }
 
 processResources {
