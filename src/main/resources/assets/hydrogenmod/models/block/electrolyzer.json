@@ -2,9 +2,9 @@
   "credit": "Made with Blockbench",
   "parent": "block/block",
   "textures": {
-    "1": "hydrogenmod:block/electrolyzer_side",
+    "1": "minecraft:block/glass",
     "3": "hydrogenmod:block/electrolyzer_bottom",
-    "particle": "hydrogenmod:block/electrolyzer_side"
+    "particle": "minecraft:block/glass"
   },
   "elements": [
     {
