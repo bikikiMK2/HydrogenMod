@@ -4,7 +4,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.stouma915.hydrogenmod.HydrogenMod
 
 object SuffocationDamageSource {
-  val damageSource: SuffocationDamageSource = new SuffocationDamageSource
+  val instance: SuffocationDamageSource = new SuffocationDamageSource
 }
 
 class SuffocationDamageSource

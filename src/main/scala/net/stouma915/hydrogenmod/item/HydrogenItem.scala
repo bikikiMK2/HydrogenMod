@@ -14,7 +14,7 @@ object HydrogenItem {
 class HydrogenItem
     extends Item(
       new Properties()
-        .tab(HydrogenModTab.tab)
+        .tab(HydrogenModTab.instance)
         .food(
           new FoodProperties.Builder()
             .alwaysEat()

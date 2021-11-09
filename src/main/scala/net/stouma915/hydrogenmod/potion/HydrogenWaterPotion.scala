@@ -6,11 +6,11 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.potion.effect.HydrogenWaterEffect
 
 object HydrogenWaterPotion {
-  val potion: Potion = new HydrogenWaterPotion()
+  val instance: Potion = new HydrogenWaterPotion()
     .setRegistryName(HydrogenMod.MODID, "hydrogen_water")
 }
 
 class HydrogenWaterPotion
     extends Potion(
-      new MobEffectInstance(HydrogenWaterEffect.effect, 1)
+      new MobEffectInstance(HydrogenWaterEffect.instance, 1)
     )

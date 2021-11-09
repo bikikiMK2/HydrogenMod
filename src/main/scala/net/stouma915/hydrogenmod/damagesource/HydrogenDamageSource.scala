@@ -4,7 +4,7 @@ import net.minecraft.world.damagesource.DamageSource
 import net.stouma915.hydrogenmod.HydrogenMod
 
 object HydrogenDamageSource {
-  val damageSource: DamageSource = new HydrogenDamageSource
+  val instance: DamageSource = new HydrogenDamageSource
 }
 
 class HydrogenDamageSource

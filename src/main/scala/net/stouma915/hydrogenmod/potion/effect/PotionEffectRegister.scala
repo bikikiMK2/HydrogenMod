@@ -14,7 +14,7 @@ object PotionEffectRegister {
   @SubscribeEvent
   def registerEffect(event: RegistryEvent.Register[MobEffect]): Unit =
     IndexedSeq(
-      HydrogenWaterEffect.effect,
-      OxygenWaterEffect.effect
+      HydrogenWaterEffect.instance,
+      OxygenWaterEffect.instance
     ).foreach(event.getRegistry.register)
 }

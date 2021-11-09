@@ -10,4 +10,4 @@ object MetalRodItem {
     new MetalRodItem().setRegistryName(HydrogenMod.MODID, "metal_rod")
 }
 
-class MetalRodItem extends Item(new Properties().tab(HydrogenModTab.tab))
+class MetalRodItem extends Item(new Properties().tab(HydrogenModTab.instance))

@@ -16,6 +16,6 @@ object FMLClientSetupListener {
   def onFMLClientSetup(event: FMLClientSetupEvent): Unit =
     event.enqueueWork((() => {
       ItemBlockRenderTypes
-        .setRenderLayer(ElectrolyzerBlock.block, RenderType.cutout())
+        .setRenderLayer(ElectrolyzerBlock.instance, RenderType.cutout())
     }): Runnable)
 }

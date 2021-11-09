@@ -20,7 +20,7 @@ class HydrogenWaterBrewingRecipe extends IBrewingRecipe {
     if (isInput(input) && isIngredient(ingredient))
       PotionUtils.setPotion(
         new ItemStack(input.getItem),
-        HydrogenWaterPotion.potion
+        HydrogenWaterPotion.instance
       )
     else
       ItemStack.EMPTY

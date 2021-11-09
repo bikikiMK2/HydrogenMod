@@ -16,12 +16,12 @@ class LivingEntityUseItemFinishListener {
     event.getItem.getItem match {
       case HydrogenItem.item =>
         event.getEntityLiving.hurt(
-          HydrogenDamageSource.damageSource,
+          HydrogenDamageSource.instance,
           event.getEntityLiving.getHealth
         )
       case OxygenItem.item =>
         event.getEntityLiving.hurt(
-          OxygenDamageSource.damageSource,
+          OxygenDamageSource.instance,
           event.getEntityLiving.getHealth
         )
       case _ =>

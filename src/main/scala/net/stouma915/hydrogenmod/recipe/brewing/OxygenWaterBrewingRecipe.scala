@@ -20,7 +20,7 @@ class OxygenWaterBrewingRecipe extends IBrewingRecipe {
     if (isInput(input) && isIngredient(ingredient))
       PotionUtils.setPotion(
         new ItemStack(input.getItem),
-        OxygenWaterPotion.potion
+        OxygenWaterPotion.instance
       )
     else
       ItemStack.EMPTY

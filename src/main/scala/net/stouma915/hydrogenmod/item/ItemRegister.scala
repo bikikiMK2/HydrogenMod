@@ -20,6 +20,6 @@ object ItemRegister {
       HydrogenItem.item,
       OxygenItem.item,
       MetalRodItem.item,
-      ElectrolyzerBlockItem.blockItem
+      ElectrolyzerBlockItem.instance
     ).foreach(event.getRegistry.register)
 }

@@ -5,7 +5,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.item.HydrogenItem
 
 object HydrogenModTab {
-  val tab: CreativeModeTab = new HydrogenModTab
+  val instance: CreativeModeTab = new HydrogenModTab
 }
 
 class HydrogenModTab extends CreativeModeTab(HydrogenMod.MODID) {

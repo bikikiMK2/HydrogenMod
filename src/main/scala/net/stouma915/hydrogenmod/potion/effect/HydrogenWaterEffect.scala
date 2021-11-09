@@ -4,7 +4,7 @@ import net.minecraft.world.effect.{MobEffect, MobEffectCategory}
 import net.stouma915.hydrogenmod.HydrogenMod
 
 object HydrogenWaterEffect {
-  var effect: MobEffect = new HydrogenWaterEffect()
+  var instance: MobEffect = new HydrogenWaterEffect()
     .setRegistryName(HydrogenMod.MODID, "hydrogen_water_effect")
 }
 
