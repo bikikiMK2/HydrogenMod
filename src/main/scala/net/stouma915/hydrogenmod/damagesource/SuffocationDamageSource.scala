@@ -7,5 +7,5 @@ object SuffocationDamageSource {
   val instance: SuffocationDamageSource = new SuffocationDamageSource
 }
 
-class SuffocationDamageSource
+sealed class SuffocationDamageSource private ()
     extends DamageSource(s"${HydrogenMod.MODID}_lack_of_oxygen")

@@ -10,7 +10,7 @@ object ElectrolyzerBlockItem {
     .setRegistryName(ElectrolyzerBlock.instance.getRegistryName)
 }
 
-class ElectrolyzerBlockItem
+sealed class ElectrolyzerBlockItem private ()
     extends BlockItem(
       ElectrolyzerBlock.instance,
       new Properties().tab(HydrogenModTab.instance)

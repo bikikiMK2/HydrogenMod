@@ -8,4 +8,5 @@ object HydrogenWaterEffect {
     .setRegistryName(HydrogenMod.MODID, "hydrogen_water_effect")
 }
 
-class HydrogenWaterEffect extends MobEffect(MobEffectCategory.HARMFUL, -6684673)
+sealed class HydrogenWaterEffect private ()
+    extends MobEffect(MobEffectCategory.HARMFUL, -6684673)

@@ -19,7 +19,7 @@ object ElectrolyzerBlock {
     new ElectrolyzerBlock().setRegistryName(HydrogenMod.MODID, "electrolyzer")
 }
 
-class ElectrolyzerBlock
+sealed class ElectrolyzerBlock private ()
     extends Block(
       Properties
         .of(Material.STONE)

@@ -8,6 +8,7 @@ object HydrogenModTab {
   val instance: CreativeModeTab = new HydrogenModTab
 }
 
-class HydrogenModTab extends CreativeModeTab(HydrogenMod.MODID) {
-  override def makeIcon(): ItemStack = new ItemStack(HydrogenItem.item)
+sealed class HydrogenModTab private ()
+    extends CreativeModeTab(HydrogenMod.MODID) {
+  override def makeIcon(): ItemStack = new ItemStack(HydrogenItem.instance)
 }

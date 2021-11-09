@@ -10,7 +10,7 @@ object OxygenWaterPotion {
     new OxygenWaterPotion().setRegistryName(HydrogenMod.MODID, "oxygen_water")
 }
 
-class OxygenWaterPotion
+sealed class OxygenWaterPotion private ()
     extends Potion(
       new MobEffectInstance(OxygenWaterEffect.instance, 1200, 0, false, true)
     )

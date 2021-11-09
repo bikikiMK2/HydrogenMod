@@ -7,5 +7,5 @@ object OxygenDamageSource {
   val instance: DamageSource = new OxygenDamageSource
 }
 
-class OxygenDamageSource
+sealed class OxygenDamageSource private ()
     extends DamageSource(s"${HydrogenMod.MODID}_ate_oxygen")

@@ -14,12 +14,12 @@ class LivingEntityUseItemFinishListener {
       event: LivingEntityUseItemEvent.Finish
   ): Unit =
     event.getItem.getItem match {
-      case HydrogenItem.item =>
+      case HydrogenItem.instance =>
         event.getEntityLiving.hurt(
           HydrogenDamageSource.instance,
           event.getEntityLiving.getHealth
         )
-      case OxygenItem.item =>
+      case OxygenItem.instance =>
         event.getEntityLiving.hurt(
           OxygenDamageSource.instance,
           event.getEntityLiving.getHealth

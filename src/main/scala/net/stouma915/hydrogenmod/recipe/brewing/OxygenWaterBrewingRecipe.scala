@@ -6,7 +6,7 @@ import net.minecraftforge.common.brewing.IBrewingRecipe
 import net.stouma915.hydrogenmod.item.OxygenItem
 import net.stouma915.hydrogenmod.potion.OxygenWaterPotion
 
-class OxygenWaterBrewingRecipe extends IBrewingRecipe {
+sealed class OxygenWaterBrewingRecipe extends IBrewingRecipe {
   override def isInput(input: ItemStack): Boolean = {
     val inputItem = input.getItem
     (inputItem == Items.POTION || inputItem == Items.SPLASH_POTION || inputItem == Items.LINGERING_POTION) && PotionUtils
@@ -14,7 +14,7 @@ class OxygenWaterBrewingRecipe extends IBrewingRecipe {
   }
 
   override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(new ItemStack(OxygenItem.item))
+    ingredient.sameItem(new ItemStack(OxygenItem.instance))
 
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))

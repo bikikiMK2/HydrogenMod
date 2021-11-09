@@ -7,10 +7,11 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object OxygenItem {
-  val item: Item = new OxygenItem().setRegistryName(HydrogenMod.MODID, "oxygen")
+  val instance: Item =
+    new OxygenItem().setRegistryName(HydrogenMod.MODID, "oxygen")
 }
 
-class OxygenItem
+sealed class OxygenItem private ()
     extends Item(
       new Properties()
         .tab(HydrogenModTab.instance)
