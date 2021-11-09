@@ -16,5 +16,6 @@
   "block.hydrogenmod.electrolyzer": "Electrolyzer",
   "death.attack.hydrogenmod_ate_hydrogen": "%1$s ate hydrogen",
   "death.attack.hydrogenmod_ate_oxygen": "%1$s ate oxygen",
-  "death.attack.hydrogenmod_lack_of_oxygen": "%1$s ran out of oxygen"
+  "death.attack.hydrogenmod_lack_of_oxygen": "%1$s ran out of oxygen",
+  "death.attack.hydrogenmod_hydrogen_explosion": "%1$s suffered a hydrogen explosion"
 }
