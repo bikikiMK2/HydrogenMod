@@ -8,15 +8,20 @@ import net.stouma915.hydrogenmod.potion.effect.{
   OxygenWaterEffect
 }
 
+import scala.jdk.CollectionConverters._
+
 class LivingUpdateListener {
   @SubscribeEvent
-  def onLivingUpdate(event: LivingUpdateEvent): Unit = {
-    if (event.getEntityLiving.hasEffect(HydrogenWaterEffect.effect))
-      event.getEntityLiving.hurt(
-        SuffocationDamageSource.damageSource,
-        event.getEntityLiving.getMaxHealth
-      )
-    if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect))
-      event.getEntityLiving.setAirSupply(event.getEntityLiving.getMaxAirSupply)
-  }
+  def onLivingUpdate(event: LivingUpdateEvent): Unit =
+    event.getEntityLiving.getActiveEffects.asScala.map(_.getEffect).foreach {
+      case _: HydrogenWaterEffect =>
+        event.getEntityLiving.hurt(
+          SuffocationDamageSource.damageSource,
+          event.getEntityLiving.getMaxHealth
+        )
+      case _: OxygenWaterEffect =>
+        event.getEntityLiving
+          .setAirSupply(event.getEntityLiving.getMaxAirSupply)
+      case _ =>
+    }
 }
