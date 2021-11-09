@@ -15,5 +15,6 @@
   "effect.hydrogenmod.oxygen_water_effect": "酸素水",
   "block.hydrogenmod.electrolyzer": "電気分解装置",
   "death.attack.hydrogenmod_ate_hydrogen": "%1$sは水素を食べた",
-  "death.attack.hydrogenmod_ate_oxygen": "%1$sは酸素を食べた"
+  "death.attack.hydrogenmod_ate_oxygen": "%1$sは酸素を食べた",
+  "death.attack.hydrogenmod_lack_of_oxygen": "%1$sは酸素不足になった"
 }

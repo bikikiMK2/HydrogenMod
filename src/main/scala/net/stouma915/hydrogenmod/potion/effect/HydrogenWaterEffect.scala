@@ -8,5 +8,4 @@ object HydrogenWaterEffect {
     .setRegistryName(HydrogenMod.MODID, "hydrogen_water_effect")
 }
 
-class HydrogenWaterEffect
-    extends MobEffect(MobEffectCategory.BENEFICIAL, -6684673)
+class HydrogenWaterEffect extends MobEffect(MobEffectCategory.HARMFUL, -6684673)

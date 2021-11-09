@@ -15,5 +15,6 @@
   "effect.hydrogenmod.oxygen_water_effect": "Oxygen Water",
   "block.hydrogenmod.electrolyzer": "Electrolyzer",
   "death.attack.hydrogenmod_ate_hydrogen": "%1$s ate hydrogen",
-  "death.attack.hydrogenmod_ate_oxygen": "%1$s ate oxygen"
+  "death.attack.hydrogenmod_ate_oxygen": "%1$s ate oxygen",
+  "death.attack.hydrogenmod_lack_of_oxygen": "%1$s ran out of oxygen"
 }

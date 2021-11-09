@@ -12,5 +12,5 @@ object HydrogenWaterPotion {
 
 class HydrogenWaterPotion
     extends Potion(
-      new MobEffectInstance(HydrogenWaterEffect.effect, 1200, 0, false, true)
+      new MobEffectInstance(HydrogenWaterEffect.effect, 1)
     )
