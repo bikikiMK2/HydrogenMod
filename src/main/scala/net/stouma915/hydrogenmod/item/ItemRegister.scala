@@ -17,9 +17,9 @@ object ItemRegister {
       event: RegistryEvent.Register[Item]
   ): Unit =
     IndexedSeq(
-      HydrogenItem.instance,
-      OxygenItem.instance,
-      MetalRodItem.instance,
-      ElectrolyzerBlockItem.instance
+      HydrogenItem(),
+      OxygenItem(),
+      MetalRodItem(),
+      ElectrolyzerBlockItem()
     ).foreach(event.getRegistry.register)
 }

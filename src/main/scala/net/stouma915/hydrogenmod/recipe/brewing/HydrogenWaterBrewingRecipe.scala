@@ -14,13 +14,13 @@ sealed class HydrogenWaterBrewingRecipe extends IBrewingRecipe {
   }
 
   override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(new ItemStack(HydrogenItem.instance))
+    ingredient.sameItem(new ItemStack(HydrogenItem()))
 
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))
       PotionUtils.setPotion(
         new ItemStack(input.getItem),
-        HydrogenWaterPotion.instance
+        HydrogenWaterPotion()
       )
     else
       ItemStack.EMPTY

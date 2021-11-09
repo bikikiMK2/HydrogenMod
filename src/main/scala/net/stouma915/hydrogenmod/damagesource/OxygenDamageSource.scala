@@ -4,7 +4,9 @@ import net.minecraft.world.damagesource.DamageSource
 import net.stouma915.hydrogenmod.HydrogenMod
 
 object OxygenDamageSource {
-  val instance: DamageSource = new OxygenDamageSource
+  private val instance: DamageSource = new OxygenDamageSource
+
+  def apply(): DamageSource = instance
 }
 
 sealed class OxygenDamageSource private ()

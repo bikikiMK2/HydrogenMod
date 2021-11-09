@@ -15,8 +15,10 @@ import net.minecraft.world.phys.shapes.{
 import net.stouma915.hydrogenmod.HydrogenMod
 
 object ElectrolyzerBlock {
-  val instance: Block =
+  private val instance: Block =
     new ElectrolyzerBlock().setRegistryName(HydrogenMod.MODID, "electrolyzer")
+
+  def apply(): Block = instance
 }
 
 sealed class ElectrolyzerBlock private ()

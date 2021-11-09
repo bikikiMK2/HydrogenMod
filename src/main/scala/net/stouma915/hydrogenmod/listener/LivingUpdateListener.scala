@@ -16,7 +16,7 @@ class LivingUpdateListener {
     event.getEntityLiving.getActiveEffects.asScala.map(_.getEffect).foreach {
       case _: HydrogenWaterEffect =>
         event.getEntityLiving.hurt(
-          SuffocationDamageSource.instance,
+          SuffocationDamageSource(),
           event.getEntityLiving.getMaxHealth
         )
       case _: OxygenWaterEffect =>

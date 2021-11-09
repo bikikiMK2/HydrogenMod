@@ -6,9 +6,11 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object MetalRodItem {
-  val instance: Item =
+  private val instance: Item =
     new MetalRodItem().setRegistryName(HydrogenMod.MODID, "metal_rod")
+
+  def apply(): Item = instance
 }
 
 sealed class MetalRodItem private ()
-    extends Item(new Properties().tab(HydrogenModTab.instance))
+    extends Item(new Properties().tab(HydrogenModTab()))

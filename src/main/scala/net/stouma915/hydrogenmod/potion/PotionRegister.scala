@@ -14,7 +14,7 @@ object PotionRegister {
   @SubscribeEvent
   def registerPotion(event: RegistryEvent.Register[Potion]): Unit =
     IndexedSeq(
-      HydrogenWaterPotion.instance,
-      OxygenWaterPotion.instance
+      HydrogenWaterPotion(),
+      OxygenWaterPotion()
     ).foreach(event.getRegistry.register)
 }

@@ -16,7 +16,7 @@ class PlayerInteractListener {
     val itemInMainHand = event.getPlayer.getInventory.getSelected
     if (
       itemInMainHand.sameItem(
-        new ItemStack(HydrogenItem.instance)
+        new ItemStack(HydrogenItem())
       ) && block == Blocks.FIRE
     ) {
       if (!event.getPlayer.isCreative)

@@ -6,12 +6,14 @@ import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object ElectrolyzerBlockItem {
-  val instance: Item = new ElectrolyzerBlockItem()
-    .setRegistryName(ElectrolyzerBlock.instance.getRegistryName)
+  private val instance: Item = new ElectrolyzerBlockItem()
+    .setRegistryName(ElectrolyzerBlock().getRegistryName)
+
+  def apply(): Item = instance
 }
 
 sealed class ElectrolyzerBlockItem private ()
     extends BlockItem(
-      ElectrolyzerBlock.instance,
-      new Properties().tab(HydrogenModTab.instance)
+      ElectrolyzerBlock(),
+      new Properties().tab(HydrogenModTab())
     )

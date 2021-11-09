@@ -7,14 +7,16 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object HydrogenItem {
-  val instance: Item =
+  private val instance: Item =
     new HydrogenItem().setRegistryName(HydrogenMod.MODID, "hydrogen")
+
+  def apply(): Item = instance
 }
 
 sealed class HydrogenItem private ()
     extends Item(
       new Properties()
-        .tab(HydrogenModTab.instance)
+        .tab(HydrogenModTab())
         .food(
           new FoodProperties.Builder()
             .alwaysEat()

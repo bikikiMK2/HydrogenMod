@@ -14,6 +14,6 @@ object BlockRegister {
   @SubscribeEvent
   def registerBlocks(event: RegistryEvent.Register[Block]): Unit =
     IndexedSeq(
-      ElectrolyzerBlock.instance
+      ElectrolyzerBlock()
     ).foreach(event.getRegistry.register)
 }

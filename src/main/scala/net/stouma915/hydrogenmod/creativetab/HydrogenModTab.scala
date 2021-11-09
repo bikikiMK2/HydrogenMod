@@ -5,10 +5,12 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.item.HydrogenItem
 
 object HydrogenModTab {
-  val instance: CreativeModeTab = new HydrogenModTab
+  private val instance: CreativeModeTab = new HydrogenModTab
+
+  def apply(): CreativeModeTab = instance
 }
 
 sealed class HydrogenModTab private ()
     extends CreativeModeTab(HydrogenMod.MODID) {
-  override def makeIcon(): ItemStack = new ItemStack(HydrogenItem.instance)
+  override def makeIcon(): ItemStack = new ItemStack(HydrogenItem())
 }
