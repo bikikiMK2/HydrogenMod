@@ -16,9 +16,7 @@ class LivingUpdateListener {
         SuffocationDamageSource.damageSource,
         event.getEntityLiving.getMaxHealth
       )
-    if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect)) {
-      event.getEntityLiving.heal(0.1f)
+    if (event.getEntityLiving.hasEffect(OxygenWaterEffect.effect))
       event.getEntityLiving.setAirSupply(event.getEntityLiving.getMaxAirSupply)
-    }
   }
 }
