@@ -7,7 +7,7 @@ version="1.0.0"
 displayName="HydrogenMod"
 displayURL="https://github.com/stouma915/HydrogenMod"
 credits="Sasaki Touma, Idea by bikikiMK2"
-authors="stouma915"
+authors="stouma915, bikikiMK2"
 description="水素で遊ぼう"
 [[dependencies.hydrogenmod]]
     modId="forge"
