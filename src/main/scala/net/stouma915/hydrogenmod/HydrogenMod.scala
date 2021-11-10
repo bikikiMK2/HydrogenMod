@@ -13,6 +13,7 @@ object HydrogenMod {
 @Mod(HydrogenMod.MODID)
 class HydrogenMod {
   Seq(
+    new LivingDamageListener,
     new LivingEntityUseItemFinishListener,
     new LivingUpdateListener,
     new PlayerInteractListener
