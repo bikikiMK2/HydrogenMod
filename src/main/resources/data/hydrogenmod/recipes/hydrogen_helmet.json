@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "hydrogenmod:hydrogen"
+    }
+  },
+  "result": {
+    "item": "hydrogenmod:hydrogen_helmet",
+    "count": 1
+  },
+  "group": "hydrogenmod"
+}
