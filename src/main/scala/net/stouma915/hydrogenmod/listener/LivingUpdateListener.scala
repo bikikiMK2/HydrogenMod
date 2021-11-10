@@ -3,7 +3,7 @@ package net.stouma915.hydrogenmod.listener
 import net.minecraft.world.entity.EquipmentSlot
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
-import net.stouma915.hydrogenmod.armor.HydrogenHelmetArmorItem
+import net.stouma915.hydrogenmod.armor.item.HydrogenHelmetArmorItem
 import net.stouma915.hydrogenmod.damagesource.SuffocationDamageSource
 import net.stouma915.hydrogenmod.potion.effect.{
   HydrogenWaterEffect,

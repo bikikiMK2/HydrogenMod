@@ -5,8 +5,8 @@ import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.HydrogenMod
-import net.stouma915.hydrogenmod.armor.HydrogenHelmetArmorItem
-import net.stouma915.hydrogenmod.block.item.ElectrolyzerBlockItem
+import net.stouma915.hydrogenmod.armor.item._
+import net.stouma915.hydrogenmod.block.item._
 
 @Mod.EventBusSubscriber(
   modid = HydrogenMod.MODID,
@@ -22,6 +22,7 @@ object ItemRegister {
       OxygenItem(),
       MetalRodItem(),
       ElectrolyzerBlockItem(),
-      HydrogenHelmetArmorItem()
+      HydrogenHelmetArmorItem(),
+      HydrogenChestplateArmorItem()
     ).foreach(event.getRegistry.register)
 }
