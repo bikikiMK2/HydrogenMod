@@ -26,6 +26,7 @@ object ItemRegister {
       HydrogenChestplateArmorItem(),
       HydrogenLeggingsArmorItem(),
       HydrogenBootsArmorItem(),
-      OxygenHelmetArmorItem()
+      OxygenHelmetArmorItem(),
+      OxygenChestplateArmorItem()
     ).foreach(event.getRegistry.register)
 }
