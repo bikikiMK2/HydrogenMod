@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "A A",
+    "A A"
+  ],
+  "key": {
+    "A": {
+      "item": "hydrogenmod:oxygen"
+    }
+  },
+  "result": {
+    "item": "hydrogenmod:oxygen_boots",
+    "count": 1
+  },
+  "group": "hydrogenmod"
+}
