@@ -6,6 +6,7 @@ import net.minecraft.world.level.block.Blocks
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.stouma915.hydrogenmod.damagesource.HydrogenExplosionDamageSource
+import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.HydrogenItem
 
 class PlayerInteractListener {
@@ -17,7 +18,7 @@ class PlayerInteractListener {
     val itemInMainHand = event.getPlayer.getInventory.getSelected
     if (
       itemInMainHand.sameItem(
-        new ItemStack(HydrogenItem())
+        HydrogenItem().asItemStack
       ) && block == Blocks.FIRE
     ) {
       if (!event.getPlayer.isCreative)

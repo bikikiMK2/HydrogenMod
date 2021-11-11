@@ -3,6 +3,7 @@ package net.stouma915.hydrogenmod.recipe.brewing
 import net.minecraft.world.item.alchemy.{PotionUtils, Potions}
 import net.minecraft.world.item.{ItemStack, Items}
 import net.minecraftforge.common.brewing.IBrewingRecipe
+import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.HydrogenItem
 import net.stouma915.hydrogenmod.potion.HydrogenWaterPotion
 
@@ -14,7 +15,7 @@ sealed class HydrogenWaterBrewingRecipe extends IBrewingRecipe {
   }
 
   override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(new ItemStack(HydrogenItem()))
+    ingredient.sameItem(HydrogenItem().asItemStack)
 
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))
