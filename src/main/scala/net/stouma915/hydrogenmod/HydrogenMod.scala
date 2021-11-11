@@ -7,7 +7,7 @@ import net.stouma915.hydrogenmod.listener._
 import net.stouma915.hydrogenmod.recipe.brewing._
 
 object HydrogenMod {
-  final val ModId = "hydrogenmod"
+  private[hydrogenmod] final val ModId = "hydrogenmod"
 }
 
 @Mod(HydrogenMod.ModId)
