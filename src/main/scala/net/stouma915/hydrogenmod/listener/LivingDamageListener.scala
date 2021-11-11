@@ -12,8 +12,6 @@ import net.stouma915.hydrogenmod.armor.item.{
 }
 import net.stouma915.hydrogenmod.damagesource.HydrogenExplosionDamageSource
 
-import java.util.function.Consumer
-
 class LivingDamageListener {
   @SubscribeEvent
   def onLivingDamage(event: LivingDamageEvent): Unit =
