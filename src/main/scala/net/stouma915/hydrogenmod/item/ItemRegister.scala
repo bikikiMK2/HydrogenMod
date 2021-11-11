@@ -9,7 +9,7 @@ import net.stouma915.hydrogenmod.armor.item._
 import net.stouma915.hydrogenmod.block.item._
 
 @Mod.EventBusSubscriber(
-  modid = HydrogenMod.MODID,
+  modid = HydrogenMod.ModId,
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object ItemRegister {

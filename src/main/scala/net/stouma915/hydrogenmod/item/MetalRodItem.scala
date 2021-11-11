@@ -7,7 +7,7 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object MetalRodItem {
   private val instance: Item =
-    new MetalRodItem().setRegistryName(HydrogenMod.MODID, "metal_rod")
+    new MetalRodItem().setRegistryName(HydrogenMod.ModId, "metal_rod")
 
   def apply(): Item = instance
 }

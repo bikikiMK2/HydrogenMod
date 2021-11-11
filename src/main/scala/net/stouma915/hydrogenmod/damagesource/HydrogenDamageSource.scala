@@ -10,7 +10,7 @@ object HydrogenDamageSource {
 }
 
 sealed class HydrogenDamageSource private ()
-    extends DamageSource(s"${HydrogenMod.MODID}_ate_hydrogen") {
+    extends DamageSource(s"${HydrogenMod.ModId}_ate_hydrogen") {
   override def isBypassArmor: Boolean = true
 
   override def isDamageHelmet: Boolean = false

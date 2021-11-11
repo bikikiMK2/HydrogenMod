@@ -25,7 +25,7 @@ sealed class HydrogenArmorMaterial private () extends ArmorMaterial {
 
   override def getRepairIngredient: Ingredient = Ingredient.of(HydrogenItem())
 
-  override def getName: String = s"${HydrogenMod.MODID}:hydrogen"
+  override def getName: String = s"${HydrogenMod.ModId}:hydrogen"
 
   override def getToughness: Float = 0.0f
 

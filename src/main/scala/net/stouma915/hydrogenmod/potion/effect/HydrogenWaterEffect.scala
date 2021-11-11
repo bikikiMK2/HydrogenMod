@@ -5,7 +5,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 
 object HydrogenWaterEffect {
   private val instance: MobEffect = new HydrogenWaterEffect()
-    .setRegistryName(HydrogenMod.MODID, "hydrogen_water_effect")
+    .setRegistryName(HydrogenMod.ModId, "hydrogen_water_effect")
 
   def apply(): MobEffect = instance
 }

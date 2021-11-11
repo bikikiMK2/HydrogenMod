@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.HydrogenMod
 
 @Mod.EventBusSubscriber(
-  modid = HydrogenMod.MODID,
+  modid = HydrogenMod.ModId,
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object PotionEffectRegister {

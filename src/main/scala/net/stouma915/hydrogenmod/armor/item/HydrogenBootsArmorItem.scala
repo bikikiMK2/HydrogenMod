@@ -9,7 +9,7 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object HydrogenBootsArmorItem {
   private val instance: Item = new HydrogenBootsArmorItem()
-    .setRegistryName(HydrogenMod.MODID, "hydrogen_boots")
+    .setRegistryName(HydrogenMod.ModId, "hydrogen_boots")
 
   def apply(): Item = instance
 }

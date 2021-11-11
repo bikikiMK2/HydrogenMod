@@ -11,6 +11,6 @@ object HydrogenModTab {
 }
 
 sealed class HydrogenModTab private ()
-    extends CreativeModeTab(HydrogenMod.MODID) {
+    extends CreativeModeTab(HydrogenMod.ModId) {
   override def makeIcon(): ItemStack = new ItemStack(HydrogenItem())
 }

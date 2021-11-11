@@ -7,10 +7,10 @@ import net.stouma915.hydrogenmod.listener._
 import net.stouma915.hydrogenmod.recipe.brewing._
 
 object HydrogenMod {
-  final val MODID = "hydrogenmod"
+  final val ModId = "hydrogenmod"
 }
 
-@Mod(HydrogenMod.MODID)
+@Mod(HydrogenMod.ModId)
 class HydrogenMod {
   Seq(
     new LivingDamageListener,

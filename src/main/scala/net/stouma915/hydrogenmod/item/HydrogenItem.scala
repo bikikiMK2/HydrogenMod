@@ -8,7 +8,7 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object HydrogenItem {
   private val instance: Item =
-    new HydrogenItem().setRegistryName(HydrogenMod.MODID, "hydrogen")
+    new HydrogenItem().setRegistryName(HydrogenMod.ModId, "hydrogen")
 
   def apply(): Item = instance
 }

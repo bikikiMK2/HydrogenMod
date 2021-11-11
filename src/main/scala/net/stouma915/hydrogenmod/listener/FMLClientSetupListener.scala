@@ -8,7 +8,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 
 @Mod.EventBusSubscriber(
-  modid = HydrogenMod.MODID,
+  modid = HydrogenMod.ModId,
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object FMLClientSetupListener {

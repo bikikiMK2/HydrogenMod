@@ -16,7 +16,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 
 object ElectrolyzerBlock {
   private val instance: Block =
-    new ElectrolyzerBlock().setRegistryName(HydrogenMod.MODID, "electrolyzer")
+    new ElectrolyzerBlock().setRegistryName(HydrogenMod.ModId, "electrolyzer")
 
   def apply(): Block = instance
 }
