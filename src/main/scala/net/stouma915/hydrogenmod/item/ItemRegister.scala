@@ -34,6 +34,7 @@ object ItemRegister {
       HydrogenSwordItem(),
       HydrogenShovelItem(),
       HydrogenPickaxeItem(),
-      HydrogenAxeItem()
+      HydrogenAxeItem(),
+      HydrogenHoeItem()
     ).foreach(event.getRegistry.register)
 }

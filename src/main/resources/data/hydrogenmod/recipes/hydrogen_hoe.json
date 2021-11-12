@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AA",
+    " B",
+    " B"
+  ],
+  "key": {
+    "A": {
+      "item": "hydrogenmod:hydrogen"
+    },
+    "B": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "hydrogenmod:hydrogen_hoe",
+    "count": 1
+  },
+  "group": "hydrogenmod"
+}

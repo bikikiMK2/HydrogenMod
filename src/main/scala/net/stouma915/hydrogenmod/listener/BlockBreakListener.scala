@@ -14,6 +14,7 @@ import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.HydrogenItem
 import net.stouma915.hydrogenmod.tool.item.{
   HydrogenAxeItem,
+  HydrogenHoeItem,
   HydrogenPickaxeItem,
   HydrogenShovelItem,
   HydrogenSwordItem
@@ -38,7 +39,8 @@ class BlockBreakListener {
             HydrogenSwordItem(),
             HydrogenShovelItem(),
             HydrogenPickaxeItem(),
-            HydrogenAxeItem()
+            HydrogenAxeItem(),
+            HydrogenHoeItem()
           ).contains(itemInMainHand.getItem)
         ) {
           if (!event.getPlayer.isCreative) {
