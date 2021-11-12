@@ -1,7 +1,6 @@
 package net.stouma915.hydrogenmod.listener
 
-import net.minecraft.world.entity.{EquipmentSlot, LivingEntity}
-import net.minecraft.world.level.{Explosion, ExplosionDamageCalculator}
+import net.minecraft.world.entity.EquipmentSlot
 import net.minecraftforge.event.entity.living.LivingDamageEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.stouma915.hydrogenmod.armor.item.{
@@ -10,7 +9,8 @@ import net.stouma915.hydrogenmod.armor.item.{
   HydrogenHelmetArmorItem,
   HydrogenLeggingsArmorItem
 }
-import net.stouma915.hydrogenmod.damagesource.HydrogenExplosionDamageSource
+import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.util.Util
 
 class LivingDamageListener {
   @SubscribeEvent
@@ -34,34 +34,26 @@ class LivingDamageListener {
         leggings == HydrogenLeggingsArmorItem() ||
         boots == HydrogenBootsArmorItem()
       ) {
-        val destroyArmor = (e: EquipmentSlot) =>
-          event.getEntityLiving
-            .getItemBySlot(e)
-            .hurtAndBreak(
-              event.getEntityLiving.getItemBySlot(e).getMaxDamage,
-              event.getEntityLiving,
-              (_: LivingEntity) => {}
-            )
-
         if (helmet == HydrogenHelmetArmorItem())
-          destroyArmor(HEAD)
+          event.getEntityLiving
+            .getItemBySlot(HEAD)
+            .destroyItem(event.getEntityLiving)
         if (chestplate == HydrogenChestplateArmorItem())
-          destroyArmor(CHEST)
+          event.getEntityLiving
+            .getItemBySlot(CHEST)
+            .destroyItem(event.getEntityLiving)
         if (leggings == HydrogenLeggingsArmorItem())
-          destroyArmor(LEGS)
+          event.getEntityLiving
+            .getItemBySlot(LEGS)
+            .destroyItem(event.getEntityLiving)
         if (boots == HydrogenBootsArmorItem())
-          destroyArmor(FEET)
+          event.getEntityLiving
+            .getItemBySlot(FEET)
+            .destroyItem(event.getEntityLiving)
 
-        event.getEntityLiving.level.explode(
-          null,
-          HydrogenExplosionDamageSource(),
-          new ExplosionDamageCalculator,
-          event.getEntityLiving.getX,
-          event.getEntityLiving.getY,
-          event.getEntityLiving.getZ,
-          10.0f,
-          false,
-          Explosion.BlockInteraction.BREAK
+        Util.performHydrogenExplosion(
+          event.getEntityLiving.level,
+          event.getEntityLiving.getPos
         )
       }
     }

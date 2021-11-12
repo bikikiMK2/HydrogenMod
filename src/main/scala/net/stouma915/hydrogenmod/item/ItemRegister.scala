@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.armor.item._
 import net.stouma915.hydrogenmod.block.item._
+import net.stouma915.hydrogenmod.tool.item.HydrogenSwordItem
 
 @Mod.EventBusSubscriber(
   modid = HydrogenMod.ModId,
@@ -29,6 +30,7 @@ object ItemRegister {
       OxygenHelmetArmorItem(),
       OxygenChestplateArmorItem(),
       OxygenLeggingsArmorItem(),
-      OxygenBootsArmorItem()
+      OxygenBootsArmorItem(),
+      HydrogenSwordItem()
     ).foreach(event.getRegistry.register)
 }

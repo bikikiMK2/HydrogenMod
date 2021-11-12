@@ -13,6 +13,7 @@ object HydrogenMod {
 @Mod(HydrogenMod.ModId)
 class HydrogenMod {
   Seq(
+    new BlockBreakListener,
     new LivingDamageListener,
     new LivingEntityUseItemFinishListener,
     new LivingUpdateListener,
