@@ -33,6 +33,7 @@ object ItemRegister {
       OxygenBootsArmorItem(),
       HydrogenSwordItem(),
       HydrogenShovelItem(),
-      HydrogenPickaxeItem()
+      HydrogenPickaxeItem(),
+      HydrogenAxeItem()
     ).foreach(event.getRegistry.register)
 }
