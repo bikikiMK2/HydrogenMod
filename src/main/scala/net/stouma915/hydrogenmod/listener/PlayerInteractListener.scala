@@ -12,6 +12,7 @@ import net.stouma915.hydrogenmod.armor.item.{
 import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.HydrogenItem
 import net.stouma915.hydrogenmod.tool.item.{
+  HydrogenPickaxeItem,
   HydrogenShovelItem,
   HydrogenSwordItem
 }
@@ -34,7 +35,8 @@ class PlayerInteractListener {
         HydrogenHelmetArmorItem(),
         HydrogenLeggingsArmorItem(),
         HydrogenSwordItem(),
-        HydrogenShovelItem()
+        HydrogenShovelItem(),
+        HydrogenPickaxeItem()
       ).contains(itemInMainHand.getItem)
     ) {
       if (!event.getPlayer.isCreative) {
