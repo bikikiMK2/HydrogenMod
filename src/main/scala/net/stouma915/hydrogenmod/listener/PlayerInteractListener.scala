@@ -11,7 +11,10 @@ import net.stouma915.hydrogenmod.armor.item.{
 }
 import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.HydrogenItem
-import net.stouma915.hydrogenmod.tool.item.HydrogenSwordItem
+import net.stouma915.hydrogenmod.tool.item.{
+  HydrogenShovelItem,
+  HydrogenSwordItem
+}
 import net.stouma915.hydrogenmod.util.Util
 
 class PlayerInteractListener {
@@ -30,7 +33,8 @@ class PlayerInteractListener {
         HydrogenChestplateArmorItem(),
         HydrogenHelmetArmorItem(),
         HydrogenLeggingsArmorItem(),
-        HydrogenSwordItem()
+        HydrogenSwordItem(),
+        HydrogenShovelItem()
       ).contains(itemInMainHand.getItem)
     ) {
       if (!event.getPlayer.isCreative) {
