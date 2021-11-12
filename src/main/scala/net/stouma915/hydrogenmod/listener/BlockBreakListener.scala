@@ -4,7 +4,14 @@ import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.level.block.FireBlock
 import net.minecraftforge.event.world.BlockEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.stouma915.hydrogenmod.armor.item.{
+  HydrogenBootsArmorItem,
+  HydrogenChestplateArmorItem,
+  HydrogenHelmetArmorItem,
+  HydrogenLeggingsArmorItem
+}
 import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.item.HydrogenItem
 import net.stouma915.hydrogenmod.tool.item.HydrogenSwordItem
 import net.stouma915.hydrogenmod.util.Util
 
@@ -18,10 +25,20 @@ class BlockBreakListener {
 
         if (
           Seq(
+            HydrogenItem(),
+            HydrogenBootsArmorItem(),
+            HydrogenChestplateArmorItem(),
+            HydrogenHelmetArmorItem(),
+            HydrogenLeggingsArmorItem(),
             HydrogenSwordItem()
           ).contains(itemInMainHand.getItem)
         ) {
-          itemInMainHand.destroyItem(event.getPlayer)
+          if (!event.getPlayer.isCreative) {
+            if (itemInMainHand.sameItem(HydrogenItem().asItemStack))
+              itemInMainHand.setCount(itemInMainHand.getCount - 1)
+            else
+              itemInMainHand.destroyItem(event.getPlayer)
+          }
           Util.performHydrogenExplosion(
             event.getPlayer.level,
             event.getPlayer.getPos

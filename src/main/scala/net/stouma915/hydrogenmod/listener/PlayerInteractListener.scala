@@ -3,8 +3,15 @@ package net.stouma915.hydrogenmod.listener
 import net.minecraft.world.level.block.Blocks
 import net.minecraftforge.event.entity.player.PlayerInteractEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
+import net.stouma915.hydrogenmod.armor.item.{
+  HydrogenBootsArmorItem,
+  HydrogenChestplateArmorItem,
+  HydrogenHelmetArmorItem,
+  HydrogenLeggingsArmorItem
+}
 import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.HydrogenItem
+import net.stouma915.hydrogenmod.tool.item.HydrogenSwordItem
 import net.stouma915.hydrogenmod.util.Util
 
 class PlayerInteractListener {
@@ -14,13 +21,24 @@ class PlayerInteractListener {
   ): Unit = {
     val block = event.getWorld.getBlockState(event.getPos).getBlock
     val itemInMainHand = event.getPlayer.getInventory.getSelected
+
     if (
-      itemInMainHand.sameItem(
-        HydrogenItem().asItemStack
-      ) && block == Blocks.FIRE
+      block == Blocks.FIRE &&
+      Seq(
+        HydrogenItem(),
+        HydrogenBootsArmorItem(),
+        HydrogenChestplateArmorItem(),
+        HydrogenHelmetArmorItem(),
+        HydrogenLeggingsArmorItem(),
+        HydrogenSwordItem()
+      ).contains(itemInMainHand.getItem)
     ) {
-      if (!event.getPlayer.isCreative)
-        itemInMainHand.setCount(itemInMainHand.getCount - 1)
+      if (!event.getPlayer.isCreative) {
+        if (itemInMainHand.sameItem(HydrogenItem().asItemStack))
+          itemInMainHand.setCount(itemInMainHand.getCount - 1)
+        else
+          itemInMainHand.destroyItem(event.getEntityLiving)
+      }
       Util.performHydrogenExplosion(event.getWorld, event.getPos)
     }
   }
