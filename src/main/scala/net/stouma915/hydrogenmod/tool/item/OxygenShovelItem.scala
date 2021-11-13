@@ -4,7 +4,7 @@ import net.minecraft.world.item.Item.Properties
 import net.minecraft.world.item.{Item, ShovelItem}
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
-import net.stouma915.hydrogenmod.tool.tier.HydrogenTier
+import net.stouma915.hydrogenmod.tool.tier.OxygenTier
 
 object OxygenShovelItem {
   private val instance: Item =
@@ -15,7 +15,7 @@ object OxygenShovelItem {
 
 sealed class OxygenShovelItem private ()
     extends ShovelItem(
-      HydrogenTier(),
+      OxygenTier(),
       1.0f,
       1.0f,
       new Properties().tab(HydrogenModTab())
