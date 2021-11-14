@@ -13,7 +13,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 object PotionRegister {
   @SubscribeEvent
   def registerPotion(event: RegistryEvent.Register[Potion]): Unit =
-    IndexedSeq(
+    List(
       HydrogenWaterPotion(),
       OxygenWaterPotion()
     ).foreach(event.getRegistry.register)

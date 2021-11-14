@@ -13,7 +13,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 object BlockRegister {
   @SubscribeEvent
   def registerBlocks(event: RegistryEvent.Register[Block]): Unit =
-    IndexedSeq(
+    List(
       ElectrolyzerBlock()
     ).foreach(event.getRegistry.register)
 }

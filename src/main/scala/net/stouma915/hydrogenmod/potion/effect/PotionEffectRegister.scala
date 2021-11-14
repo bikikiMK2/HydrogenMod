@@ -13,7 +13,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 object PotionEffectRegister {
   @SubscribeEvent
   def registerEffect(event: RegistryEvent.Register[MobEffect]): Unit =
-    IndexedSeq(
+    List(
       HydrogenWaterEffect(),
       OxygenWaterEffect()
     ).foreach(event.getRegistry.register)

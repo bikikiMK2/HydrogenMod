@@ -18,7 +18,7 @@ object ItemRegister {
   def registerItems(
       event: RegistryEvent.Register[Item]
   ): Unit =
-    IndexedSeq(
+    List(
       HydrogenItem(),
       OxygenItem(),
       MetalRodItem(),
