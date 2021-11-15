@@ -11,10 +11,12 @@ import net.stouma915.hydrogenmod.HydrogenMod
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object PotionRegister {
+  private val potionsToRegister = List(
+    HydrogenWaterPotion(),
+    OxygenWaterPotion()
+  )
+
   @SubscribeEvent
   def registerPotion(event: RegistryEvent.Register[Potion]): Unit =
-    List(
-      HydrogenWaterPotion(),
-      OxygenWaterPotion()
-    ).foreach(event.getRegistry.register)
+    potionsToRegister.foreach(event.getRegistry.register)
 }
