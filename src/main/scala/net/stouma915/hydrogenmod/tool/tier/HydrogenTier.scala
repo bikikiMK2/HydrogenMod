@@ -22,6 +22,5 @@ sealed class HydrogenTier private () extends Tier {
   override def getRepairIngredient: Ingredient =
     Ingredient.of(HydrogenItem())
 
-  @SuppressWarnings(Array("deprecation"))
   override def getLevel: Int = 0
 }

@@ -31,7 +31,6 @@ sealed class ElectrolyzerBlock private ()
         .requiresCorrectToolForDrops()
     ) {
 
-  @SuppressWarnings(Array("deprecation"))
   override def getShape(
       p_51973_ : BlockState,
       p_51974_ : BlockGetter,

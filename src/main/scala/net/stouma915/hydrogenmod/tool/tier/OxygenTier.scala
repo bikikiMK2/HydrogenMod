@@ -22,6 +22,5 @@ sealed class OxygenTier private () extends Tier {
   override def getRepairIngredient: Ingredient =
     Ingredient.of(OxygenItem())
 
-  @SuppressWarnings(Array("deprecation"))
   override def getLevel: Int = 0
 }
