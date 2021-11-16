@@ -1,6 +1,5 @@
 package net.stouma915.hydrogenmod.listener
 
-import net.minecraft.world.entity.EquipmentSlot
 import net.minecraft.world.level.block.FireBlock
 import net.minecraftforge.event.world.BlockEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
@@ -27,7 +26,7 @@ class BlockBreakListener {
     event.getState.getBlock match {
       case _: FireBlock =>
         val itemInMainHand =
-          event.getPlayer.getItemBySlot(EquipmentSlot.MAINHAND)
+          event.getPlayer.getInventory.getSelected
 
         if (
           Seq(
@@ -44,10 +43,10 @@ class BlockBreakListener {
           ).contains(itemInMainHand.getItem)
         ) {
           if (!event.getPlayer.isCreative) {
-            if (itemInMainHand.sameItem(HydrogenItem().asItemStack))
-              itemInMainHand.setCount(itemInMainHand.getCount - 1)
-            else
+            if (itemInMainHand.getItem.canDestroy)
               itemInMainHand.destroyItem(event.getPlayer)
+            else
+              itemInMainHand.setCount(itemInMainHand.getCount - 1)
           }
           Util.performHydrogenExplosion(
             event.getPlayer.level,
