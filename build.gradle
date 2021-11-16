@@ -12,10 +12,7 @@ buildscript {
     }
 }
 
-plugins {
-    id "scala"
-}
-
+apply plugin: "scala"
 apply plugin: "net.minecraftforge.gradle"
 
 version = "1.0.0"
