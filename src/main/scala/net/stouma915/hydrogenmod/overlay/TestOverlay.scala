@@ -13,6 +13,7 @@ object TestOverlay {
 sealed class TestOverlay private () extends Overlay {
   override def render(overlayGameData: OverlayGameData): Unit =
     if (overlayGameData.getType == RenderGameOverlayEvent.ElementType.ALL) {
+      /*
       val width = overlayGameData.getWindow.getGuiScaledWidth
       val height = overlayGameData.getWindow.getGuiScaledHeight
       val posX = width / 2
@@ -28,5 +29,6 @@ sealed class TestOverlay private () extends Overlay {
           posY.toFloat + 67,
           -12829636
         )
+       */
     }
 }
