@@ -55,7 +55,6 @@ class LivingDamageListener {
                 .destroyItem(event.getEntityLiving)
           case _ =>
         }
-
         Util.performHydrogenExplosion(
           event.getEntityLiving.level,
           event.getEntityLiving.getPos
