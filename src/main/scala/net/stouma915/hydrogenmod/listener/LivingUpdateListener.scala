@@ -8,6 +8,7 @@ import net.stouma915.hydrogenmod.armor.item.{
   OxygenHelmetArmorItem
 }
 import net.stouma915.hydrogenmod.damagesource.SuffocationDamageSource
+import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.potion.effect.{
   HydrogenWaterEffect,
   OxygenWaterEffect
@@ -20,10 +21,7 @@ class LivingUpdateListener {
   def onLivingUpdate(event: LivingUpdateEvent): Unit = {
     event.getEntityLiving.getActiveEffects.asScala.map(_.getEffect).foreach {
       case _: HydrogenWaterEffect =>
-        event.getEntityLiving.hurt(
-          SuffocationDamageSource(),
-          event.getEntityLiving.getMaxHealth
-        )
+        event.getEntityLiving.killWithCause(SuffocationDamageSource())
       case _: OxygenWaterEffect =>
         event.getEntityLiving
           .setAirSupply(event.getEntityLiving.getMaxAirSupply)

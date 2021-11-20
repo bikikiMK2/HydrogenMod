@@ -14,29 +14,32 @@ import net.stouma915.hydrogenmod.tool.item._
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object ItemRegister {
+  private val itemsToRegister = List(
+    HydrogenItem(),
+    OxygenItem(),
+    MetalRodItem(),
+    ElectrolyzerBlockItem(),
+    HydrogenHelmetArmorItem(),
+    HydrogenChestplateArmorItem(),
+    HydrogenLeggingsArmorItem(),
+    HydrogenBootsArmorItem(),
+    OxygenHelmetArmorItem(),
+    OxygenChestplateArmorItem(),
+    OxygenLeggingsArmorItem(),
+    OxygenBootsArmorItem(),
+    HydrogenSwordItem(),
+    HydrogenShovelItem(),
+    HydrogenPickaxeItem(),
+    HydrogenAxeItem(),
+    HydrogenHoeItem(),
+    OxygenSwordItem(),
+    OxygenShovelItem(),
+    OxygenPickaxeItem(),
+    OxygenAxeItem(),
+    OxygenHoeItem()
+  )
+
   @SubscribeEvent
-  def registerItems(
-      event: RegistryEvent.Register[Item]
-  ): Unit =
-    IndexedSeq(
-      HydrogenItem(),
-      OxygenItem(),
-      MetalRodItem(),
-      ElectrolyzerBlockItem(),
-      HydrogenHelmetArmorItem(),
-      HydrogenChestplateArmorItem(),
-      HydrogenLeggingsArmorItem(),
-      HydrogenBootsArmorItem(),
-      OxygenHelmetArmorItem(),
-      OxygenChestplateArmorItem(),
-      OxygenLeggingsArmorItem(),
-      OxygenBootsArmorItem(),
-      HydrogenSwordItem(),
-      HydrogenShovelItem(),
-      HydrogenPickaxeItem(),
-      HydrogenAxeItem(),
-      HydrogenHoeItem(),
-      OxygenSwordItem(),
-      OxygenShovelItem()
-    ).foreach(event.getRegistry.register)
+  def registerItems(event: RegistryEvent.Register[Item]): Unit =
+    itemsToRegister.foreach(event.getRegistry.register)
 }

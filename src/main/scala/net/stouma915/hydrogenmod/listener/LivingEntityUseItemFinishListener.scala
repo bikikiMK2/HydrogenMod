@@ -6,6 +6,7 @@ import net.stouma915.hydrogenmod.damagesource.{
   HydrogenDamageSource,
   OxygenDamageSource
 }
+import net.stouma915.hydrogenmod.implicits._
 import net.stouma915.hydrogenmod.item.{HydrogenItem, OxygenItem}
 
 class LivingEntityUseItemFinishListener {
@@ -15,15 +16,9 @@ class LivingEntityUseItemFinishListener {
   ): Unit =
     event.getItem.getItem match {
       case _: HydrogenItem =>
-        event.getEntityLiving.hurt(
-          HydrogenDamageSource(),
-          event.getEntityLiving.getHealth
-        )
+        event.getEntityLiving.killWithCause(HydrogenDamageSource())
       case _: OxygenItem =>
-        event.getEntityLiving.hurt(
-          OxygenDamageSource(),
-          event.getEntityLiving.getHealth
-        )
+        event.getEntityLiving.killWithCause(OxygenDamageSource())
       case _ =>
     }
 }

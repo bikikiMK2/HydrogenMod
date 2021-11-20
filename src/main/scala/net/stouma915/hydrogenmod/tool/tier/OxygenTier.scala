@@ -2,15 +2,15 @@ package net.stouma915.hydrogenmod.tool.tier
 
 import net.minecraft.world.item.Tier
 import net.minecraft.world.item.crafting.Ingredient
-import net.stouma915.hydrogenmod.item.HydrogenItem
+import net.stouma915.hydrogenmod.item.OxygenItem
 
-object HydrogenTier {
-  private val instance: Tier = new HydrogenTier
+object OxygenTier {
+  private val instance: Tier = new OxygenTier
 
   def apply(): Tier = instance
 }
 
-sealed class HydrogenTier private () extends Tier {
+sealed class OxygenTier private () extends Tier {
   override def getUses: Int = 50
 
   override def getSpeed: Float = 0.0f
@@ -20,7 +20,7 @@ sealed class HydrogenTier private () extends Tier {
   override def getEnchantmentValue: Int = 0
 
   override def getRepairIngredient: Ingredient =
-    Ingredient.of(HydrogenItem())
+    Ingredient.of(OxygenItem())
 
   override def getLevel: Int = 0
 }

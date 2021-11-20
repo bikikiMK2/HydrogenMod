@@ -1,22 +1,22 @@
 package net.stouma915.hydrogenmod.tool.item
 
+import net.minecraft.world.item.{HoeItem, Item}
 import net.minecraft.world.item.Item.Properties
-import net.minecraft.world.item.{Item, SwordItem}
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 import net.stouma915.hydrogenmod.tool.tier.OxygenTier
 
-object OxygenSwordItem {
+object OxygenHoeItem {
   private val instance: Item =
-    new OxygenSwordItem().setRegistryName(HydrogenMod.ModId, "oxygen_sword")
+    new OxygenHoeItem().setRegistryName(HydrogenMod.ModId, "oxygen_hoe")
 
   def apply(): Item = instance
 }
 
-sealed class OxygenSwordItem private ()
-    extends SwordItem(
+sealed class OxygenHoeItem private ()
+    extends HoeItem(
       OxygenTier(),
-      0,
+      1,
       1.0f,
       new Properties().tab(HydrogenModTab())
     )

@@ -44,10 +44,10 @@ class PlayerInteractListener {
       ).contains(itemInMainHand.getItem)
     ) {
       if (!event.getPlayer.isCreative) {
-        if (itemInMainHand.sameItem(HydrogenItem().asItemStack))
-          itemInMainHand.setCount(itemInMainHand.getCount - 1)
-        else
+        if (itemInMainHand.getItem.canDestroy)
           itemInMainHand.destroyItem(event.getEntityLiving)
+        else
+          itemInMainHand.setCount(itemInMainHand.getCount - 1)
       }
       Util.performHydrogenExplosion(event.getWorld, event.getPos)
     }
