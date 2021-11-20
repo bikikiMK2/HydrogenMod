@@ -18,18 +18,12 @@ package object implicits {
   }
 
   implicit class ItemStackOps(itemStack: ItemStack) {
-    def destroyItem(livingEntity: LivingEntity): Unit = {
-      if (!itemStack.getItem.canDestroy)
-        throw new IllegalStateException(
-          s"${itemStack.getItem.getRegistryName.toString} has no durability."
-        )
-
+    def destroyItem(livingEntity: LivingEntity): Unit =
       itemStack.hurtAndBreak(
         itemStack.getMaxDamage,
         livingEntity,
         (_: LivingEntity) => {}
       )
-    }
   }
 
   implicit class EntityOps(entity: Entity) {
