@@ -1,6 +1,7 @@
 package net.stouma915.hydrogenmod
 
 import net.minecraft.core.BlockPos
+import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.{Entity, LivingEntity}
 import net.minecraft.world.item.{Item, ItemStack}
 
@@ -34,5 +35,10 @@ package object implicits {
 
   implicit class EntityOps(entity: Entity) {
     def getPos: BlockPos = new BlockPos(entity.getX, entity.getY, entity.getZ)
+  }
+
+  implicit class LivingEntityPos(livingEntity: LivingEntity) {
+    def killWithCause(cause: DamageSource): Unit =
+      livingEntity.hurt(cause, livingEntity.getMaxHealth)
   }
 }
