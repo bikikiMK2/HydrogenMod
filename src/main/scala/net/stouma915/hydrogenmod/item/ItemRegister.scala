@@ -6,6 +6,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.armor.item._
+import net.stouma915.hydrogenmod.block.item._
 import net.stouma915.hydrogenmod.tool.item._
 
 @Mod.EventBusSubscriber(
@@ -17,6 +18,7 @@ object ItemRegister {
     HydrogenItem(),
     OxygenItem(),
     MetalRodItem(),
+    ElectrolyzerBlockItem(),
     HydrogenHelmetArmorItem(),
     HydrogenChestplateArmorItem(),
     HydrogenLeggingsArmorItem(),

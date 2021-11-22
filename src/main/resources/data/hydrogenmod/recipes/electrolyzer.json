@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "AAA",
+    "BAB",
+    "CCC"
+  ],
+  "key": {
+    "A": {
+      "item": "minecraft:glass"
+    },
+    "B": {
+      "item": "hydrogenmod:metal_rod"
+    },
+    "C": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "result": {
+    "item": "hydrogenmod:electrolyzer",
+    "count": 1
+  },
+  "group": "hydrogenmod"
+}

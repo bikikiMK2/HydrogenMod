@@ -12,6 +12,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
 )
 object BlockRegister {
   private val blocksToRegister = List(
+    ElectrolyzerBlock()
   )
 
   @SubscribeEvent
