@@ -30,7 +30,6 @@ sealed class ElectrolyzerBlock private ()
         .destroyTime(0.45f)
         .requiresCorrectToolForDrops()
     ) {
-
   override def getShape(
       p_51973_ : BlockState,
       p_51974_ : BlockGetter,
