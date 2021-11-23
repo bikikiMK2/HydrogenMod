@@ -8,13 +8,13 @@ import net.stouma915.hydrogenmod.armor.item.{
   OxygenHelmetArmorItem
 }
 import net.stouma915.hydrogenmod.damagesource.SuffocationDamageSource
-import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.potion.effect.{
   HydrogenWaterEffect,
   OxygenWaterEffect
 }
 
-import scala.jdk.CollectionConverters._
+import scala.jdk.CollectionConverters.*
 
 class LivingUpdateListener {
   @SubscribeEvent

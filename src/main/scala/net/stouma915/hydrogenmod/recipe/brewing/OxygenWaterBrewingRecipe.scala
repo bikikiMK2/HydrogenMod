@@ -3,7 +3,7 @@ package net.stouma915.hydrogenmod.recipe.brewing
 import net.minecraft.world.item.{ItemStack, Items}
 import net.minecraft.world.item.alchemy.{PotionUtils, Potions}
 import net.minecraftforge.common.brewing.IBrewingRecipe
-import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.OxygenItem
 import net.stouma915.hydrogenmod.potion.OxygenWaterPotion
 

@@ -2,7 +2,7 @@ package net.stouma915.hydrogenmod.creativetab
 
 import net.minecraft.world.item.{CreativeModeTab, ItemStack}
 import net.stouma915.hydrogenmod.HydrogenMod
-import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.HydrogenItem
 
 object HydrogenModTab {

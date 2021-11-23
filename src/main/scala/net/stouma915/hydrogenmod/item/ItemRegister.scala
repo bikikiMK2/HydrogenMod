@@ -5,9 +5,9 @@ import net.minecraftforge.event.RegistryEvent
 import net.minecraftforge.eventbus.api.SubscribeEvent
 import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.HydrogenMod
-import net.stouma915.hydrogenmod.armor.item._
-import net.stouma915.hydrogenmod.block.item._
-import net.stouma915.hydrogenmod.tool.item._
+import net.stouma915.hydrogenmod.armor.item.*
+import net.stouma915.hydrogenmod.block.item.*
+import net.stouma915.hydrogenmod.tool.item.*
 
 @Mod.EventBusSubscriber(
   modid = HydrogenMod.ModId,

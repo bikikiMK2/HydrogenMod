@@ -9,7 +9,7 @@ import net.stouma915.hydrogenmod.armor.item.{
   HydrogenHelmetArmorItem,
   HydrogenLeggingsArmorItem
 }
-import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.HydrogenItem
 import net.stouma915.hydrogenmod.tool.item.{
   HydrogenAxeItem,

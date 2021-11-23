@@ -6,7 +6,7 @@ import net.stouma915.hydrogenmod.damagesource.{
   HydrogenDamageSource,
   OxygenDamageSource
 }
-import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.{HydrogenItem, OxygenItem}
 
 class LivingEntityUseItemFinishListener {

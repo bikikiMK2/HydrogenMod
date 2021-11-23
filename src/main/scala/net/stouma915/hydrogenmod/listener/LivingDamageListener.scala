@@ -10,7 +10,7 @@ import net.stouma915.hydrogenmod.armor.item.{
   HydrogenHelmetArmorItem,
   HydrogenLeggingsArmorItem
 }
-import net.stouma915.hydrogenmod.implicits._
+import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.util.Util
 
 class LivingDamageListener {
@@ -18,7 +18,7 @@ class LivingDamageListener {
   def onLivingDamage(event: LivingDamageEvent): Unit =
     if (event.getSource.isFire) {
 
-      import EquipmentSlot._
+      import EquipmentSlot.*
 
       val helmet =
         event.getEntityLiving.getItemBySlot(HEAD).getItem
