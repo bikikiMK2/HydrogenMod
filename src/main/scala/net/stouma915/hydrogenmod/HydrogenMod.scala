@@ -5,6 +5,7 @@ import net.minecraftforge.common.brewing.BrewingRecipeRegistry
 import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.listener.*
 import net.stouma915.hydrogenmod.recipe.brewing.*
+import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegister
 
 object HydrogenMod {
   private[hydrogenmod] final val ModId = "hydrogenmod"
@@ -24,4 +25,6 @@ class HydrogenMod {
     new HydrogenWaterBrewingRecipe,
     new OxygenWaterBrewingRecipe
   ).foreach(BrewingRecipeRegistry.addRecipe)
+
+  ElectrolysisRecipeRegister.register()
 }
