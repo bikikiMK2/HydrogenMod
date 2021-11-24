@@ -17,6 +17,7 @@ object ItemRegister {
   private val itemsToRegister = List(
     HydrogenItem(),
     OxygenItem(),
+    BatteryItem(),
     MetalRodItem(),
     ElectrolyzerBlockItem(),
     HydrogenHelmetArmorItem(),
