@@ -70,7 +70,7 @@ sealed class ElectrolyzerBlock private ()
                 p_39954_ : Int,
                 p_39955_ : Inventory,
                 p_39956_ : Player
-            ): AbstractContainerMenu = new ElectrolyzerMenu(
+            ): AbstractContainerMenu = ElectrolyzerMenu.newInstance(
               p_39954_,
               p_39955_,
               extraData

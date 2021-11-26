@@ -148,7 +148,7 @@ sealed class ElectrolyzerBlockEntity private (
       p_58627_ : Int,
       p_58628_ : Inventory
   ): AbstractContainerMenu =
-    new ElectrolyzerMenu(
+    ElectrolyzerMenu.newInstance(
       p_58627_,
       p_58628_,
       new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition)
