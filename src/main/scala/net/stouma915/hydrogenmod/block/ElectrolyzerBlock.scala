@@ -5,7 +5,12 @@ import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.network.chat.{Component, TranslatableComponent}
 import net.minecraft.server.level.ServerPlayer
-import net.minecraft.world.{InteractionHand, InteractionResult, MenuProvider}
+import net.minecraft.world.{
+  Containers,
+  InteractionHand,
+  InteractionResult,
+  MenuProvider
+}
 import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.level.block.entity.BlockEntity
@@ -102,4 +107,22 @@ sealed class ElectrolyzerBlock private ()
       p_153215_ : BlockPos,
       p_153216_ : BlockState
   ): BlockEntity = ElectrolyzerBlockEntity.newInstance(p_153215_, p_153216_)
+
+  override def onRemove(
+      p_60515_ : BlockState,
+      p_60516_ : Level,
+      p_60517_ : BlockPos,
+      p_60518_ : BlockState,
+      p_60519_ : Boolean
+  ): Unit = {
+    if (p_60515_.getBlock != p_60518_.getBlock) {
+      val blockEntity = p_60516_.getBlockEntity(p_60517_)
+      blockEntity match {
+        case entity: ElectrolyzerBlockEntity =>
+          Containers.dropContents(p_60516_, p_60517_, entity)
+          p_60516_.updateNeighbourForOutputSignal(p_60517_, this)
+        case _ =>
+      }
+    }
+  }
 }
