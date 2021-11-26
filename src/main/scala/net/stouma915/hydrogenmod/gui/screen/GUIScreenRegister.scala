@@ -21,7 +21,7 @@ object GUIScreenRegister {
     event.enqueueWork((() => {
       MenuScreens.register(
         ElectrolyzerMenu(),
-        new ElectrolyzerScreen(_, _, _)
+        ElectrolyzerScreen.newInstance(_, _, _)
       )
     }): Runnable)
 }

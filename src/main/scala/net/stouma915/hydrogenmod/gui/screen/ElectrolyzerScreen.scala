@@ -17,9 +17,15 @@ object ElectrolyzerScreen {
   private val texture = new ResourceLocation(
     "hydrogenmod:textures/gui/electrolyzer_menu.png"
   )
+
+  private[hydrogenmod] def newInstance(
+      container: ElectrolyzerMenu,
+      inventory: Inventory,
+      text: Component
+  ): ElectrolyzerScreen = new ElectrolyzerScreen(container, inventory, text)
 }
 
-private[hydrogenmod] class ElectrolyzerScreen(
+sealed class ElectrolyzerScreen private (
     container: ElectrolyzerMenu,
     inventory: Inventory,
     text: Component
