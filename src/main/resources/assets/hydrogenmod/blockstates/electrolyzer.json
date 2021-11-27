@@ -1,7 +1,81 @@
 {
-  "variants": {
-    "": {
-      "model": "hydrogenmod:block/electrolyzer"
+  "multipart": [
+    {
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer"
+      }
+    },
+    {
+      "when": {
+        "water_level": 1
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_1"
+      }
+    },
+    {
+      "when": {
+        "water_level": 2
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_2"
+      }
+    },
+    {
+      "when": {
+        "water_level": 3
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_3"
+      }
+    },
+    {
+      "when": {
+        "water_level": 4
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_4"
+      }
+    },
+    {
+      "when": {
+        "water_level": 5
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_5"
+      }
+    },
+    {
+      "when": {
+        "water_level": 6
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_6"
+      }
+    },
+    {
+      "when": {
+        "water_level": 7
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_7"
+      }
+    },
+    {
+      "when": {
+        "water_level": 8
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_8"
+      }
+    },
+    {
+      "when": {
+        "water_level": 9
+      },
+      "apply": {
+        "model": "hydrogenmod:block/electrolyzer_water_level_9"
+      }
     }
-  }
+  ]
 }

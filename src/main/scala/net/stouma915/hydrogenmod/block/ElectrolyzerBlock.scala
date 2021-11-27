@@ -17,7 +17,8 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.{BlockGetter, Level}
 import net.minecraft.world.level.block.{Block, EntityBlock, SoundType}
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
-import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.{BlockState, StateDefinition}
+import net.minecraft.world.level.block.state.properties.IntegerProperty
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.{CollisionContext, VoxelShape}
@@ -27,6 +28,9 @@ import net.stouma915.hydrogenmod.block.entity.ElectrolyzerBlockEntity
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
 
 object ElectrolyzerBlock {
+  private[hydrogenmod] final val WaterLevelProperty =
+    IntegerProperty.create("water_level", 0, 9)
+
   private val instance: Block =
     new ElectrolyzerBlock().setRegistryName(HydrogenMod.ModId, "electrolyzer")
 
@@ -44,6 +48,14 @@ sealed class ElectrolyzerBlock private ()
         .lightLevel((_: BlockState) => 1)
     )
     with EntityBlock {
+  this.registerDefaultState(
+    this.stateDefinition.any().setValue(ElectrolyzerBlock.WaterLevelProperty, 0)
+  )
+
+  override def createBlockStateDefinition(
+      p_49915_ : StateDefinition.Builder[Block, BlockState]
+  ): Unit = p_49915_.add(ElectrolyzerBlock.WaterLevelProperty)
+
   override def getShape(
       p_51973_ : BlockState,
       p_51974_ : BlockGetter,
