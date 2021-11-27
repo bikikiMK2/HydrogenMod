@@ -54,14 +54,12 @@ sealed class ElectrolyzerMenu private (
   private val customSlots = mutable.Map[Int, Slot]()
   private val blockPos: BlockPos = extraData.readBlockPos()
   private var iItemHandler: IItemHandler = _
-  private var bound: Boolean = false
 
   inventory.player.level
     .getBlockEntity(blockPos)
     .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
     .ifPresent { capability =>
       iItemHandler = capability
-      bound = true
     }
 
   if (iItemHandler.isNull)
