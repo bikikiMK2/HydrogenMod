@@ -19,10 +19,10 @@ sealed class ElectrolysisOfWater private () extends ElectrolysisRecipe {
   override def getOutputItems(inputItem: ItemStack): List[ItemStack] =
     List(
       {
-        val hydrogenItemStack = HydrogenItem().asItemStack
+        val hydrogenItemStack = HydrogenItem().toGeneralItemStack
         hydrogenItemStack.setCount(2)
         hydrogenItemStack
       },
-      OxygenItem().asItemStack
+      OxygenItem().toGeneralItemStack
     )
 }

@@ -15,7 +15,7 @@ sealed class OxygenWaterBrewingRecipe extends IBrewingRecipe {
   }
 
   override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(OxygenItem().asItemStack)
+    ingredient.sameItem(OxygenItem().toGeneralItemStack)
 
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))

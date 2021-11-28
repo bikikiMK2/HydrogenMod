@@ -14,9 +14,9 @@ package object implicits {
   }
 
   implicit class ItemOps(item: Item) {
-    def asItemStack: ItemStack = new ItemStack(item)
+    def toGeneralItemStack: ItemStack = new ItemStack(item)
 
-    def canDestroy: Boolean = item.isDamageable(asItemStack)
+    def canDestroy: Boolean = item.isDamageable(toGeneralItemStack)
   }
 
   implicit class ItemStackOps(itemStack: ItemStack) {

@@ -15,7 +15,7 @@ sealed class HydrogenWaterBrewingRecipe extends IBrewingRecipe {
   }
 
   override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(HydrogenItem().asItemStack)
+    ingredient.sameItem(HydrogenItem().toGeneralItemStack)
 
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))
