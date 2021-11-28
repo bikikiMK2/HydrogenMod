@@ -64,7 +64,7 @@ sealed class ElectrolyzerBlockEntity private (
     )
     with WorldlyContainer {
 
-  private var itemStacks = NonNullList.withSize[ItemStack](9, ItemStack.EMPTY)
+  private var itemStacks = NonNullList.withSize[ItemStack](10, ItemStack.EMPTY)
   private val handlers: Array[LazyOptional[IItemHandlerModifiable]] =
     SidedInvWrapper.create(this, Direction.values: _*)
 
@@ -157,6 +157,6 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def getDefaultName: Component = new TextComponent("electrolyzer")
 
-  override def getContainerSize: Int = 9
+  override def getContainerSize: Int = 10
 
 }

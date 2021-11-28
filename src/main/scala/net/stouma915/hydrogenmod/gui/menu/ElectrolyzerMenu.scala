@@ -14,6 +14,7 @@ import net.minecraftforge.items.{
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.implicits.*
+import net.stouma915.hydrogenmod.item.BatteryItem
 import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.function.Supplier
@@ -142,6 +143,14 @@ sealed class ElectrolyzerMenu private (
         })
       )
     )
+
+  customSlots.put(
+    9,
+    this.addSlot(new SlotItemHandler(iItemHandler, 9, 80, 18) {
+      override def mayPlace(stack: ItemStack): Boolean =
+        stack.getItem == BatteryItem()
+    })
+  )
 
   (0 to 2).foreach { a =>
     (0 to 8).foreach { b =>
