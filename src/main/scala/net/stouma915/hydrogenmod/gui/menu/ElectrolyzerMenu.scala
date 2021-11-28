@@ -152,6 +152,80 @@ sealed class ElectrolyzerMenu private (
     })
   )
 
+  customSlots
+    .tap(
+      _.put(
+        10,
+        this.addSlot(new SlotItemHandler(iItemHandler, 10, 103, 18) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        11,
+        this.addSlot(new SlotItemHandler(iItemHandler, 11, 121, 18) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        12,
+        this.addSlot(new SlotItemHandler(iItemHandler, 12, 139, 18) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        13,
+        this.addSlot(new SlotItemHandler(iItemHandler, 13, 103, 36) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        14,
+        this.addSlot(new SlotItemHandler(iItemHandler, 14, 121, 36) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        15,
+        this.addSlot(new SlotItemHandler(iItemHandler, 15, 139, 36) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        16,
+        this.addSlot(new SlotItemHandler(iItemHandler, 16, 103, 54) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        17,
+        this.addSlot(new SlotItemHandler(iItemHandler, 17, 121, 54) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+    .tap(
+      _.put(
+        18,
+        this.addSlot(new SlotItemHandler(iItemHandler, 18, 139, 54) {
+          override def mayPlace(stack: ItemStack): Boolean = false
+        })
+      )
+    )
+
   (0 to 2).foreach { a =>
     (0 to 8).foreach { b =>
       this.addSlot(
