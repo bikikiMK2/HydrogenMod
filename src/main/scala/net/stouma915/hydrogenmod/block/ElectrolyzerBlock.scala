@@ -32,7 +32,7 @@ object ElectrolyzerBlock {
   final val WaterLevelProperty =
     IntegerProperty.create("water_level", 0, 9)
   final val ProgressProperty =
-    IntegerProperty.create("progress", 0, 5)
+    IntegerProperty.create("progress", 0, 6)
 
   private val instance: Block =
     new ElectrolyzerBlock().setRegistryName(HydrogenMod.ModId, "electrolyzer")

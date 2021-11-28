@@ -58,10 +58,13 @@ sealed class ElectrolyzerScreen private (
     RenderSystem.setShaderColor(1, 1, 1, 1)
     RenderSystem.setShaderTexture(0, ElectrolyzerScreen.texture)
 
+    val x = (this.width - this.imageWidth) / 2
+    val y = (this.height - this.imageHeight) / 2
+
     this.blit(
       poseStack,
-      (this.width - this.imageWidth) / 2,
-      (this.height - this.imageHeight) / 2,
+      x,
+      y,
       0,
       0,
       this.imageWidth,
@@ -69,6 +72,16 @@ sealed class ElectrolyzerScreen private (
     )
 
     val progress = this.menu.getProgress
+    if (progress != 0)
+      this.blit(
+        poseStack,
+        x + 76,
+        y + 44,
+        176,
+        0,
+        progress * 4,
+        16
+      )
   }
 
   override def keyPressed(key: Int, b: Int, c: Int): Boolean = {
