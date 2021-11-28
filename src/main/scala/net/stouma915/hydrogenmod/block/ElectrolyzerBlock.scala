@@ -29,7 +29,7 @@ import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
 
 object ElectrolyzerBlock {
 
-  private[hydrogenmod] final val WaterLevelProperty =
+  final val WaterLevelProperty =
     IntegerProperty.create("water_level", 0, 9)
 
   private val instance: Block =

@@ -19,7 +19,7 @@ object ElectrolyzerScreen {
     "hydrogenmod:textures/gui/electrolyzer_menu.png"
   )
 
-  private[hydrogenmod] def newInstance(
+  private[gui] def newInstance(
       container: ElectrolyzerMenu,
       inventory: Inventory,
       text: Component

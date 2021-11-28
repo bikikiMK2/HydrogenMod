@@ -47,7 +47,7 @@ object ElectrolyzerBlockEntity {
 
   def apply(): BlockEntityType[_] = instance
 
-  private[hydrogenmod] def newInstance(
+  private[block] def newInstance(
       blockPos: BlockPos,
       blockState: BlockState
   ): ElectrolyzerBlockEntity = new ElectrolyzerBlockEntity(blockPos, blockState)
