@@ -4,6 +4,7 @@ import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
+import net.minecraft.client.renderer.GameRenderer
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
 import net.minecraft.world.entity.player.Inventory
@@ -53,9 +54,8 @@ sealed class ElectrolyzerScreen private (
       gx: Int,
       gy: Int
   ): Unit = {
+    RenderSystem.setShader(() => GameRenderer.getPositionTexShader)
     RenderSystem.setShaderColor(1, 1, 1, 1)
-    RenderSystem.enableBlend()
-    RenderSystem.defaultBlendFunc()
     RenderSystem.setShaderTexture(0, ElectrolyzerScreen.texture)
     this.blit(
       poseStack,
@@ -66,7 +66,6 @@ sealed class ElectrolyzerScreen private (
       this.imageWidth,
       this.imageHeight
     )
-    RenderSystem.disableBlend()
   }
 
   override def keyPressed(key: Int, b: Int, c: Int): Boolean = {
