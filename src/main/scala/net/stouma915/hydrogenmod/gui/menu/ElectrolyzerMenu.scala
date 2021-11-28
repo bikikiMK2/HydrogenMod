@@ -151,13 +151,11 @@ sealed class ElectrolyzerMenu private (
   }
 
   private def setWaterLevel(): Unit = {
-    var waterLevel = 0
-    (0 to 8).foreach { i =>
-      val slot = customSlots(i)
-      if (
+    val waterLevel = customSlots.count {
+      case (index: Int, slot: Slot) if (0 to 8).contains(index) =>
         slot.hasItem && slot.getItem.nonNull && !slot.getItem.isEmpty && slot.getItem.getItem == Items.WATER_BUCKET
-      )
-        waterLevel += 1
+      case _ =>
+        false
     }
 
     val blockEntity = inventory.player.level.getBlockEntity(blockPos)
