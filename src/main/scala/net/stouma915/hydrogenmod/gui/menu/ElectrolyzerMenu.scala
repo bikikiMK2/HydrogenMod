@@ -81,7 +81,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         1,
-        this.addSlot(new SlotItemHandler(iItemHandler, 1, 21, 36) {
+        this.addSlot(new SlotItemHandler(iItemHandler, 1, 39, 18) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -89,7 +89,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         2,
-        this.addSlot(new SlotItemHandler(iItemHandler, 2, 21, 54) {
+        this.addSlot(new SlotItemHandler(iItemHandler, 2, 57, 18) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -97,7 +97,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         3,
-        this.addSlot(new SlotItemHandler(iItemHandler, 3, 39, 18) {
+        this.addSlot(new SlotItemHandler(iItemHandler, 3, 21, 36) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -113,7 +113,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         5,
-        this.addSlot(new SlotItemHandler(iItemHandler, 5, 39, 54) {
+        this.addSlot(new SlotItemHandler(iItemHandler, 5, 57, 36) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -121,7 +121,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         6,
-        this.addSlot(new SlotItemHandler(iItemHandler, 6, 57, 18) {
+        this.addSlot(new SlotItemHandler(iItemHandler, 6, 21, 54) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -129,7 +129,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         7,
-        this.addSlot(new SlotItemHandler(iItemHandler, 7, 57, 36) {
+        this.addSlot(new SlotItemHandler(iItemHandler, 7, 39, 54) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
