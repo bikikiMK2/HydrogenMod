@@ -3,7 +3,6 @@ package net.stouma915.hydrogenmod.gui.screen
 import com.mojang.blaze3d.systems.RenderSystem
 import com.mojang.blaze3d.vertex.PoseStack
 import net.minecraft.client.Minecraft
-import net.minecraft.client.gui.GuiComponent
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen
 import net.minecraft.network.chat.Component
 import net.minecraft.resources.ResourceLocation
@@ -37,9 +36,6 @@ sealed class ElectrolyzerScreen private (
       text
     ) {
 
-  this.imageWidth = 176
-  this.imageHeight = 166
-
   override def render(
       poseStack: PoseStack,
       mouseX: Int,
@@ -61,14 +57,12 @@ sealed class ElectrolyzerScreen private (
     RenderSystem.enableBlend()
     RenderSystem.defaultBlendFunc()
     RenderSystem.setShaderTexture(0, ElectrolyzerScreen.texture)
-    GuiComponent.blit(
+    this.blit(
       poseStack,
-      this.leftPos,
-      this.topPos,
+      (this.width - this.imageWidth) / 2,
+      (this.height - this.imageHeight) / 2,
       0,
       0,
-      this.imageWidth,
-      this.imageHeight,
       this.imageWidth,
       this.imageHeight
     )
