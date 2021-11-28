@@ -153,7 +153,7 @@ sealed class ElectrolyzerMenu private (
   private def setWaterLevel(): Unit = {
     val waterLevel = customSlots.count {
       case (index: Int, slot: Slot) if (0 to 8).contains(index) =>
-        slot.hasItem && slot.getItem.nonNull && !slot.getItem.isEmpty && slot.getItem.getItem == Items.WATER_BUCKET
+        slot.contains(Items.WATER_BUCKET)
       case _ =>
         false
     }
