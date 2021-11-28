@@ -4,7 +4,7 @@ import io.netty.buffer.Unpooled
 import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.network.chat.{Component, TranslatableComponent}
-import net.minecraft.server.level.ServerPlayer
+import net.minecraft.server.level.{ServerLevel, ServerPlayer}
 import net.minecraft.world.{
   Containers,
   InteractionHand,
@@ -26,6 +26,8 @@ import net.minecraftforge.fmllegacy.network.NetworkHooks
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.entity.ElectrolyzerBlockEntity
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
+
+import java.util.Random
 
 object ElectrolyzerBlock {
 
@@ -65,6 +67,36 @@ sealed class ElectrolyzerBlock private ()
   ): Unit = p_49915_
     .add(ElectrolyzerBlock.WaterLevelProperty)
     .add(ElectrolyzerBlock.ProgressProperty)
+
+  override def newBlockEntity(
+      p_153215_ : BlockPos,
+      p_153216_ : BlockState
+  ): BlockEntity = ElectrolyzerBlockEntity.newInstance(p_153215_, p_153216_)
+
+  override def onPlace(
+      p_60566_ : BlockState,
+      p_60567_ : Level,
+      p_60568_ : BlockPos,
+      p_60569_ : BlockState,
+      p_60570_ : Boolean
+  ): Unit =
+    p_60567_.getBlockTicks.scheduleTick(p_60568_, this, 5)
+
+  override def tick(
+      p_60462_ : BlockState,
+      p_60463_ : ServerLevel,
+      p_60464_ : BlockPos,
+      p_60465_ : Random
+  ): Unit = {
+    val currentProgress = p_60462_.getValue(ElectrolyzerBlock.ProgressProperty)
+    val newProgress = if (currentProgress == 6) 0 else currentProgress + 1
+    val newBlockState =
+      p_60462_.setValue(ElectrolyzerBlock.ProgressProperty, newProgress)
+
+    p_60463_.setBlock(p_60464_, newBlockState, 3)
+
+    p_60463_.getBlockTicks.scheduleTick(p_60464_, this, 5)
+  }
 
   override def getShape(
       p_51973_ : BlockState,
@@ -124,11 +156,6 @@ sealed class ElectrolyzerBlock private ()
         null
     }
   }
-
-  override def newBlockEntity(
-      p_153215_ : BlockPos,
-      p_153216_ : BlockState
-  ): BlockEntity = ElectrolyzerBlockEntity.newInstance(p_153215_, p_153216_)
 
   override def onRemove(
       p_60515_ : BlockState,
