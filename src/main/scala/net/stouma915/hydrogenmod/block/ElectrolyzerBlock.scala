@@ -31,6 +31,8 @@ object ElectrolyzerBlock {
 
   final val WaterLevelProperty =
     IntegerProperty.create("water_level", 0, 9)
+  final val ProgressProperty =
+    IntegerProperty.create("progress", 0, 5)
 
   private val instance: Block =
     new ElectrolyzerBlock().setRegistryName(HydrogenMod.ModId, "electrolyzer")
@@ -52,12 +54,17 @@ sealed class ElectrolyzerBlock private ()
     with EntityBlock {
 
   this.registerDefaultState(
-    this.stateDefinition.any().setValue(ElectrolyzerBlock.WaterLevelProperty, 0)
+    this.stateDefinition
+      .any()
+      .setValue(ElectrolyzerBlock.WaterLevelProperty, 0)
+      .setValue(ElectrolyzerBlock.ProgressProperty, 0)
   )
 
   override def createBlockStateDefinition(
       p_49915_ : StateDefinition.Builder[Block, BlockState]
-  ): Unit = p_49915_.add(ElectrolyzerBlock.WaterLevelProperty)
+  ): Unit = p_49915_
+    .add(ElectrolyzerBlock.WaterLevelProperty)
+    .add(ElectrolyzerBlock.ProgressProperty)
 
   override def getShape(
       p_51973_ : BlockState,

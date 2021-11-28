@@ -5,6 +5,7 @@ import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.{AbstractContainerMenu, MenuType, Slot}
 import net.minecraft.world.item.{ItemStack, Items}
+import net.minecraft.world.level.block.state.properties.Property
 import net.minecraftforge.fmllegacy.network.IContainerFactory
 import net.minecraftforge.items.{
   CapabilityItemHandler,
@@ -399,5 +400,12 @@ sealed class ElectrolyzerMenu private (
   override def stillValid(p_38874_ : Player): Boolean = true
 
   override def get(): Map[Int, Slot] = immutable.Map.from(customSlots)
+
+  private[gui] def getProgress: Int = {
+    val blockEntity = inventory.player.level.getBlockEntity(blockPos)
+    blockEntity.getBlockState.getValue(
+      ElectrolyzerBlock.ProgressProperty.asInstanceOf[Property[Nothing]]
+    )
+  }
 
 }
