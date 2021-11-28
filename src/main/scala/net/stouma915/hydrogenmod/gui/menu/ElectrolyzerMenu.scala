@@ -14,6 +14,7 @@ import net.minecraftforge.items.{
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.implicits.*
+import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.function.Supplier
 import scala.collection.{immutable, mutable}
@@ -156,7 +157,13 @@ sealed class ElectrolyzerMenu private (
   private def setWaterLevel(): Unit = {
     val waterLevel = customSlots.count {
       case (index: Int, slot: Slot) if (0 to 8).contains(index) =>
-        slot.contains(Items.WATER_BUCKET)
+        if (slot.hasItem && slot.getItem.nonNull && !slot.getItem.isEmpty) {
+          val itemStack = slot.getItem
+
+          ElectrolysisRecipeRegistry.getAll.exists(
+            _.isCorrectAsInput(itemStack)
+          )
+        } else false
       case _ =>
         false
     }

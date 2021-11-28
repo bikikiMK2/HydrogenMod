@@ -3,7 +3,6 @@ package net.stouma915.hydrogenmod
 import net.minecraft.core.BlockPos
 import net.minecraft.world.damagesource.DamageSource
 import net.minecraft.world.entity.{Entity, LivingEntity}
-import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.{Item, ItemStack}
 
 package object implicits {
@@ -45,13 +44,6 @@ package object implicits {
 
     def killWithCause(cause: DamageSource): Unit =
       livingEntity.hurt(cause, livingEntity.getMaxHealth)
-
-  }
-
-  implicit class SlotOps(slot: Slot) {
-
-    def contains(item: Item): Boolean =
-      slot.hasItem && slot.getItem.nonNull && !slot.getItem.isEmpty && slot.getItem.getItem == item
 
   }
 
