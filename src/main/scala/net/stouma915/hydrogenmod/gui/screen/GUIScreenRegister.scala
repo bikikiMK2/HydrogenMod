@@ -16,6 +16,7 @@ import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object GUIScreenRegister {
+
   @SubscribeEvent
   def registerGUIScreens(event: FMLClientSetupEvent): Unit =
     event.enqueueWork((() => {
@@ -24,4 +25,5 @@ object GUIScreenRegister {
         ElectrolyzerScreen.newInstance(_, _, _)
       )
     }): Runnable)
+
 }

@@ -5,12 +5,15 @@ import net.minecraft.world.item.crafting.Ingredient
 import net.stouma915.hydrogenmod.item.HydrogenItem
 
 object HydrogenTier {
+
   private val instance: Tier = new HydrogenTier
 
   def apply(): Tier = instance
+
 }
 
 sealed class HydrogenTier private () extends Tier {
+
   override def getUses: Int = 50
 
   override def getSpeed: Float = 0.0f
@@ -23,4 +26,5 @@ sealed class HydrogenTier private () extends Tier {
     Ingredient.of(HydrogenItem())
 
   override def getLevel: Int = 0
+
 }

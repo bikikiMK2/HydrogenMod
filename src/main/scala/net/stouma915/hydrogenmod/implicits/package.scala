@@ -7,6 +7,7 @@ import net.minecraft.world.inventory.Slot
 import net.minecraft.world.item.{Item, ItemStack}
 
 package object implicits {
+
   implicit class AnyRefOps(anyRef: AnyRef) {
     def isNull: Boolean = anyRef == null
 
@@ -41,4 +42,5 @@ package object implicits {
     def contains(item: Item): Boolean =
       slot.hasItem && slot.getItem.nonNull && !slot.getItem.isEmpty && slot.getItem.getItem == item
   }
+
 }

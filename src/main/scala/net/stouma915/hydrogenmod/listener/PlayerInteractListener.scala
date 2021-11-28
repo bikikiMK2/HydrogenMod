@@ -21,6 +21,7 @@ import net.stouma915.hydrogenmod.tool.item.{
 import net.stouma915.hydrogenmod.util.Util
 
 class PlayerInteractListener {
+
   @SubscribeEvent
   def onPlayerRightClickBlock(
       event: PlayerInteractEvent.RightClickBlock
@@ -52,4 +53,5 @@ class PlayerInteractListener {
       Util.performHydrogenExplosion(event.getWorld, event.getPos)
     }
   }
+
 }

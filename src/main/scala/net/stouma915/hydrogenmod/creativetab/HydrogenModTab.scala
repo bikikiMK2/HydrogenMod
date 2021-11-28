@@ -6,12 +6,16 @@ import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.HydrogenItem
 
 object HydrogenModTab {
+
   private val instance: CreativeModeTab = new HydrogenModTab
 
   def apply(): CreativeModeTab = instance
+
 }
 
 sealed class HydrogenModTab private ()
     extends CreativeModeTab(HydrogenMod.ModId) {
+
   override def makeIcon(): ItemStack = HydrogenItem().toGeneralItemStack
+
 }

@@ -7,10 +7,12 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 import net.stouma915.hydrogenmod.tool.tier.HydrogenTier
 
 object HydrogenAxeItem {
+
   private val instance: Item =
     new HydrogenAxeItem().setRegistryName(HydrogenMod.ModId, "hydrogen_axe")
 
   def apply(): Item = instance
+
 }
 
 sealed class HydrogenAxeItem private ()

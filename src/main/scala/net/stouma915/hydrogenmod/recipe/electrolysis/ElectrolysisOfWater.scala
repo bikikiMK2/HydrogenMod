@@ -7,12 +7,15 @@ import net.stouma915.hydrogenmod.item.{HydrogenItem, OxygenItem}
 import net.stouma915.hydrogenmod.meta.recipe.electrolysis.ElectrolysisRecipe
 
 object ElectrolysisOfWater {
+
   private val instance: ElectrolysisRecipe = new ElectrolysisOfWater
 
   def apply(): ElectrolysisRecipe = instance
+
 }
 
 sealed class ElectrolysisOfWater private () extends ElectrolysisRecipe {
+
   override def isCorrectAsInput(inputItem: ItemStack): Boolean =
     inputItem.getItem == Items.WATER_BUCKET
 
@@ -25,4 +28,5 @@ sealed class ElectrolysisOfWater private () extends ElectrolysisRecipe {
       },
       OxygenItem().toGeneralItemStack
     )
+
 }

@@ -7,10 +7,12 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 import net.stouma915.hydrogenmod.tool.tier.HydrogenTier
 
 object HydrogenShovelItem {
+
   private val instance: Item = new HydrogenShovelItem()
     .setRegistryName(HydrogenMod.ModId, "hydrogen_shovel")
 
   def apply(): Item = instance
+
 }
 
 sealed class HydrogenShovelItem private ()

@@ -10,6 +10,7 @@ import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.{HydrogenItem, OxygenItem}
 
 class LivingEntityUseItemFinishListener {
+
   @SubscribeEvent
   def onLivingEntityUseItemFinish(
       event: LivingEntityUseItemEvent.Finish
@@ -21,4 +22,5 @@ class LivingEntityUseItemFinishListener {
         event.getEntityLiving.killWithCause(OxygenDamageSource())
       case _ =>
     }
+
 }

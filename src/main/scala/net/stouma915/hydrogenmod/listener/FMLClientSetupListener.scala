@@ -12,10 +12,12 @@ import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object FMLClientSetupListener {
+
   @SubscribeEvent
   def onFMLClientSetup(event: FMLClientSetupEvent): Unit =
     event.enqueueWork((() => {
       ItemBlockRenderTypes
         .setRenderLayer(ElectrolyzerBlock(), RenderType.cutout())
     }): Runnable)
+
 }

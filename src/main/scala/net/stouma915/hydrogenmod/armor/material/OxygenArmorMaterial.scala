@@ -8,12 +8,15 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.item.OxygenItem
 
 object OxygenArmorMaterial {
+
   private val instance: ArmorMaterial = new OxygenArmorMaterial
 
   def apply(): ArmorMaterial = instance
+
 }
 
 sealed class OxygenArmorMaterial private () extends ArmorMaterial {
+
   override def getDurabilityForSlot(p_40410_ : EquipmentSlot): Int =
     Int.MaxValue
 
@@ -30,4 +33,5 @@ sealed class OxygenArmorMaterial private () extends ArmorMaterial {
   override def getToughness: Float = 0.0f
 
   override def getKnockbackResistance: Float = 0.0f
+
 }

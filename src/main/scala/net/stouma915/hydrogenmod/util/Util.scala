@@ -5,6 +5,7 @@ import net.minecraft.world.level.{Explosion, ExplosionDamageCalculator, Level}
 import net.stouma915.hydrogenmod.damagesource.HydrogenExplosionDamageSource
 
 object Util {
+
   def performHydrogenExplosion(level: Level, blockPos: BlockPos): Unit =
     level.explode(
       null,
@@ -17,4 +18,5 @@ object Util {
       false,
       Explosion.BlockInteraction.BREAK
     )
+
 }

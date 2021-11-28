@@ -5,14 +5,17 @@ import net.minecraftforge.common.brewing.BrewingRecipeRegistry
 import net.minecraftforge.fml.common.Mod
 import net.stouma915.hydrogenmod.listener.*
 import net.stouma915.hydrogenmod.recipe.brewing.*
-import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegister
+import net.stouma915.hydrogenmod.recipe.electrolysis.*
 
 object HydrogenMod {
+
   private[hydrogenmod] final val ModId = "hydrogenmod"
+
 }
 
 @Mod(HydrogenMod.ModId)
 class HydrogenMod {
+
   Seq(
     new BlockBreakListener,
     new LivingDamageListener,
@@ -26,5 +29,8 @@ class HydrogenMod {
     new OxygenWaterBrewingRecipe
   ).foreach(BrewingRecipeRegistry.addRecipe)
 
-  ElectrolysisRecipeRegister.register()
+  Seq(
+    ElectrolysisOfWater()
+  ).foreach(ElectrolysisRecipeRegistry.register)
+
 }

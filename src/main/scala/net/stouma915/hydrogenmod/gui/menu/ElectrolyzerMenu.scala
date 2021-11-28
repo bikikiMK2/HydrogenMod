@@ -21,6 +21,7 @@ import scala.util.chaining.*
 import scala.util.control.Breaks.*
 
 object ElectrolyzerMenu {
+
   private val instance: MenuType[ElectrolyzerMenu] = {
     val menuType = new MenuType[ElectrolyzerMenu](
       (
@@ -43,6 +44,7 @@ object ElectrolyzerMenu {
       inventory: Inventory,
       extraData: FriendlyByteBuf
   ): ElectrolyzerMenu = new ElectrolyzerMenu(id, inventory, extraData)
+
 }
 
 sealed class ElectrolyzerMenu private (
@@ -51,6 +53,7 @@ sealed class ElectrolyzerMenu private (
     extraData: FriendlyByteBuf
 ) extends AbstractContainerMenu(ElectrolyzerMenu(), id)
     with Supplier[Map[Int, Slot]] {
+
   private val customSlots = mutable.Map[Int, Slot]()
   private val blockPos: BlockPos = extraData.readBlockPos()
   private var iItemHandler: IItemHandler = _
@@ -226,7 +229,7 @@ sealed class ElectrolyzerMenu private (
     var canMove = false
     var i = if (p_38907_) p_38906_ - 1 else p_38905_
 
-    if (p_38904_.isStackable) {
+    if (p_38904_.isStackable)
       breakable {
         while (!p_38904_.isEmpty) {
           if (p_38907_ && i < p_38905_)
@@ -264,7 +267,6 @@ sealed class ElectrolyzerMenu private (
             i += 1
         }
       }
-    }
 
     if (!p_38904_.isEmpty) {
       if (p_38907_)
@@ -307,4 +309,5 @@ sealed class ElectrolyzerMenu private (
   override def stillValid(p_38874_ : Player): Boolean = true
 
   override def get(): Map[Int, Slot] = immutable.Map.from(customSlots)
+
 }

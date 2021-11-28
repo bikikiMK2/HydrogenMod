@@ -7,10 +7,12 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 import net.stouma915.hydrogenmod.tool.tier.OxygenTier
 
 object OxygenHoeItem {
+
   private val instance: Item =
     new OxygenHoeItem().setRegistryName(HydrogenMod.ModId, "oxygen_hoe")
 
   def apply(): Item = instance
+
 }
 
 sealed class OxygenHoeItem private ()

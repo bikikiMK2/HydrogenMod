@@ -14,6 +14,7 @@ import net.stouma915.hydrogenmod.tool.item.*
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object ItemRegister {
+
   private val itemsToRegister = List(
     HydrogenItem(),
     OxygenItem(),
@@ -43,4 +44,5 @@ object ItemRegister {
   @SubscribeEvent
   def registerItems(event: RegistryEvent.Register[Item]): Unit =
     itemsToRegister.foreach(event.getRegistry.register)
+
 }

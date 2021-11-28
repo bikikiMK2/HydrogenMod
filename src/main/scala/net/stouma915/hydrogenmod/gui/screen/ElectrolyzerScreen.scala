@@ -13,6 +13,7 @@ import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
 import scala.collection.immutable.HashMap
 
 object ElectrolyzerScreen {
+
   final val guiState: HashMap[String, Object] = HashMap()
   private val texture = new ResourceLocation(
     "hydrogenmod:textures/gui/electrolyzer_menu.png"
@@ -23,6 +24,7 @@ object ElectrolyzerScreen {
       inventory: Inventory,
       text: Component
   ): ElectrolyzerScreen = new ElectrolyzerScreen(container, inventory, text)
+
 }
 
 sealed class ElectrolyzerScreen private (
@@ -34,6 +36,7 @@ sealed class ElectrolyzerScreen private (
       inventory,
       text
     ) {
+
   this.imageWidth = 176
   this.imageHeight = 166
 
@@ -92,4 +95,5 @@ sealed class ElectrolyzerScreen private (
     super.init()
     this.minecraft.keyboardHandler.setSendRepeatsToGui(true)
   }
+
 }

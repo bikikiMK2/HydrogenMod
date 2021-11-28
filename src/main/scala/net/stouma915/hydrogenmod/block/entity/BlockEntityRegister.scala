@@ -11,6 +11,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object BlockEntityRegister {
+
   private val blockEntitiesToRegister = List(
     ElectrolyzerBlockEntity()
   )
@@ -20,4 +21,5 @@ object BlockEntityRegister {
       event: RegistryEvent.Register[BlockEntityType[_]]
   ): Unit =
     blockEntitiesToRegister.foreach(event.getRegistry.register)
+
 }

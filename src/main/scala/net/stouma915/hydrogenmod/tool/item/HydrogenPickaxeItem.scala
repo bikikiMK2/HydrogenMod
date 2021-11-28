@@ -7,10 +7,12 @@ import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 import net.stouma915.hydrogenmod.tool.tier.HydrogenTier
 
 object HydrogenPickaxeItem {
+
   private val instance: Item = new HydrogenPickaxeItem()
     .setRegistryName(HydrogenMod.ModId, "hydrogen_pickaxe")
 
   def apply(): Item = instance
+
 }
 
 sealed class HydrogenPickaxeItem private ()

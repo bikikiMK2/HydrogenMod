@@ -14,6 +14,7 @@ import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.util.Util
 
 class LivingDamageListener {
+
   @SubscribeEvent
   def onLivingDamage(event: LivingDamageEvent): Unit =
     if (event.getSource.isFire) {
@@ -61,4 +62,5 @@ class LivingDamageListener {
         )
       }
     }
+
 }

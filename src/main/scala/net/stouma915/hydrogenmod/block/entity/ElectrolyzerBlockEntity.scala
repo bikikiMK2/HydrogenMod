@@ -31,6 +31,7 @@ import net.stouma915.hydrogenmod.implicits.*
 import scala.jdk.CollectionConverters.*
 
 object ElectrolyzerBlockEntity {
+
   private val instance: BlockEntityType[_] =
     BlockEntityType.Builder
       .of(
@@ -50,6 +51,7 @@ object ElectrolyzerBlockEntity {
       blockPos: BlockPos,
       blockState: BlockState
   ): ElectrolyzerBlockEntity = new ElectrolyzerBlockEntity(blockPos, blockState)
+
 }
 
 sealed class ElectrolyzerBlockEntity private (
@@ -61,6 +63,7 @@ sealed class ElectrolyzerBlockEntity private (
       blockState
     )
     with WorldlyContainer {
+
   private var itemStacks = NonNullList.withSize[ItemStack](9, ItemStack.EMPTY)
   private val handlers: Array[LazyOptional[IItemHandlerModifiable]] =
     SidedInvWrapper.create(this, Direction.values: _*)
@@ -139,9 +142,7 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def setRemoved(): Unit = {
     super.setRemoved()
-    handlers.foreach { handler =>
-      handler.invalidate()
-    }
+    handlers.foreach(_.invalidate())
   }
 
   override def createMenu(
@@ -157,4 +158,5 @@ sealed class ElectrolyzerBlockEntity private (
   override def getDefaultName: Component = new TextComponent("electrolyzer")
 
   override def getContainerSize: Int = 9
+
 }

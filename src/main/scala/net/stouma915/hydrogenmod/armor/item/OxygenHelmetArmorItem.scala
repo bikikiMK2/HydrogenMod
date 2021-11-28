@@ -8,10 +8,12 @@ import net.stouma915.hydrogenmod.armor.material.OxygenArmorMaterial
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 
 object OxygenHelmetArmorItem {
+
   private val instance: Item = new OxygenHelmetArmorItem()
     .setRegistryName(HydrogenMod.ModId, "oxygen_helmet")
 
   def apply(): Item = instance
+
 }
 
 sealed class OxygenHelmetArmorItem private ()

@@ -11,6 +11,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object PotionEffectRegister {
+
   private val potionEffectsToRegister = List(
     HydrogenWaterEffect(),
     OxygenWaterEffect()
@@ -19,4 +20,5 @@ object PotionEffectRegister {
   @SubscribeEvent
   def registerEffect(event: RegistryEvent.Register[MobEffect]): Unit =
     potionEffectsToRegister.foreach(event.getRegistry.register)
+
 }

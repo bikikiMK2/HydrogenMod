@@ -21,6 +21,7 @@ import net.stouma915.hydrogenmod.tool.item.{
 import net.stouma915.hydrogenmod.util.Util
 
 class BlockBreakListener {
+
   @SubscribeEvent
   def onBlockBreak(event: BlockEvent.BreakEvent): Unit =
     event.getState.getBlock match {
@@ -55,4 +56,5 @@ class BlockBreakListener {
         }
       case _ =>
     }
+
 }

@@ -17,6 +17,7 @@ import net.stouma915.hydrogenmod.potion.effect.{
 import scala.jdk.CollectionConverters.*
 
 class LivingUpdateListener {
+
   @SubscribeEvent
   def onLivingUpdate(event: LivingUpdateEvent): Unit = {
     event.getEntityLiving.getActiveEffects.asScala.map(_.getEffect).foreach {
@@ -38,4 +39,5 @@ class LivingUpdateListener {
       case _ =>
     }
   }
+
 }

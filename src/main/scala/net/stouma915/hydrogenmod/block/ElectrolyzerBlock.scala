@@ -28,6 +28,7 @@ import net.stouma915.hydrogenmod.block.entity.ElectrolyzerBlockEntity
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
 
 object ElectrolyzerBlock {
+
   private[hydrogenmod] final val WaterLevelProperty =
     IntegerProperty.create("water_level", 0, 9)
 
@@ -35,6 +36,7 @@ object ElectrolyzerBlock {
     new ElectrolyzerBlock().setRegistryName(HydrogenMod.ModId, "electrolyzer")
 
   def apply(): Block = instance
+
 }
 
 sealed class ElectrolyzerBlock private ()
@@ -48,6 +50,7 @@ sealed class ElectrolyzerBlock private ()
         .lightLevel((_: BlockState) => 1)
     )
     with EntityBlock {
+
   this.registerDefaultState(
     this.stateDefinition.any().setValue(ElectrolyzerBlock.WaterLevelProperty, 0)
   )
@@ -137,4 +140,5 @@ sealed class ElectrolyzerBlock private ()
       }
     }
   }
+
 }

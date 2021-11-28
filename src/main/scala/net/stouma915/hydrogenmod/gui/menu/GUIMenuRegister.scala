@@ -11,6 +11,7 @@ import net.stouma915.hydrogenmod.HydrogenMod
   bus = Mod.EventBusSubscriber.Bus.MOD
 )
 object GUIMenuRegister {
+
   private val guiMenusToRegister = List(
     ElectrolyzerMenu()
   )
@@ -18,4 +19,5 @@ object GUIMenuRegister {
   @SubscribeEvent
   def registerGUIMenus(event: RegistryEvent.Register[MenuType[_]]): Unit =
     guiMenusToRegister.foreach(event.getRegistry.register)
+
 }
