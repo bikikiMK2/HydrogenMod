@@ -1,7 +1,7 @@
 package net.stouma915.hydrogenmod.block
 
 import io.netty.buffer.Unpooled
-import net.minecraft.core.BlockPos
+import net.minecraft.core.{BlockPos, NonNullList}
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.network.chat.{Component, TranslatableComponent}
 import net.minecraft.server.level.{ServerLevel, ServerPlayer}
@@ -13,12 +13,16 @@ import net.minecraft.world.{
 }
 import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.AbstractContainerMenu
+import net.minecraft.world.item.{ItemStack, Items}
 import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.{BlockGetter, Level}
 import net.minecraft.world.level.block.{Block, EntityBlock, SoundType}
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
 import net.minecraft.world.level.block.state.{BlockState, StateDefinition}
-import net.minecraft.world.level.block.state.properties.IntegerProperty
+import net.minecraft.world.level.block.state.properties.{
+  IntegerProperty,
+  Property
+}
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.{CollisionContext, VoxelShape}
@@ -26,8 +30,13 @@ import net.minecraftforge.fmllegacy.network.NetworkHooks
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.entity.ElectrolyzerBlockEntity
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
+import net.stouma915.hydrogenmod.implicits.*
+import net.stouma915.hydrogenmod.item.BatteryItem
+import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.Random
+import scala.jdk.CollectionConverters.*
+import scala.util.control.Breaks.*
 
 object ElectrolyzerBlock {
 
@@ -88,12 +97,67 @@ sealed class ElectrolyzerBlock private ()
       p_60464_ : BlockPos,
       p_60465_ : Random
   ): Unit = {
-    val currentProgress = p_60462_.getValue(ElectrolyzerBlock.ProgressProperty)
-    val newProgress = if (currentProgress == 6) 0 else currentProgress + 1
-    val newBlockState =
-      p_60462_.setValue(ElectrolyzerBlock.ProgressProperty, newProgress)
+    val blockEntity = p_60463_.getBlockEntity(p_60464_) match {
+      case entity: ElectrolyzerBlockEntity =>
+        entity
+      case _ => throw new IllegalStateException
+    }
+    val items: List[ItemStack] = blockEntity.getItems.asScala.toList
 
-    p_60463_.setBlock(p_60464_, newBlockState, 3)
+    val isBatterySet = items(9).getItem == BatteryItem()
+    val isInputCorrect = items
+      .dropRight(10)
+      .filterNot(elem => elem.isEmpty)
+      .filterNot(elem => elem.getItem == Items.BUCKET)
+      .forall(elem =>
+        ElectrolysisRecipeRegistry.getAll.exists(_.isCorrectAsInput(elem))
+      )
+    val isSameItemInput = {
+      val droppedItems = items
+        .dropRight(10)
+        .filterNot(elem => elem.isEmpty)
+        .filterNot(elem => elem.getItem == Items.BUCKET)
+
+      droppedItems.count(elem =>
+        elem.sameItem(droppedItems.head)
+      ) == droppedItems.length && droppedItems.nonEmpty
+    }
+
+    if (isBatterySet && isInputCorrect && isSameItemInput) {
+      val electrolysisRecipe = ElectrolysisRecipeRegistry.getAll
+        .find(elem =>
+          elem.isCorrectAsInput(
+            items
+              .filterNot(elem => elem.isEmpty)
+              .filterNot(elem => elem.getItem == Items.BUCKET)
+              .head
+          )
+        )
+        .getOrElse {
+          throw new IllegalStateException()
+        }
+      val currentProgress = getProgress(p_60463_, p_60464_)
+
+      if (currentProgress >= 6) {
+        items(9).addDamage()
+        setProgress(p_60462_, p_60463_, p_60464_, 0)
+        breakable {
+          items.dropRight(10).zipWithIndex.foreach {
+            case (itemStack: ItemStack, index: Int)
+                if !itemStack.isEmpty && itemStack.getItem != Items.BUCKET =>
+              if (electrolysisRecipe.leaveBucketOfInput) {
+                val bucketItemStack = Items.BUCKET.toGeneralItemStack
+                blockEntity.setItems(
+                  NonNullList
+                    .of(null, items.updated(index, bucketItemStack).toArray: _*)
+                )
+              } else itemStack.setCount(itemStack.getCount - 1)
+              break()
+            case _ =>
+          }
+        }
+      } else setProgress(p_60462_, p_60463_, p_60464_, currentProgress + 1)
+    } else setProgress(p_60462_, p_60463_, p_60464_, 0)
 
     p_60463_.getBlockTicks.scheduleTick(p_60464_, this, 5)
   }
@@ -173,6 +237,29 @@ sealed class ElectrolyzerBlock private ()
         case _ =>
       }
     }
+  }
+
+  private def getProgress(
+      level: Level,
+      blockPos: BlockPos
+  ): Int =
+    level
+      .getBlockEntity(blockPos)
+      .getBlockState
+      .getValue(
+        ElectrolyzerBlock.ProgressProperty.asInstanceOf[Property[Nothing]]
+      )
+
+  private def setProgress(
+      blockState: BlockState,
+      level: Level,
+      blockPos: BlockPos,
+      newProgress: Int
+  ): Unit = {
+    val newBlockState =
+      blockState.setValue(ElectrolyzerBlock.ProgressProperty, newProgress)
+
+    level.setBlock(blockPos, newBlockState, 3)
   }
 
 }

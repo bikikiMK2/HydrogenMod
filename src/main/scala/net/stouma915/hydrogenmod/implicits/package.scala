@@ -32,6 +32,12 @@ package object implicits {
         (_: LivingEntity) => {}
       )
 
+    def addDamage(): Unit =
+      if (itemStack.getDamageValue >= itemStack.getMaxDamage - 1)
+        itemStack.setCount(itemStack.getCount - 1)
+      else
+        itemStack.setDamageValue(itemStack.getDamageValue + 1)
+
   }
 
   implicit class EntityOps(entity: Entity) {
