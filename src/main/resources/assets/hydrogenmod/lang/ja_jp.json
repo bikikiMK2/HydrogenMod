@@ -37,5 +37,6 @@
   "death.attack.hydrogenmod_ate_oxygen": "%1$sは酸素を食べた",
   "death.attack.hydrogenmod_lack_of_oxygen": "%1$sは酸素不足になった",
   "death.attack.hydrogenmod_hydrogen_explosion": "%1$sは水素爆発に巻き込まれた",
+  "death.attack.hydrogenmod_battery_explosion": "%1$sは電池の爆発に巻き込まれた",
   "gui.hydrogenmod.electrolyzer.title": "電気分解装置"
 }

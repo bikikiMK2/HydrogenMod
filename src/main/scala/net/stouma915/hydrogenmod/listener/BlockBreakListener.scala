@@ -10,7 +10,7 @@ import net.stouma915.hydrogenmod.armor.item.{
   HydrogenLeggingsArmorItem
 }
 import net.stouma915.hydrogenmod.implicits.*
-import net.stouma915.hydrogenmod.item.HydrogenItem
+import net.stouma915.hydrogenmod.item.{BatteryItem, HydrogenItem}
 import net.stouma915.hydrogenmod.tool.item.{
   HydrogenAxeItem,
   HydrogenHoeItem,
@@ -50,6 +50,15 @@ class BlockBreakListener {
               itemInMainHand.setCount(itemInMainHand.getCount - 1)
           }
           Util.performHydrogenExplosion(
+            event.getPlayer.level,
+            event.getPlayer.getPos
+          )
+        }
+
+        if (itemInMainHand.getItem == BatteryItem()) {
+          if (!event.getPlayer.isCreative)
+            itemInMainHand.destroyItem(event.getPlayer)
+          Util.performBatteryExplosion(
             event.getPlayer.level,
             event.getPlayer.getPos
           )
