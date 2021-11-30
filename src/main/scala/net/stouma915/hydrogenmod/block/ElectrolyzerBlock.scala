@@ -124,39 +124,47 @@ sealed class ElectrolyzerBlock private ()
     }
 
     if (isBatterySet && isInputCorrect && isSameItemInput) {
+      val inputItem = items
+        .filterNot(elem => elem.isEmpty)
+        .filterNot(elem => elem.getItem == Items.BUCKET)
+        .head
       val electrolysisRecipe = ElectrolysisRecipeRegistry.getAll
-        .find(elem =>
-          elem.isCorrectAsInput(
-            items
-              .filterNot(elem => elem.isEmpty)
-              .filterNot(elem => elem.getItem == Items.BUCKET)
-              .head
-          )
-        )
+        .find(elem => elem.isCorrectAsInput(inputItem))
         .getOrElse {
           throw new IllegalStateException()
         }
-      val currentProgress = getProgress(p_60463_, p_60464_)
 
-      if (currentProgress >= 6) {
-        items(9).addDamage()
-        setProgress(p_60462_, p_60463_, p_60464_, 0)
-        breakable {
-          items.dropRight(10).zipWithIndex.foreach {
-            case (itemStack: ItemStack, index: Int)
-                if !itemStack.isEmpty && itemStack.getItem != Items.BUCKET =>
-              if (electrolysisRecipe.leaveBucketOfInput) {
-                val bucketItemStack = Items.BUCKET.toGeneralItemStack
-                blockEntity.setItems(
-                  NonNullList
-                    .of(null, items.updated(index, bucketItemStack).toArray: _*)
-                )
-              } else itemStack.setCount(itemStack.getCount - 1)
-              break()
-            case _ =>
+      if (
+        canPlaceItems(
+          electrolysisRecipe.getOutputItems(inputItem),
+          items.drop(10)
+        )
+      ) {
+        val currentProgress = getProgress(p_60463_, p_60464_)
+
+        if (currentProgress >= 6) {
+          items(9).addDamage()
+          setProgress(p_60462_, p_60463_, p_60464_, 0)
+          breakable {
+            items.dropRight(10).zipWithIndex.foreach {
+              case (itemStack: ItemStack, index: Int)
+                  if !itemStack.isEmpty && itemStack.getItem != Items.BUCKET =>
+                if (electrolysisRecipe.leaveBucketOfInput) {
+                  val bucketItemStack = Items.BUCKET.toGeneralItemStack
+                  blockEntity.setItems(
+                    NonNullList
+                      .of(
+                        null,
+                        items.updated(index, bucketItemStack).toArray: _*
+                      )
+                  )
+                } else itemStack.setCount(itemStack.getCount - 1)
+                break()
+              case _ =>
+            }
           }
-        }
-      } else setProgress(p_60462_, p_60463_, p_60464_, currentProgress + 1)
+        } else setProgress(p_60462_, p_60463_, p_60464_, currentProgress + 1)
+      } else setProgress(p_60462_, p_60463_, p_60464_, 0)
     } else setProgress(p_60462_, p_60463_, p_60464_, 0)
 
     p_60463_.getBlockTicks.scheduleTick(p_60464_, this, 5)
@@ -237,6 +245,109 @@ sealed class ElectrolyzerBlock private ()
         case _ =>
       }
     }
+  }
+
+  private def canPlaceItems(
+      itemsToPlace: List[ItemStack],
+      currentItems: List[ItemStack]
+  ): Boolean = {
+    if (itemsToPlace.isEmpty || currentItems.isEmpty)
+      return true
+
+    require(itemsToPlace.length <= 9)
+    require(currentItems.length <= 9)
+
+    val numberOfEmptySlot =
+      if (currentItems.length == 9)
+        currentItems.count(_.isEmpty)
+      else
+        9 - currentItems.length
+    val currentUnstackableItems = currentItems.filterNot(_.isStackable)
+    val unstackableItemsToPlace = itemsToPlace.filterNot(_.isStackable)
+    val currentStackableItems = currentItems.filter(_.isStackable)
+    val stackableItemsToPlace = itemsToPlace.filter(_.isStackable)
+
+    // format: off
+
+    if (itemsToPlace.length <= numberOfEmptySlot)
+      return true
+    
+    if (currentUnstackableItems.length == 9)
+      return false
+
+    if (unstackableItemsToPlace.length > numberOfEmptySlot)
+      return false
+
+    if (stackableItemsToPlace.isEmpty && unstackableItemsToPlace.length <= numberOfEmptySlot)
+      return true
+      
+    if (unstackableItemsToPlace.isEmpty && !currentStackableItems.exists(elem => elem.getCount < elem.getMaxStackSize))
+      return false
+      
+    if (unstackableItemsToPlace.isEmpty) {
+      var count = 1
+      val bool = stackableItemsToPlace.forall { elem =>
+        val sameItems = currentStackableItems.filter(_.sameItem(elem))
+        if (sameItems.isEmpty) {
+          count += 1
+          if (numberOfEmptySlot >= count - 1)
+            true
+          else 
+            false
+        } else {
+          val b = sameItems.map(e => e.getMaxStackSize - e.getCount).sum >= elem.getCount
+          if (b)
+            true
+          else {
+            count += 1
+            if (numberOfEmptySlot >= count - 1)
+              true
+            else false
+          }
+        }
+      }
+      
+      if (bool)
+        return true
+    }
+    
+    if (unstackableItemsToPlace.nonEmpty && stackableItemsToPlace.nonEmpty) {
+      if (unstackableItemsToPlace.length >= numberOfEmptySlot)
+        return false
+        
+      val numberOfEmptySlotAfterPlacingUnstackable = numberOfEmptySlot - unstackableItemsToPlace.length
+      if (numberOfEmptySlotAfterPlacingUnstackable <= 0)
+        return false
+        
+      var count = 1
+      val bool = stackableItemsToPlace.forall { elem =>
+        val sameItems = currentStackableItems.filter(_.sameItem(elem))
+        if (sameItems.isEmpty) {
+          count += 1
+          if (numberOfEmptySlotAfterPlacingUnstackable >= count - 1)
+            true
+          else
+            false
+        } else {
+          val b = sameItems.map(e => e.getMaxStackSize - e.getCount).sum >= elem.getCount
+          if (b)
+            true
+          else {
+            count += 1
+            if (numberOfEmptySlot >= count - 1)
+              true
+            else false
+          }
+        }
+      }
+      
+      if (bool)
+        return true
+    }
+
+    // format: on
+
+    false
   }
 
   private def getProgress(
