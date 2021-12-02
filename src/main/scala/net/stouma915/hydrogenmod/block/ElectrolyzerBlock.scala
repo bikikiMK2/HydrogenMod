@@ -35,7 +35,6 @@ import net.stouma915.hydrogenmod.item.BatteryItem
 import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.Random
-import scala.collection.mutable
 import scala.jdk.CollectionConverters.*
 import scala.util.control.Breaks.*
 
