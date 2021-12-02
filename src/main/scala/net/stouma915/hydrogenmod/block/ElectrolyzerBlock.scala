@@ -35,6 +35,7 @@ import net.stouma915.hydrogenmod.item.BatteryItem
 import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.Random
+import scala.collection.mutable
 import scala.jdk.CollectionConverters.*
 import scala.util.control.Breaks.*
 
@@ -102,7 +103,7 @@ sealed class ElectrolyzerBlock private ()
         entity
       case _ => throw new IllegalStateException
     }
-    val items: List[ItemStack] = blockEntity.getItems.asScala.toList
+    val items: List[ItemStack] = blockEntity.getItems.asScala.toList.map(_.copy)
 
     val isBatterySet = items(9).getItem == BatteryItem()
     val isInputCorrect = items
@@ -143,26 +144,41 @@ sealed class ElectrolyzerBlock private ()
         val currentProgress = getProgress(p_60463_, p_60464_)
 
         if (currentProgress >= 6) {
-          items(9).addDamage()
+          var newItems: List[ItemStack] = items
+
+          val damagedBattery = newItems(9).copy
+          damagedBattery.addDamage()
+          newItems = newItems.updated(9, damagedBattery)
+
           setProgress(p_60462_, p_60463_, p_60464_, 0)
+
           breakable {
-            items.dropRight(10).zipWithIndex.foreach {
+            newItems.dropRight(10).zipWithIndex.foreach {
               case (itemStack: ItemStack, index: Int)
                   if !itemStack.isEmpty && itemStack.getItem != Items.BUCKET =>
                 if (electrolysisRecipe.leaveBucketOfInput) {
                   val bucketItemStack = Items.BUCKET.toGeneralItemStack
-                  blockEntity.setItems(
-                    NonNullList
-                      .of(
-                        null,
-                        items.updated(index, bucketItemStack).toArray: _*
-                      )
-                  )
-                } else itemStack.setCount(itemStack.getCount - 1)
+                  newItems = newItems.updated(index, bucketItemStack)
+                } else {
+                  val newItem = itemStack.copy
+                  newItem.setCount(newItem.getCount - 1)
+                  newItems = newItems.updated(index, newItem)
+                }
                 break()
               case _ =>
             }
           }
+
+          newItems = newItems
+            .dropRight(9)
+            .appendedAll(
+              placeItems(
+                electrolysisRecipe.getOutputItems(inputItem),
+                newItems.drop(10).map(_.copy)
+              )
+            )
+
+          blockEntity.setItems(NonNullList.of(null, newItems.toArray: _*))
         } else setProgress(p_60462_, p_60463_, p_60464_, currentProgress + 1)
       } else setProgress(p_60462_, p_60463_, p_60464_, 0)
     } else setProgress(p_60462_, p_60463_, p_60464_, 0)
@@ -244,6 +260,96 @@ sealed class ElectrolyzerBlock private ()
           p_60516_.updateNeighbourForOutputSignal(p_60517_, this)
         case _ =>
       }
+    }
+  }
+
+  private def placeItems(
+      itemsToPlace: List[ItemStack],
+      currentItems: List[ItemStack]
+  ): List[ItemStack] = {
+    if (itemsToPlace.isEmpty)
+      return currentItems
+    if (currentItems.isEmpty)
+      return itemsToPlace
+
+    require(itemsToPlace.length <= 9)
+    require(currentItems.length <= 9)
+
+    if (currentItems.length != 9) currentItems.appendedAll(itemsToPlace)
+    else {
+      val unstackableItemsToPlace = itemsToPlace.filterNot(_.isStackable)
+      val stackableItemsToPlace = itemsToPlace.filter(_.isStackable)
+
+      def addItems(
+          items: List[ItemStack],
+          target: List[ItemStack]
+      ): List[ItemStack] = {
+        var itemIndex = 0
+        target.zipWithIndex
+          .map { case (itemStack: ItemStack, index: Int) =>
+            if (itemStack.isEmpty) {
+              itemIndex += 1
+              (
+                items.applyOrElse(itemIndex - 1, _ => itemStack),
+                index
+              )
+            } else (itemStack, index)
+          }
+          .map(_._1)
+      }
+
+      val afterAddUnstackable = addItems(unstackableItemsToPlace, currentItems)
+
+      val itemsStackedToMax = stackableItemsToPlace.filter(elem =>
+        elem.getCount >= elem.getMaxStackSize
+      )
+
+      val afterAddStackedToMax =
+        addItems(itemsStackedToMax, afterAddUnstackable)
+
+      val itemsNotIncluded = stackableItemsToPlace
+        .filterNot(elem => elem.getCount >= elem.getMaxStackSize)
+        .filterNot(elem =>
+          afterAddStackedToMax.exists(item => item.sameItem(elem))
+        )
+      val itemsIncluded = stackableItemsToPlace
+        .filterNot(elem => elem.getCount >= elem.getMaxStackSize)
+        .filter(elem =>
+          afterAddStackedToMax.exists(item => item.sameItem(elem))
+        )
+
+      val afterAddNotIncluded = addItems(itemsNotIncluded, afterAddStackedToMax)
+      var overflowingItems = List[ItemStack]()
+
+      itemsIncluded
+        .foreach { itemStack =>
+          val sameItems = afterAddNotIncluded
+            .filter(item => item.sameItem(itemStack))
+          val canBeStacked =
+            sameItems.map(item => item.getMaxStackSize - item.getCount).sum
+
+          // format: off
+          if (itemStack.getCount == canBeStacked)
+            sameItems.foreach(item => item.setCount(item.getMaxStackSize))
+          else if (itemStack.getCount > canBeStacked) {
+            sameItems.foreach(item => item.setCount(item.getMaxStackSize))
+            val overflowingItem = itemStack
+            overflowingItem.setCount(overflowingItem.getCount - canBeStacked)
+            overflowingItems = overflowingItems.appended(overflowingItem)
+          }
+          else if (itemStack.getCount < canBeStacked) {
+            while (itemStack.getCount > 0)
+              sameItems.foreach { item => 
+                item.setCount(item.getCount + 1)
+                itemStack.setCount(itemStack.getCount - 1)
+              }
+          }
+          // format: on
+        }
+
+      val result = addItems(overflowingItems, afterAddNotIncluded)
+
+      result
     }
   }
 
