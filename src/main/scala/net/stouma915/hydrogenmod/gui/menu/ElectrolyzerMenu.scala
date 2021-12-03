@@ -1,6 +1,5 @@
 package net.stouma915.hydrogenmod.gui.menu
 
-import net.minecraft.core.BlockPos
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.{AbstractContainerMenu, MenuType, Slot}
@@ -58,7 +57,7 @@ sealed class ElectrolyzerMenu private (
     with Supplier[Map[Int, Slot]] {
 
   private val customSlots = mutable.Map[Int, Slot]()
-  private val blockPos: BlockPos = extraData.readBlockPos()
+  private val blockPos = extraData.readBlockPos()
   private var iItemHandler: IItemHandler = _
 
   inventory.player.level
@@ -75,7 +74,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         0,
-        this.addSlot(new SlotItemHandler(iItemHandler, 0, 21, 18) {
+        addSlot(new SlotItemHandler(iItemHandler, 0, 21, 18) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -83,7 +82,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         1,
-        this.addSlot(new SlotItemHandler(iItemHandler, 1, 39, 18) {
+        addSlot(new SlotItemHandler(iItemHandler, 1, 39, 18) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -91,7 +90,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         2,
-        this.addSlot(new SlotItemHandler(iItemHandler, 2, 57, 18) {
+        addSlot(new SlotItemHandler(iItemHandler, 2, 57, 18) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -99,7 +98,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         3,
-        this.addSlot(new SlotItemHandler(iItemHandler, 3, 21, 36) {
+        addSlot(new SlotItemHandler(iItemHandler, 3, 21, 36) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -107,7 +106,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         4,
-        this.addSlot(new SlotItemHandler(iItemHandler, 4, 39, 36) {
+        addSlot(new SlotItemHandler(iItemHandler, 4, 39, 36) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -115,7 +114,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         5,
-        this.addSlot(new SlotItemHandler(iItemHandler, 5, 57, 36) {
+        addSlot(new SlotItemHandler(iItemHandler, 5, 57, 36) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -123,7 +122,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         6,
-        this.addSlot(new SlotItemHandler(iItemHandler, 6, 21, 54) {
+        addSlot(new SlotItemHandler(iItemHandler, 6, 21, 54) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -131,7 +130,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         7,
-        this.addSlot(new SlotItemHandler(iItemHandler, 7, 39, 54) {
+        addSlot(new SlotItemHandler(iItemHandler, 7, 39, 54) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -139,7 +138,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         8,
-        this.addSlot(new SlotItemHandler(iItemHandler, 8, 57, 54) {
+        addSlot(new SlotItemHandler(iItemHandler, 8, 57, 54) {
           override def setChanged(): Unit = setWaterLevel()
         })
       )
@@ -147,7 +146,7 @@ sealed class ElectrolyzerMenu private (
 
   customSlots.put(
     9,
-    this.addSlot(new SlotItemHandler(iItemHandler, 9, 80, 18) {
+    addSlot(new SlotItemHandler(iItemHandler, 9, 80, 18) {
       override def mayPlace(stack: ItemStack): Boolean =
         stack.getItem == BatteryItem()
     })
@@ -157,7 +156,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         10,
-        this.addSlot(new SlotItemHandler(iItemHandler, 10, 103, 18) {
+        addSlot(new SlotItemHandler(iItemHandler, 10, 103, 18) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -165,7 +164,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         11,
-        this.addSlot(new SlotItemHandler(iItemHandler, 11, 121, 18) {
+        addSlot(new SlotItemHandler(iItemHandler, 11, 121, 18) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -173,7 +172,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         12,
-        this.addSlot(new SlotItemHandler(iItemHandler, 12, 139, 18) {
+        addSlot(new SlotItemHandler(iItemHandler, 12, 139, 18) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -181,7 +180,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         13,
-        this.addSlot(new SlotItemHandler(iItemHandler, 13, 103, 36) {
+        addSlot(new SlotItemHandler(iItemHandler, 13, 103, 36) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -189,7 +188,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         14,
-        this.addSlot(new SlotItemHandler(iItemHandler, 14, 121, 36) {
+        addSlot(new SlotItemHandler(iItemHandler, 14, 121, 36) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -197,7 +196,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         15,
-        this.addSlot(new SlotItemHandler(iItemHandler, 15, 139, 36) {
+        addSlot(new SlotItemHandler(iItemHandler, 15, 139, 36) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -205,7 +204,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         16,
-        this.addSlot(new SlotItemHandler(iItemHandler, 16, 103, 54) {
+        addSlot(new SlotItemHandler(iItemHandler, 16, 103, 54) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -213,7 +212,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         17,
-        this.addSlot(new SlotItemHandler(iItemHandler, 17, 121, 54) {
+        addSlot(new SlotItemHandler(iItemHandler, 17, 121, 54) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -221,7 +220,7 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         18,
-        this.addSlot(new SlotItemHandler(iItemHandler, 18, 139, 54) {
+        addSlot(new SlotItemHandler(iItemHandler, 18, 139, 54) {
           override def mayPlace(stack: ItemStack): Boolean = false
         })
       )
@@ -229,13 +228,13 @@ sealed class ElectrolyzerMenu private (
 
   (0 to 2).foreach { a =>
     (0 to 8).foreach { b =>
-      this.addSlot(
+      addSlot(
         new Slot(inventory, b + (a + 1) * 9, 0 + 8 + b * 18, 0 + 84 + a * 18)
       )
     }
   }
   (0 to 8).foreach { a =>
-    this.addSlot(new Slot(inventory, a, 0 + 8 + a * 18, 0 + 142))
+    addSlot(new Slot(inventory, a, 0 + 8 + a * 18, 0 + 142))
   }
 
   private def setWaterLevel(): Unit = {
@@ -262,7 +261,7 @@ sealed class ElectrolyzerMenu private (
 
   override def quickMoveStack(p_38941_ : Player, p_38942_ : Int): ItemStack = {
     var itemStack = ItemStack.EMPTY
-    val slot = this.slots.get(p_38942_)
+    val slot = slots.get(p_38942_)
 
     if (slot.nonNull && slot.hasItem) {
       val itemStack1 = slot.getItem
@@ -270,29 +269,29 @@ sealed class ElectrolyzerMenu private (
 
       if (p_38942_ < 0) {
         if (
-          !this.moveItemStackTo(
+          !moveItemStackTo(
             itemStack1,
             0,
-            this.slots.size(),
+            slots.size(),
             p_38907_ = true
           )
         )
           return ItemStack.EMPTY
 
         slot.onQuickCraft(itemStack1, itemStack)
-      } else if (!this.moveItemStackTo(itemStack1, 0, 0, p_38907_ = false)) {
+      } else if (!moveItemStackTo(itemStack1, 0, 0, p_38907_ = false)) {
         if (p_38942_ < 0 + 27) {
           if (
-            !this.moveItemStackTo(
+            !moveItemStackTo(
               itemStack1,
               0 + 27,
-              this.slots.size(),
+              slots.size(),
               p_38907_ = true
             )
           )
             return ItemStack.EMPTY
         } else {
-          if (!this.moveItemStackTo(itemStack1, 0, 0 + 27, p_38907_ = false))
+          if (!moveItemStackTo(itemStack1, 0, 0 + 27, p_38907_ = false))
             return ItemStack.EMPTY
         }
       }
@@ -328,7 +327,7 @@ sealed class ElectrolyzerMenu private (
           else if (i >= p_38906_)
             break()
 
-          val slot = this.slots.get(i)
+          val slot = slots.get(i)
           val itemStack = slot.getItem
 
           if (
@@ -372,7 +371,7 @@ sealed class ElectrolyzerMenu private (
           else if (i >= p_38906_)
             break()
 
-          val slot = this.slots.get(i)
+          val slot = slots.get(i)
           val itemStack = slot.getItem
 
           if (itemStack.isEmpty && slot.mayPlace(p_38904_)) {

@@ -64,8 +64,8 @@ sealed class ElectrolyzerBlock private ()
     )
     with EntityBlock {
 
-  this.registerDefaultState(
-    this.stateDefinition
+  registerDefaultState(
+    stateDefinition
       .any()
       .setValue(ElectrolyzerBlock.WaterLevelProperty, 0)
       .setValue(ElectrolyzerBlock.ProgressProperty, 0)
@@ -102,7 +102,7 @@ sealed class ElectrolyzerBlock private ()
         entity
       case _ => throw new IllegalStateException
     }
-    val items: List[ItemStack] = blockEntity.getItems.asScala.toList.map(_.copy)
+    val items = blockEntity.getItems.asScala.toList.map(_.copy)
 
     val isBatterySet = items(9).getItem == BatteryItem()
     val isInputCorrect = items
@@ -143,7 +143,7 @@ sealed class ElectrolyzerBlock private ()
         val currentProgress = getProgress(p_60463_, p_60464_)
 
         if (currentProgress >= 6) {
-          var newItems: List[ItemStack] = items
+          var newItems = items
 
           val damagedBattery = newItems(9).copy
           damagedBattery.addDamage()

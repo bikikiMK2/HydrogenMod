@@ -70,8 +70,8 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def load(p_155080_ : CompoundTag): Unit = {
     super.load(p_155080_)
-    if (!this.tryLoadLootTable(p_155080_))
-      itemStacks = NonNullList.withSize(this.getContainerSize, ItemStack.EMPTY)
+    if (!tryLoadLootTable(p_155080_))
+      itemStacks = NonNullList.withSize(getContainerSize, ItemStack.EMPTY)
 
     ContainerHelper.loadAllItems(
       p_155080_,
@@ -81,7 +81,7 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def save(p_58637_ : CompoundTag): CompoundTag = {
     super.save(p_58637_)
-    if (!this.trySaveLootTable(p_58637_))
+    if (!trySaveLootTable(p_58637_))
       ContainerHelper.saveAllItems(p_58637_, itemStacks)
 
     p_58637_
@@ -89,17 +89,17 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def getUpdatePacket: ClientboundBlockEntityDataPacket =
     new ClientboundBlockEntityDataPacket(
-      this.worldPosition,
+      worldPosition,
       0,
-      this.getUpdateTag
+      getUpdateTag
     )
 
-  override def getUpdateTag: CompoundTag = this.save(new CompoundTag())
+  override def getUpdateTag: CompoundTag = save(new CompoundTag())
 
   override def onDataPacket(
       net: Connection,
       pkt: ClientboundBlockEntityDataPacket
-  ): Unit = this.load(pkt.getTag)
+  ): Unit = load(pkt.getTag)
 
   override def isEmpty: Boolean =
     !itemStacks.asScala.toList.map(_.isEmpty).contains(false)
@@ -115,7 +115,7 @@ sealed class ElectrolyzerBlockEntity private (
     true
 
   override def getSlotsForFace(p_19238_ : Direction): Array[Int] =
-    (0 to this.getContainerSize).toArray
+    (0 to getContainerSize).toArray
 
   override def canPlaceItemThroughFace(
       p_19235_ : Int,
@@ -134,7 +134,7 @@ sealed class ElectrolyzerBlockEntity private (
       side: Direction
   ): LazyOptional[T] =
     if (
-      !this.remove && side.nonNull && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
+      !remove && side.nonNull && cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY
     )
       handlers(side.ordinal).cast
     else
@@ -152,7 +152,7 @@ sealed class ElectrolyzerBlockEntity private (
     ElectrolyzerMenu.newInstance(
       p_58627_,
       p_58628_,
-      new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(this.worldPosition)
+      new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition)
     )
 
   override def getDefaultName: Component = new TextComponent("electrolyzer")

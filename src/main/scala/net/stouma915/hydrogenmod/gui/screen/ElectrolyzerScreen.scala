@@ -14,7 +14,6 @@ import scala.collection.immutable.HashMap
 
 object ElectrolyzerScreen {
 
-  final val guiState: HashMap[String, Object] = HashMap()
   private val texture = new ResourceLocation(
     "hydrogenmod:textures/gui/electrolyzer_menu.png"
   )
@@ -43,9 +42,9 @@ sealed class ElectrolyzerScreen private (
       mouseY: Int,
       partialTicks: Float
   ): Unit = {
-    this.renderBackground(poseStack)
+    renderBackground(poseStack)
     super.render(poseStack, mouseX, mouseY, partialTicks)
-    this.renderTooltip(poseStack, mouseX, mouseY)
+    renderTooltip(poseStack, mouseX, mouseY)
   }
 
   override protected def renderBg(
@@ -58,22 +57,22 @@ sealed class ElectrolyzerScreen private (
     RenderSystem.setShaderColor(1, 1, 1, 1)
     RenderSystem.setShaderTexture(0, ElectrolyzerScreen.texture)
 
-    val x = (this.width - this.imageWidth) / 2
-    val y = (this.height - this.imageHeight) / 2
+    val x = (width - imageWidth) / 2
+    val y = (height - imageHeight) / 2
 
-    this.blit(
+    blit(
       poseStack,
       x,
       y,
       0,
       0,
-      this.imageWidth,
-      this.imageHeight
+      imageWidth,
+      imageHeight
     )
 
-    val progress = this.menu.getProgress
+    val progress = menu.getProgress
     if (progress != 0)
-      this.blit(
+      blit(
         poseStack,
         x + 76,
         y + 44,
@@ -86,7 +85,7 @@ sealed class ElectrolyzerScreen private (
 
   override def keyPressed(key: Int, b: Int, c: Int): Boolean = {
     if (key == 256) {
-      this.minecraft.player.closeContainer()
+      minecraft.player.closeContainer()
       return true
     }
     super.keyPressed(key, b, c)
@@ -102,7 +101,7 @@ sealed class ElectrolyzerScreen private (
 
   override def init(): Unit = {
     super.init()
-    this.minecraft.keyboardHandler.setSendRepeatsToGui(true)
+    minecraft.keyboardHandler.setSendRepeatsToGui(true)
   }
 
 }
