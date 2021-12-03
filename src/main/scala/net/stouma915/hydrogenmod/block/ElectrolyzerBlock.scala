@@ -279,6 +279,8 @@ sealed class ElectrolyzerBlock private ()
       val unstackableItemsToPlace = itemsToPlace.filterNot(_.isStackable)
       val stackableItemsToPlace = itemsToPlace.filter(_.isStackable)
 
+      var overflowingItems = List[ItemStack]()
+
       def addItems(
           items: List[ItemStack],
           target: List[ItemStack]
@@ -297,58 +299,68 @@ sealed class ElectrolyzerBlock private ()
           .map(_._1)
       }
 
-      val afterAddUnstackable = addItems(unstackableItemsToPlace, currentItems)
-
-      val itemsStackedToMax = stackableItemsToPlace.filter(elem =>
-        elem.getCount >= elem.getMaxStackSize
-      )
-
-      val afterAddStackedToMax =
-        addItems(itemsStackedToMax, afterAddUnstackable)
-
-      val itemsNotIncluded = stackableItemsToPlace
-        .filterNot(elem => elem.getCount >= elem.getMaxStackSize)
-        .filterNot(elem =>
-          afterAddStackedToMax.exists(item => item.sameItem(elem))
-        )
-      val itemsIncluded = stackableItemsToPlace
-        .filterNot(elem => elem.getCount >= elem.getMaxStackSize)
-        .filter(elem =>
-          afterAddStackedToMax.exists(item => item.sameItem(elem))
-        )
-
-      val afterAddNotIncluded = addItems(itemsNotIncluded, afterAddStackedToMax)
-      var overflowingItems = List[ItemStack]()
-
-      itemsIncluded
-        .foreach { itemStack =>
-          val sameItems = afterAddNotIncluded
-            .filter(item => item.sameItem(itemStack))
-          val canBeStacked =
-            sameItems.map(item => item.getMaxStackSize - item.getCount).sum
-
-          // format: off
-          if (itemStack.getCount == canBeStacked)
-            sameItems.foreach(item => item.setCount(item.getMaxStackSize))
-          else if (itemStack.getCount > canBeStacked) {
-            sameItems.foreach(item => item.setCount(item.getMaxStackSize))
-            val overflowingItem = itemStack
-            overflowingItem.setCount(overflowingItem.getCount - canBeStacked)
-            overflowingItems = overflowingItems.appended(overflowingItem)
-          }
-          else if (itemStack.getCount < canBeStacked) {
-            while (itemStack.getCount > 0)
-              sameItems.foreach { item => 
-                item.setCount(item.getCount + 1)
-                itemStack.setCount(itemStack.getCount - 1)
-              }
-          }
-          // format: on
+      val result = for {
+        afterAddUnstackable <- Some {
+          addItems(unstackableItemsToPlace, currentItems)
         }
+        itemsStackedToMax <- Some {
+          stackableItemsToPlace.filter(elem =>
+            elem.getCount >= elem.getMaxStackSize
+          )
+        }
+        afterAddStackedToMax <- Some {
+          addItems(itemsStackedToMax, afterAddUnstackable)
+        }
+        itemsNotIncluded <- Some {
+          stackableItemsToPlace
+            .filterNot(elem => elem.getCount >= elem.getMaxStackSize)
+            .filterNot(elem =>
+              afterAddStackedToMax.exists(item => item.sameItem(elem))
+            )
+        }
+        afterAddNotIncluded <- Some {
+          addItems(itemsNotIncluded, afterAddStackedToMax)
+        }
+        itemsIncluded <- Some {
+          stackableItemsToPlace
+            .filterNot(elem => elem.getCount >= elem.getMaxStackSize)
+            .filter(elem =>
+              afterAddStackedToMax.exists(item => item.sameItem(elem))
+            )
+        }
+        _ <- Some {
+          itemsIncluded
+            .foreach { itemStack =>
+              val sameItems = afterAddNotIncluded
+                .filter(item => item.sameItem(itemStack))
+              val canBeStacked =
+                sameItems.map(item => item.getMaxStackSize - item.getCount).sum
 
-      val result = addItems(overflowingItems, afterAddNotIncluded)
+              // format: off
+              if (itemStack.getCount == canBeStacked)
+                sameItems.foreach(item => item.setCount(item.getMaxStackSize))
+              else if (itemStack.getCount > canBeStacked) {
+                sameItems.foreach(item => item.setCount(item.getMaxStackSize))
+                val overflowingItem = itemStack
+                overflowingItem.setCount(overflowingItem.getCount - canBeStacked)
+                overflowingItems = overflowingItems.appended(overflowingItem)
+              }
+              else if (itemStack.getCount < canBeStacked) {
+                while (itemStack.getCount > 0)
+                  sameItems.foreach { item =>
+                    item.setCount(item.getCount + 1)
+                    itemStack.setCount(itemStack.getCount - 1)
+                  }
+              }
+              // format: on
+            }
+        }
+        afterAddOverflowingItems <- Some {
+          addItems(overflowingItems, afterAddNotIncluded)
+        }
+      } yield afterAddOverflowingItems
 
-      result
+      result.getOrElse(throw new IllegalStateException)
     }
   }
 
