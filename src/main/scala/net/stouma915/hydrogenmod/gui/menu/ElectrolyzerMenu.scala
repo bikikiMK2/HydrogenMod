@@ -15,7 +15,6 @@ import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.BatteryItem
-import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.function.Supplier
 import scala.collection.{immutable, mutable}
@@ -74,73 +73,55 @@ sealed class ElectrolyzerMenu private (
     .tap(
       _.put(
         0,
-        addSlot(new SlotItemHandler(iItemHandler, 0, 21, 18) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 0, 21, 18))
       )
     )
     .tap(
       _.put(
         1,
-        addSlot(new SlotItemHandler(iItemHandler, 1, 39, 18) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 1, 39, 18))
       )
     )
     .tap(
       _.put(
         2,
-        addSlot(new SlotItemHandler(iItemHandler, 2, 57, 18) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 2, 57, 18))
       )
     )
     .tap(
       _.put(
         3,
-        addSlot(new SlotItemHandler(iItemHandler, 3, 21, 36) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 3, 21, 36))
       )
     )
     .tap(
       _.put(
         4,
-        addSlot(new SlotItemHandler(iItemHandler, 4, 39, 36) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 4, 39, 36))
       )
     )
     .tap(
       _.put(
         5,
-        addSlot(new SlotItemHandler(iItemHandler, 5, 57, 36) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 5, 57, 36))
       )
     )
     .tap(
       _.put(
         6,
-        addSlot(new SlotItemHandler(iItemHandler, 6, 21, 54) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 6, 21, 54))
       )
     )
     .tap(
       _.put(
         7,
-        addSlot(new SlotItemHandler(iItemHandler, 7, 39, 54) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 7, 39, 54))
       )
     )
     .tap(
       _.put(
         8,
-        addSlot(new SlotItemHandler(iItemHandler, 8, 57, 54) {
-          override def setChanged(): Unit = setWaterLevel()
-        })
+        addSlot(new SlotItemHandler(iItemHandler, 8, 57, 54))
       )
     )
 
@@ -235,28 +216,6 @@ sealed class ElectrolyzerMenu private (
   }
   (0 to 8).foreach { a =>
     addSlot(new Slot(inventory, a, 0 + 8 + a * 18, 0 + 142))
-  }
-
-  private def setWaterLevel(): Unit = {
-    val waterLevel = customSlots.count {
-      case (index: Int, slot: Slot) if (0 to 8).contains(index) =>
-        if (slot.hasItem && slot.getItem.nonNull && !slot.getItem.isEmpty) {
-          val itemStack = slot.getItem
-
-          ElectrolysisRecipeRegistry.getAll.exists(
-            _.isCorrectAsInput(itemStack)
-          )
-        } else false
-      case _ =>
-        false
-    }
-
-    val blockEntity = inventory.player.level.getBlockEntity(blockPos)
-    val newBlockState = blockEntity.getBlockState.setValue(
-      ElectrolyzerBlock.WaterLevelProperty,
-      waterLevel
-    )
-    inventory.player.level.setBlock(blockPos, newBlockState, 3)
   }
 
   override def quickMoveStack(p_38941_ : Player, p_38942_ : Int): ItemStack = {

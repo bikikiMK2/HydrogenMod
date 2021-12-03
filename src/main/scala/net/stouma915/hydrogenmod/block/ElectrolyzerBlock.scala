@@ -89,7 +89,7 @@ sealed class ElectrolyzerBlock private ()
       p_60569_ : BlockState,
       p_60570_ : Boolean
   ): Unit =
-    p_60567_.getBlockTicks.scheduleTick(p_60568_, this, 5)
+    p_60567_.getBlockTicks.scheduleTick(p_60568_, this, 0)
 
   override def tick(
       p_60462_ : BlockState,
@@ -103,6 +103,9 @@ sealed class ElectrolyzerBlock private ()
       case _ => throw new IllegalStateException
     }
     val items = blockEntity.getItems.asScala.toList.map(_.copy)
+    val waterLevel = items.dropRight(10).count { itemStack =>
+      ElectrolysisRecipeRegistry.getAll.exists(_.isCorrectAsInput(itemStack))
+    }
 
     val isBatterySet = items(9).getItem == BatteryItem()
     val isInputCorrect = items
@@ -149,7 +152,7 @@ sealed class ElectrolyzerBlock private ()
           damagedBattery.addDamage()
           newItems = newItems.updated(9, damagedBattery)
 
-          setProgress(p_60462_, p_60463_, p_60464_, 0)
+          updateState(p_60462_, p_60463_, p_60464_, 0, waterLevel)
 
           breakable {
             newItems.dropRight(10).zipWithIndex.foreach {
@@ -178,9 +181,16 @@ sealed class ElectrolyzerBlock private ()
             )
 
           blockEntity.setItems(NonNullList.of(null, newItems.toArray: _*))
-        } else setProgress(p_60462_, p_60463_, p_60464_, currentProgress + 1)
-      } else setProgress(p_60462_, p_60463_, p_60464_, 0)
-    } else setProgress(p_60462_, p_60463_, p_60464_, 0)
+        } else
+          updateState(
+            p_60462_,
+            p_60463_,
+            p_60464_,
+            currentProgress + 1,
+            waterLevel
+          )
+      } else updateState(p_60462_, p_60463_, p_60464_, 0, waterLevel)
+    } else updateState(p_60462_, p_60463_, p_60464_, 0, waterLevel)
 
     p_60463_.getBlockTicks.scheduleTick(p_60464_, this, 5)
   }
@@ -478,14 +488,17 @@ sealed class ElectrolyzerBlock private ()
         ElectrolyzerBlock.ProgressProperty.asInstanceOf[Property[Nothing]]
       )
 
-  private def setProgress(
+  private def updateState(
       blockState: BlockState,
       level: Level,
       blockPos: BlockPos,
-      newProgress: Int
+      newProgress: Int,
+      newWaterLevel: Int
   ): Unit = {
     val newBlockState =
-      blockState.setValue(ElectrolyzerBlock.ProgressProperty, newProgress)
+      blockState
+        .setValue(ElectrolyzerBlock.ProgressProperty, newProgress)
+        .setValue(ElectrolyzerBlock.WaterLevelProperty, newWaterLevel)
 
     level.setBlock(blockPos, newBlockState, 3)
   }
