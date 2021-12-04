@@ -456,8 +456,7 @@ sealed class ElectrolyzerBlock private ()
           else
             false
         } else {
-          val b = sameItems.map(e => e.getMaxStackSize - e.getCount).sum >= elem.getCount
-          if (b)
+          if (sameItems.map(e => e.getMaxStackSize - e.getCount).sum >= elem.getCount)
             true
           else {
             count += 1
