@@ -9,15 +9,6 @@ import net.stouma915.hydrogenmod.potion.OxygenWaterPotion
 
 sealed class OxygenWaterBrewingRecipe extends IBrewingRecipe {
 
-  override def isInput(input: ItemStack): Boolean = {
-    val inputItem = input.getItem
-    (inputItem == Items.POTION || inputItem == Items.SPLASH_POTION || inputItem == Items.LINGERING_POTION) && PotionUtils
-      .getPotion(input) == Potions.WATER
-  }
-
-  override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(OxygenItem().toGeneralItemStack)
-
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))
       PotionUtils.setPotion(
@@ -26,5 +17,14 @@ sealed class OxygenWaterBrewingRecipe extends IBrewingRecipe {
       )
     else
       ItemStack.EMPTY
+
+  override def isInput(input: ItemStack): Boolean = {
+    val inputItem = input.getItem
+    (inputItem == Items.POTION || inputItem == Items.SPLASH_POTION || inputItem == Items.LINGERING_POTION) && PotionUtils
+      .getPotion(input) == Potions.WATER
+  }
+
+  override def isIngredient(ingredient: ItemStack): Boolean =
+    ingredient.sameItem(OxygenItem().toGeneralItemStack)
 
 }

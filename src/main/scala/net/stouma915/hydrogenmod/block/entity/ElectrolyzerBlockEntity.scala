@@ -64,9 +64,9 @@ sealed class ElectrolyzerBlockEntity private (
     )
     with WorldlyContainer {
 
-  private var itemStacks = NonNullList.withSize[ItemStack](19, ItemStack.EMPTY)
   private val handlers: Array[LazyOptional[IItemHandlerModifiable]] =
     SidedInvWrapper.create(this, Direction.values: _*)
+  private var itemStacks = NonNullList.withSize[ItemStack](19, ItemStack.EMPTY)
 
   override def load(p_155080_ : CompoundTag): Unit = {
     super.load(p_155080_)
@@ -92,17 +92,19 @@ sealed class ElectrolyzerBlockEntity private (
   override def setItems(p_59625_ : NonNullList[ItemStack]): Unit = itemStacks =
     p_59625_
 
-  override def canPlaceItem(p_18952_ : Int, p_18953_ : ItemStack): Boolean =
-    true
-
   override def getSlotsForFace(p_19238_ : Direction): Array[Int] =
     (0 to getContainerSize).toArray
+
+  override def getContainerSize: Int = 19
 
   override def canPlaceItemThroughFace(
       p_19235_ : Int,
       p_19236_ : ItemStack,
       p_19237_ : Direction
   ): Boolean = canPlaceItem(p_19235_, p_19236_)
+
+  override def canPlaceItem(p_18952_ : Int, p_18953_ : ItemStack): Boolean =
+    true
 
   override def canTakeItemThroughFace(
       p_19239_ : Int,
@@ -137,7 +139,5 @@ sealed class ElectrolyzerBlockEntity private (
     )
 
   override def getDefaultName: Component = new TextComponent("electrolyzer")
-
-  override def getContainerSize: Int = 19
 
 }

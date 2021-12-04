@@ -201,111 +201,6 @@ sealed class ElectrolyzerBlock private ()
     p_60463_.scheduleTick(p_60464_, this, 5)
   }
 
-  override def getShape(
-      p_51973_ : BlockState,
-      p_51974_ : BlockGetter,
-      p_51975_ : BlockPos,
-      p_51976_ : CollisionContext
-  ): VoxelShape = {
-
-    implicit def convertTupleToBox(
-        tuple: (Int, Int, Int, Int, Int, Int)
-    ): VoxelShape = Block.box(
-      tuple._1,
-      tuple._2,
-      tuple._3,
-      tuple._4,
-      tuple._5,
-      tuple._6
-    )
-
-    Shapes.join(
-      Shapes.or(
-        (3, 30, 7, 5, 32, 9),
-        (3, 30, 7, 5, 32, 9),
-        (0, 0, 0, 16, 32, 16)
-      ),
-      Shapes.or(
-        (0, 0, 1, 16, 9, 15),
-        (0, 10, 0, 16, 32, 4),
-        (0, 10, 12, 16, 32, 16),
-        (0, 10, 0, 1, 32, 16),
-        (15, 10, 0, 16, 32, 16),
-        (0, 30, 0, 16, 32, 16)
-      ),
-      BooleanOp.ONLY_FIRST
-    )
-  }
-
-  override def use(
-      p_60503_ : BlockState,
-      p_60504_ : Level,
-      p_60505_ : BlockPos,
-      p_60506_ : Player,
-      p_60507_ : InteractionHand,
-      p_60508_ : BlockHitResult
-  ): InteractionResult = {
-    p_60506_ match {
-      case serverPlayer: ServerPlayer =>
-        val extraData =
-          new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(p_60505_)
-
-        NetworkHooks.openGui(
-          serverPlayer,
-          new MenuProvider {
-            override def getDisplayName: Component =
-              new TranslatableComponent("gui.hydrogenmod.electrolyzer.title")
-
-            override def createMenu(
-                p_39954_ : Int,
-                p_39955_ : Inventory,
-                p_39956_ : Player
-            ): AbstractContainerMenu = ElectrolyzerMenu.newInstance(
-              p_39954_,
-              p_39955_,
-              extraData
-            )
-          },
-          p_60505_
-        )
-      case _ =>
-    }
-
-    InteractionResult.SUCCESS
-  }
-
-  override def getMenuProvider(
-      p_60563_ : BlockState,
-      p_60564_ : Level,
-      p_60565_ : BlockPos
-  ): MenuProvider = {
-    val blockEntity = p_60564_.getBlockEntity(p_60565_)
-    blockEntity match {
-      case menuProvider: MenuProvider =>
-        menuProvider
-      case _ =>
-        null
-    }
-  }
-
-  override def onRemove(
-      p_60515_ : BlockState,
-      p_60516_ : Level,
-      p_60517_ : BlockPos,
-      p_60518_ : BlockState,
-      p_60519_ : Boolean
-  ): Unit = {
-    if (p_60515_.getBlock != p_60518_.getBlock) {
-      val blockEntity = p_60516_.getBlockEntity(p_60517_)
-      blockEntity match {
-        case entity: ElectrolyzerBlockEntity =>
-          Containers.dropContents(p_60516_, p_60517_, entity)
-          p_60516_.updateNeighbourForOutputSignal(p_60517_, this)
-        case _ =>
-      }
-    }
-  }
-
   private def placeItems(
       itemsToPlace: List[ItemStack],
       currentItems: List[ItemStack]
@@ -534,6 +429,111 @@ sealed class ElectrolyzerBlock private ()
         .setValue(ElectrolyzerBlock.WaterLevelProperty, newWaterLevel)
 
     level.setBlock(blockPos, newBlockState, 3)
+  }
+
+  override def getShape(
+      p_51973_ : BlockState,
+      p_51974_ : BlockGetter,
+      p_51975_ : BlockPos,
+      p_51976_ : CollisionContext
+  ): VoxelShape = {
+
+    implicit def convertTupleToBox(
+        tuple: (Int, Int, Int, Int, Int, Int)
+    ): VoxelShape = Block.box(
+      tuple._1,
+      tuple._2,
+      tuple._3,
+      tuple._4,
+      tuple._5,
+      tuple._6
+    )
+
+    Shapes.join(
+      Shapes.or(
+        (3, 30, 7, 5, 32, 9),
+        (3, 30, 7, 5, 32, 9),
+        (0, 0, 0, 16, 32, 16)
+      ),
+      Shapes.or(
+        (0, 0, 1, 16, 9, 15),
+        (0, 10, 0, 16, 32, 4),
+        (0, 10, 12, 16, 32, 16),
+        (0, 10, 0, 1, 32, 16),
+        (15, 10, 0, 16, 32, 16),
+        (0, 30, 0, 16, 32, 16)
+      ),
+      BooleanOp.ONLY_FIRST
+    )
+  }
+
+  override def use(
+      p_60503_ : BlockState,
+      p_60504_ : Level,
+      p_60505_ : BlockPos,
+      p_60506_ : Player,
+      p_60507_ : InteractionHand,
+      p_60508_ : BlockHitResult
+  ): InteractionResult = {
+    p_60506_ match {
+      case serverPlayer: ServerPlayer =>
+        val extraData =
+          new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(p_60505_)
+
+        NetworkHooks.openGui(
+          serverPlayer,
+          new MenuProvider {
+            override def getDisplayName: Component =
+              new TranslatableComponent("gui.hydrogenmod.electrolyzer.title")
+
+            override def createMenu(
+                p_39954_ : Int,
+                p_39955_ : Inventory,
+                p_39956_ : Player
+            ): AbstractContainerMenu = ElectrolyzerMenu.newInstance(
+              p_39954_,
+              p_39955_,
+              extraData
+            )
+          },
+          p_60505_
+        )
+      case _ =>
+    }
+
+    InteractionResult.SUCCESS
+  }
+
+  override def getMenuProvider(
+      p_60563_ : BlockState,
+      p_60564_ : Level,
+      p_60565_ : BlockPos
+  ): MenuProvider = {
+    val blockEntity = p_60564_.getBlockEntity(p_60565_)
+    blockEntity match {
+      case menuProvider: MenuProvider =>
+        menuProvider
+      case _ =>
+        null
+    }
+  }
+
+  override def onRemove(
+      p_60515_ : BlockState,
+      p_60516_ : Level,
+      p_60517_ : BlockPos,
+      p_60518_ : BlockState,
+      p_60519_ : Boolean
+  ): Unit = {
+    if (p_60515_.getBlock != p_60518_.getBlock) {
+      val blockEntity = p_60516_.getBlockEntity(p_60517_)
+      blockEntity match {
+        case entity: ElectrolyzerBlockEntity =>
+          Containers.dropContents(p_60516_, p_60517_, entity)
+          p_60516_.updateNeighbourForOutputSignal(p_60517_, this)
+        case _ =>
+      }
+    }
   }
 
 }

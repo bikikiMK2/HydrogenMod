@@ -47,6 +47,27 @@ sealed class ElectrolyzerScreen private (
     renderTooltip(poseStack, mouseX, mouseY)
   }
 
+  override def keyPressed(key: Int, b: Int, c: Int): Boolean = {
+    if (key == 256) {
+      minecraft.player.closeContainer()
+      return true
+    }
+    super.keyPressed(key, b, c)
+  }
+
+  override def containerTick(): Unit =
+    super.containerTick()
+
+  override def onClose(): Unit = {
+    super.onClose()
+    Minecraft.getInstance.keyboardHandler.setSendRepeatsToGui(false)
+  }
+
+  override def init(): Unit = {
+    super.init()
+    minecraft.keyboardHandler.setSendRepeatsToGui(true)
+  }
+
   override protected def renderBg(
       poseStack: PoseStack,
       partialTicks: Float,
@@ -81,27 +102,6 @@ sealed class ElectrolyzerScreen private (
         progress * 4,
         16
       )
-  }
-
-  override def keyPressed(key: Int, b: Int, c: Int): Boolean = {
-    if (key == 256) {
-      minecraft.player.closeContainer()
-      return true
-    }
-    super.keyPressed(key, b, c)
-  }
-
-  override def containerTick(): Unit =
-    super.containerTick()
-
-  override def onClose(): Unit = {
-    super.onClose()
-    Minecraft.getInstance.keyboardHandler.setSendRepeatsToGui(false)
-  }
-
-  override def init(): Unit = {
-    super.init()
-    minecraft.keyboardHandler.setSendRepeatsToGui(true)
   }
 
 }

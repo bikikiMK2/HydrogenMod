@@ -9,17 +9,17 @@ package object implicits {
 
   implicit class AnyRefOps(anyRef: AnyRef) {
 
-    def isNull: Boolean = anyRef == null
-
     def nonNull: Boolean = !isNull
+
+    def isNull: Boolean = anyRef == null
 
   }
 
   implicit class ItemOps(item: Item) {
 
-    def toGeneralItemStack: ItemStack = new ItemStack(item)
-
     def canDestroy: Boolean = item.isDamageable(toGeneralItemStack)
+
+    def toGeneralItemStack: ItemStack = new ItemStack(item)
 
   }
 
