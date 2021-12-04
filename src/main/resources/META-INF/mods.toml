@@ -3,24 +3,24 @@ loaderVersion = "[38,)"
 license = "MIT License"
 
 [[mods]]
-    modId = "hydrogenmod"
-    version = "1.0.0"
-    displayName = "HydrogenMod"
-    displayURL = "https://github.com/stouma915/HydrogenMod"
-    credits = "Sasaki Touma, Idea by bikikiMK2"
-    authors = "stouma915, bikikiMK2"
-    description = "水素で遊ぼう"
+modId = "hydrogenmod"
+version = "1.0.0"
+displayName = "HydrogenMod"
+displayURL = "https://github.com/stouma915/HydrogenMod"
+credits = "Sasaki Touma, Idea by bikikiMK2"
+authors = "stouma915, bikikiMK2"
+description = "水素で遊ぼう"
 
 [[dependencies.hydrogenmod]]
-    modId = "forge"
-    mandatory = true
-    versionRange = "[38,)"
-    ordering = "NONE"
-    side = "BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "[38,)"
+ordering = "NONE"
+side = "BOTH"
 
 [[dependencies.hydrogenmod]]
-    modId = "minecraft"
-    mandatory = true
-    versionRange = "[1.18,1.19)"
-    ordering = "NONE"
-    side = "BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.18,1.19)"
+ordering = "NONE"
+side = "BOTH"

@@ -10,7 +10,7 @@
           "name": "hydrogenmod:electrolyzer"
         }
       ],
-      "conditions":[
+      "conditions": [
         {
           "condition": "minecraft:survives_explosion"
         }
