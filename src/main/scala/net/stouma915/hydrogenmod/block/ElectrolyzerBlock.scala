@@ -25,7 +25,12 @@ import net.minecraft.world.level.block.state.properties.{
 }
 import net.minecraft.world.level.material.Material
 import net.minecraft.world.phys.BlockHitResult
-import net.minecraft.world.phys.shapes.{CollisionContext, VoxelShape}
+import net.minecraft.world.phys.shapes.{
+  BooleanOp,
+  CollisionContext,
+  Shapes,
+  VoxelShape
+}
 import net.minecraftforge.fmllegacy.network.NetworkHooks
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.entity.ElectrolyzerBlockEntity
@@ -36,6 +41,7 @@ import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.Random
 import scala.jdk.CollectionConverters.*
+import scala.language.implicitConversions
 import scala.util.control.Breaks.*
 
 object ElectrolyzerBlock {
@@ -200,8 +206,36 @@ sealed class ElectrolyzerBlock private ()
       p_51974_ : BlockGetter,
       p_51975_ : BlockPos,
       p_51976_ : CollisionContext
-  ): VoxelShape =
-    Block.box(0.0d, 0.0d, 0.0d, 16.0d, 32.0d, 16.0d)
+  ): VoxelShape = {
+
+    implicit def convertTupleToBox(
+        tuple: (Int, Int, Int, Int, Int, Int)
+    ): VoxelShape = Block.box(
+      tuple._1,
+      tuple._2,
+      tuple._3,
+      tuple._4,
+      tuple._5,
+      tuple._6
+    )
+
+    Shapes.join(
+      Shapes.or(
+        (3, 30, 7, 5, 32, 9),
+        (3, 30, 7, 5, 32, 9),
+        (0, 0, 0, 16, 32, 16)
+      ),
+      Shapes.or(
+        (0, 0, 1, 16, 9, 15),
+        (0, 10, 0, 16, 32, 4),
+        (0, 10, 12, 16, 32, 16),
+        (0, 10, 0, 1, 32, 16),
+        (15, 10, 0, 16, 32, 16),
+        (0, 30, 0, 16, 32, 16)
+      ),
+      BooleanOp.ONLY_FIRST
+    )
+  }
 
   override def use(
       p_60503_ : BlockState,
