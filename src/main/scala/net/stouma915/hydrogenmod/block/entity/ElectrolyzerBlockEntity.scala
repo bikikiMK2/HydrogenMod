@@ -82,8 +82,7 @@ sealed class ElectrolyzerBlockEntity private (
       ContainerHelper.saveAllItems(p_187461_, itemStacks, false)
   }
 
-  override def isEmpty: Boolean =
-    !itemStacks.asScala.toList.map(_.isEmpty).contains(false)
+  override def isEmpty: Boolean = itemStacks.asScala.forall(_.isEmpty)
 
   override def getMaxStackSize: Int = 64
 
