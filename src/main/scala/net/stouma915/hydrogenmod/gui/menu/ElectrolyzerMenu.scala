@@ -5,12 +5,12 @@ import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.{AbstractContainerMenu, MenuType, Slot}
 import net.minecraft.world.item.{ItemStack, Items}
 import net.minecraft.world.level.block.state.properties.Property
-import net.minecraftforge.fmllegacy.network.IContainerFactory
 import net.minecraftforge.items.{
   CapabilityItemHandler,
   IItemHandler,
   SlotItemHandler
 }
+import net.minecraftforge.network.IContainerFactory
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.implicits.*

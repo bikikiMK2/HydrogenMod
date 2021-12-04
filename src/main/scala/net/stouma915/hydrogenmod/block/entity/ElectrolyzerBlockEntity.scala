@@ -3,10 +3,9 @@ package net.stouma915.hydrogenmod.block.entity
 import io.netty.buffer.Unpooled
 import net.minecraft.core.{BlockPos, Direction, NonNullList}
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.{Connection, FriendlyByteBuf}
 import net.minecraft.network.chat.{Component, TextComponent}
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.world.{ContainerHelper, WorldlyContainer}
+import net.minecraft.network.{Connection, FriendlyByteBuf}
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
@@ -15,14 +14,15 @@ import net.minecraft.world.level.block.entity.{
   RandomizableContainerBlockEntity
 }
 import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.{ContainerHelper, WorldlyContainer}
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
+import net.minecraftforge.items.wrapper.SidedInvWrapper
 import net.minecraftforge.items.{
   CapabilityItemHandler,
   IItemHandler,
   IItemHandlerModifiable
 }
-import net.minecraftforge.items.wrapper.SidedInvWrapper
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
@@ -70,36 +70,17 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def load(p_155080_ : CompoundTag): Unit = {
     super.load(p_155080_)
-    if (!tryLoadLootTable(p_155080_))
-      itemStacks = NonNullList.withSize(getContainerSize, ItemStack.EMPTY)
+    itemStacks = NonNullList.withSize(getContainerSize, ItemStack.EMPTY)
 
-    ContainerHelper.loadAllItems(
-      p_155080_,
-      itemStacks
-    )
+    if (!tryLoadLootTable(p_155080_) && p_155080_.contains("Items"))
+      ContainerHelper.loadAllItems(p_155080_, itemStacks)
   }
 
-  override def save(p_58637_ : CompoundTag): CompoundTag = {
-    super.save(p_58637_)
-    if (!trySaveLootTable(p_58637_))
-      ContainerHelper.saveAllItems(p_58637_, itemStacks)
-
-    p_58637_
+  override def saveAdditional(p_187461_ : CompoundTag): Unit = {
+    super.saveAdditional(p_187461_)
+    if (!trySaveLootTable(p_187461_))
+      ContainerHelper.saveAllItems(p_187461_, itemStacks, false)
   }
-
-  override def getUpdatePacket: ClientboundBlockEntityDataPacket =
-    new ClientboundBlockEntityDataPacket(
-      worldPosition,
-      0,
-      getUpdateTag
-    )
-
-  override def getUpdateTag: CompoundTag = save(new CompoundTag())
-
-  override def onDataPacket(
-      net: Connection,
-      pkt: ClientboundBlockEntityDataPacket
-  ): Unit = load(pkt.getTag)
 
   override def isEmpty: Boolean =
     !itemStacks.asScala.toList.map(_.isEmpty).contains(false)

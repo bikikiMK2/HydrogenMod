@@ -31,7 +31,7 @@ import net.minecraft.world.phys.shapes.{
   Shapes,
   VoxelShape
 }
-import net.minecraftforge.fmllegacy.network.NetworkHooks
+import net.minecraftforge.network.NetworkHooks
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.entity.ElectrolyzerBlockEntity
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
@@ -95,7 +95,7 @@ sealed class ElectrolyzerBlock private ()
       p_60569_ : BlockState,
       p_60570_ : Boolean
   ): Unit =
-    p_60567_.getBlockTicks.scheduleTick(p_60568_, this, 0)
+    p_60567_.scheduleTick(p_60568_, this, 0)
 
   override def tick(
       p_60462_ : BlockState,
@@ -198,7 +198,7 @@ sealed class ElectrolyzerBlock private ()
       } else updateState(p_60462_, p_60463_, p_60464_, 0, waterLevel)
     } else updateState(p_60462_, p_60463_, p_60464_, 0, waterLevel)
 
-    p_60463_.getBlockTicks.scheduleTick(p_60464_, this, 5)
+    p_60463_.scheduleTick(p_60464_, this, 5)
   }
 
   override def getShape(

@@ -18,10 +18,10 @@ apply plugin: "net.minecraftforge.gradle"
 version = "1.0.0"
 group = "net.stouma915.hydrogenmod"
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(16)
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: "official", version: "1.17.1"
+    mappings channel: "official", version: "1.18"
 
     runs {
         client {
@@ -79,7 +79,7 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:1.17.1-37.0.103"
+    minecraft "net.minecraftforge:forge:1.18-38.0.14"
     embed "org.scala-lang:scala3-library_3:3.1.0"
 }
 
