@@ -5,31 +5,31 @@ import net.minecraft.core.{BlockPos, NonNullList}
 import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.network.chat.{Component, TranslatableComponent}
 import net.minecraft.server.level.{ServerLevel, ServerPlayer}
-import net.minecraft.world.{
-  Containers,
-  InteractionHand,
-  InteractionResult,
-  MenuProvider
-}
 import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.{ItemStack, Items}
 import net.minecraft.world.level.block.entity.BlockEntity
-import net.minecraft.world.level.{BlockGetter, Level}
-import net.minecraft.world.level.block.{Block, EntityBlock, SoundType}
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties
-import net.minecraft.world.level.block.state.{BlockState, StateDefinition}
 import net.minecraft.world.level.block.state.properties.{
   IntegerProperty,
   Property
 }
+import net.minecraft.world.level.block.state.{BlockState, StateDefinition}
+import net.minecraft.world.level.block.{Block, EntityBlock, SoundType}
 import net.minecraft.world.level.material.Material
+import net.minecraft.world.level.{BlockGetter, Level}
 import net.minecraft.world.phys.BlockHitResult
 import net.minecraft.world.phys.shapes.{
   BooleanOp,
   CollisionContext,
   Shapes,
   VoxelShape
+}
+import net.minecraft.world.{
+  Containers,
+  InteractionHand,
+  InteractionResult,
+  MenuProvider
 }
 import net.minecraftforge.network.NetworkHooks
 import net.stouma915.hydrogenmod.HydrogenMod

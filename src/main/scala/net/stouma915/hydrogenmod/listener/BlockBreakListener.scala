@@ -11,13 +11,7 @@ import net.stouma915.hydrogenmod.armor.item.{
 }
 import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.{BatteryItem, HydrogenItem}
-import net.stouma915.hydrogenmod.tool.item.{
-  HydrogenAxeItem,
-  HydrogenHoeItem,
-  HydrogenPickaxeItem,
-  HydrogenShovelItem,
-  HydrogenSwordItem
-}
+import net.stouma915.hydrogenmod.tool.item.*
 import net.stouma915.hydrogenmod.util.Util
 
 class BlockBreakListener {

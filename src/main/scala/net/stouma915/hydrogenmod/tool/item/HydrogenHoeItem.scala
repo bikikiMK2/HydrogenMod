@@ -1,7 +1,7 @@
 package net.stouma915.hydrogenmod.tool.item
 
-import net.minecraft.world.item.{HoeItem, Item}
 import net.minecraft.world.item.Item.Properties
+import net.minecraft.world.item.{HoeItem, Item}
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.creativetab.HydrogenModTab
 import net.stouma915.hydrogenmod.tool.tier.HydrogenTier

@@ -1,7 +1,6 @@
 package net.stouma915.hydrogenmod.recipe.electrolysis
 
-import net.minecraft.world.item.Items
-import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.{ItemStack, Items}
 import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.{HydrogenItem, OxygenItem}
 import net.stouma915.hydrogenmod.meta.recipe.electrolysis.ElectrolysisRecipe
