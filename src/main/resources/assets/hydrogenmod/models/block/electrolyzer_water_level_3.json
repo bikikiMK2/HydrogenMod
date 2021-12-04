@@ -1,8 +1,8 @@
 {
   "credit": "Made with Blockbench",
   "textures": {
-    "0": "block/water_flow",
-    "particle": "block/water_flow"
+    "0": "hydrogenmod:block/electrolyzer_water",
+    "particle": "hydrogenmod:block/electrolyzer_water"
   },
   "elements": [
     {
