@@ -35,11 +35,8 @@ object ElectrolyzerBlockEntity {
   private val instance: BlockEntityType[_] =
     BlockEntityType.Builder
       .of(
-        new BlockEntityType.BlockEntitySupplier[ElectrolyzerBlockEntity] {
-          override def create(p_155268_ : BlockPos, p_155269_ : BlockState)
-              : ElectrolyzerBlockEntity =
-            new ElectrolyzerBlockEntity(p_155268_, p_155269_)
-        },
+        (blockPos: BlockPos, blockState: BlockState) =>
+          new ElectrolyzerBlockEntity(blockPos, blockState),
         ElectrolyzerBlock()
       )
       .build(null)
