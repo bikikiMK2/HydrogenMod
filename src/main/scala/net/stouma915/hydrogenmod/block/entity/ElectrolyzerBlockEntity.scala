@@ -73,6 +73,8 @@ sealed class ElectrolyzerBlockEntity private (
       ContainerHelper.loadAllItems(p_155080_, itemStacks)
   }
 
+  override def getContainerSize: Int = 19
+
   override def saveAdditional(p_187461_ : CompoundTag): Unit = {
     super.saveAdditional(p_187461_)
     if (!trySaveLootTable(p_187461_))
@@ -90,8 +92,6 @@ sealed class ElectrolyzerBlockEntity private (
 
   override def getSlotsForFace(p_19238_ : Direction): Array[Int] =
     (0 to getContainerSize).toArray
-
-  override def getContainerSize: Int = 19
 
   override def canPlaceItemThroughFace(
       p_19235_ : Int,
