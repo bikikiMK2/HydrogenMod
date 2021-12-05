@@ -139,9 +139,7 @@ sealed class ElectrolyzerBlock private ()
         .head
       val electrolysisRecipe = ElectrolysisRecipeRegistry.getAll
         .find(elem => elem.isCorrectAsInput(inputItem))
-        .getOrElse {
-          throw new IllegalStateException()
-        }
+        .getOrElse(throw new IllegalStateException)
 
       if (
         canPlaceItems(
