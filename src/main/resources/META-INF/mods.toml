@@ -7,7 +7,7 @@ modId = "hydrogenmod"
 version = "1.0.0"
 displayName = "HydrogenMod"
 displayURL = "https://github.com/stouma915/HydrogenMod"
-credits = "Idea by bikikiMK2, Used Blockbench to make a block model"
+credits = "Idea by bikikiMK2, Programmed by stouma915, Block model by Blockbench"
 authors = "stouma915, bikikiMK2"
 description = "水素で遊ぼう"
 
