@@ -4,7 +4,7 @@ license = "MIT License"
 
 [[mods]]
 modId = "hydrogenmod"
-version = "1.0.0"
+version = "1.0.1"
 displayName = "HydrogenMod"
 displayURL = "https://github.com/stouma915/HydrogenMod"
 credits = "Idea by bikikiMK2, Programmed by stouma915, Block model by Blockbench"
