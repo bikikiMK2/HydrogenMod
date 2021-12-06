@@ -41,7 +41,6 @@ import net.stouma915.hydrogenmod.recipe.electrolysis.ElectrolysisRecipeRegistry
 
 import java.util.Random
 import scala.jdk.CollectionConverters.*
-import scala.language.implicitConversions
 import scala.util.control.Breaks.*
 
 object ElectrolyzerBlock {
@@ -435,6 +434,8 @@ sealed class ElectrolyzerBlock private ()
       p_51975_ : BlockPos,
       p_51976_ : CollisionContext
   ): VoxelShape = {
+
+    import scala.language.implicitConversions
 
     implicit def convertTupleToBox(
         tuple: (Int, Int, Int, Int, Int, Int)
