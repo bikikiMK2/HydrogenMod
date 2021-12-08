@@ -47,14 +47,6 @@ sealed class ElectrolyzerScreen private (
     renderTooltip(poseStack, mouseX, mouseY)
   }
 
-  override def keyPressed(key: Int, b: Int, c: Int): Boolean = {
-    if (key == 256) {
-      minecraft.player.closeContainer()
-      return true
-    }
-    super.keyPressed(key, b, c)
-  }
-
   override def containerTick(): Unit =
     super.containerTick()
 
