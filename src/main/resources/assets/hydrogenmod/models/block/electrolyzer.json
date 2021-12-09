@@ -3,9 +3,9 @@
   "parent": "minecraft:block/block",
   "textures": {
     "0": "hydrogenmod:block/electrolyzer_base",
-    "1": "block/glass",
+    "1": "minecraft:block/glass",
     "2": "hydrogenmod:block/electrolyzer_cap",
-    "3": "electrolyzer_electrode",
+    "3": "hydrogenmod:block/electrolyzer_electrode",
     "particle": "hydrogenmod:block/electrolyzer_base"
   },
   "elements": [
