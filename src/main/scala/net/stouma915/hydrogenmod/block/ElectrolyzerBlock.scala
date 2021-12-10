@@ -161,8 +161,8 @@ sealed class ElectrolyzerBlock private ()
             newItems.dropRight(10).zipWithIndex.foreach {
               case (itemStack: ItemStack, index: Int)
                   if !itemStack.isEmpty && itemStack.getItem != Items.BUCKET =>
-                  val bucketItemStack = Items.BUCKET.toGeneralItemStack
-                  newItems = newItems.updated(index, bucketItemStack)
+                val bucketItemStack = Items.BUCKET.toGeneralItemStack
+                newItems = newItems.updated(index, bucketItemStack)
                 break()
               case _ =>
             }
