@@ -107,7 +107,7 @@ sealed class ElectrolyzerBlock private ()
         entity
       case _ => throw new IllegalStateException
     }
-    val items = blockEntity.getItems.asScala.toList.map(_.copy)
+    val items = blockEntity.getItems.asScala.toList.map(_.copy())
     val waterLevel = items.dropRight(10).count { itemStack =>
       ElectrolysisRecipeRegistry.getAll.exists(_.isCorrectAsInput(itemStack))
     }
@@ -151,7 +151,7 @@ sealed class ElectrolyzerBlock private ()
         if (currentProgress >= 6) {
           var newItems = items
 
-          val damagedBattery = newItems(9).copy
+          val damagedBattery = newItems(9).copy()
           damagedBattery.addDamage()
           newItems = newItems.updated(9, damagedBattery)
 
@@ -173,7 +173,7 @@ sealed class ElectrolyzerBlock private ()
             .appendedAll(
               placeItems(
                 electrolysisRecipe.getOutputItems(inputItem),
-                newItems.drop(10).map(_.copy)
+                newItems.drop(10).map(_.copy())
               )
             )
 
