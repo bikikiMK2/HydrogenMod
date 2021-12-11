@@ -38,15 +38,9 @@ object ElectrolyzerMenu {
 
   def apply(): MenuType[ElectrolyzerMenu] = instance
 
-  private[hydrogenmod] def newInstance(
-      id: Int,
-      inventory: Inventory,
-      extraData: FriendlyByteBuf
-  ): ElectrolyzerMenu = new ElectrolyzerMenu(id, inventory, extraData)
-
 }
 
-sealed class ElectrolyzerMenu private (
+sealed class ElectrolyzerMenu private[hydrogenmod] (
     id: Int,
     inventory: Inventory,
     extraData: FriendlyByteBuf

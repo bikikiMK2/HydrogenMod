@@ -44,14 +44,9 @@ object ElectrolyzerBlockEntity {
 
   def apply(): BlockEntityType[_] = instance
 
-  private[block] def newInstance(
-      blockPos: BlockPos,
-      blockState: BlockState
-  ): ElectrolyzerBlockEntity = new ElectrolyzerBlockEntity(blockPos, blockState)
-
 }
 
-sealed class ElectrolyzerBlockEntity private (
+sealed class ElectrolyzerBlockEntity private[hydrogenmod] (
     blockPos: BlockPos,
     blockState: BlockState
 ) extends RandomizableContainerBlockEntity(
@@ -128,7 +123,7 @@ sealed class ElectrolyzerBlockEntity private (
       p_58627_ : Int,
       p_58628_ : Inventory
   ): AbstractContainerMenu =
-    ElectrolyzerMenu.newInstance(
+    new ElectrolyzerMenu(
       p_58627_,
       p_58628_,
       new FriendlyByteBuf(Unpooled.buffer()).writeBlockPos(worldPosition)

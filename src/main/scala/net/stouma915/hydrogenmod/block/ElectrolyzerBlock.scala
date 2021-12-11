@@ -85,7 +85,7 @@ sealed class ElectrolyzerBlock private ()
   override def newBlockEntity(
       p_153215_ : BlockPos,
       p_153216_ : BlockState
-  ): BlockEntity = ElectrolyzerBlockEntity.newInstance(p_153215_, p_153216_)
+  ): BlockEntity = new ElectrolyzerBlockEntity(p_153215_, p_153216_)
 
   override def onPlace(
       p_60566_ : BlockState,
@@ -483,7 +483,7 @@ sealed class ElectrolyzerBlock private ()
                 p_39954_ : Int,
                 p_39955_ : Inventory,
                 p_39956_ : Player
-            ): AbstractContainerMenu = ElectrolyzerMenu.newInstance(
+            ): AbstractContainerMenu = new ElectrolyzerMenu(
               p_39954_,
               p_39955_,
               extraData
