@@ -21,7 +21,7 @@ group = "net.stouma915.hydrogenmod"
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
 minecraft {
-    mappings channel: "official", version: "1.18"
+    mappings channel: "official", version: "1.18.1"
 
     runs {
         client {
@@ -79,7 +79,7 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:1.18-38.0.14"
+    minecraft "net.minecraftforge:forge:1.18.1-39.0.0"
     embed "org.scala-lang:scala3-library_3:3.1.0"
 }
 
