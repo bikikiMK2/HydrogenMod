@@ -2,8 +2,8 @@
 Minecraftに水素を追加するMod
 
 ## 動作環境
-* Minecraft 1.18
-* Forge 1.18-38.0.14
+* Minecraft 1.18.1
+* Forge 1.18.1-39.0.0
 
 ## ビルド
 プロジェクトルートで<br>
