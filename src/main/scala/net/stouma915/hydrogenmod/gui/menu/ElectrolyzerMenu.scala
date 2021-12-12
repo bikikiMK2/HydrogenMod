@@ -58,7 +58,7 @@ sealed class ElectrolyzerMenu private[hydrogenmod] (
     }
 
   if (iItemHandler.isNull)
-    throw new IllegalStateException("IItemHandler is null.")
+    throw new IllegalStateException("Couldn't get the inventory capability.")
 
   // format: off
   private class CustomSlot(val index: Int, val x: Int, val y: Int, val mayPlace: ItemStack => Boolean)
