@@ -46,7 +46,7 @@ object ElectrolyzerBlockEntity {
 
 }
 
-sealed class ElectrolyzerBlockEntity private[hydrogenmod] (
+sealed class ElectrolyzerBlockEntity private[block] (
     blockPos: BlockPos,
     blockState: BlockState
 ) extends RandomizableContainerBlockEntity(
