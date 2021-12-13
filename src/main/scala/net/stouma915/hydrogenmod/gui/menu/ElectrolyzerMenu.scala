@@ -9,8 +9,6 @@ import net.minecraftforge.items.{CapabilityItemHandler, SlotItemHandler}
 import net.minecraftforge.network.IContainerFactory
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
-import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu.instance
-import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.BatteryItem
 import net.stouma915.hydrogenmod.meta.gui.menu.GUIMenu
 

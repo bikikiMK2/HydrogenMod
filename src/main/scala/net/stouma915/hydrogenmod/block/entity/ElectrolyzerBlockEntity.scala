@@ -4,8 +4,7 @@ import io.netty.buffer.Unpooled
 import net.minecraft.core.{BlockPos, Direction, NonNullList}
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.network.chat.{Component, TextComponent}
-import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket
-import net.minecraft.network.{Connection, FriendlyByteBuf}
+import net.minecraft.network.FriendlyByteBuf
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack
@@ -18,17 +17,11 @@ import net.minecraft.world.{ContainerHelper, WorldlyContainer}
 import net.minecraftforge.common.capabilities.Capability
 import net.minecraftforge.common.util.LazyOptional
 import net.minecraftforge.items.wrapper.SidedInvWrapper
-import net.minecraftforge.items.{
-  CapabilityItemHandler,
-  IItemHandler,
-  IItemHandlerModifiable
-}
+import net.minecraftforge.items.{CapabilityItemHandler, IItemHandlerModifiable}
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
 import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
 import net.stouma915.hydrogenmod.implicits.*
-
-import scala.jdk.CollectionConverters.*
 
 object ElectrolyzerBlockEntity {
 

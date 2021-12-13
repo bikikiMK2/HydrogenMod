@@ -7,7 +7,6 @@ import net.minecraft.world.item.ItemStack
 import net.stouma915.hydrogenmod.implicits.*
 
 import java.util.function.Supplier
-import scala.collection.mutable
 import scala.util.control.Breaks.*
 
 abstract class GUIMenu(
