@@ -57,7 +57,7 @@ sealed class ElectrolyzerMenu private[hydrogenmod] (
 
   // format: off
   private class CustomSlot(val index: Int, val x: Int, val y: Int, val mayPlace: ItemStack => Boolean)
-  private case class InputSlot(override val index: Int, override val x: Int, override val y: Int) extends CustomSlot(index, x, y,  _ => true)
+  private case class InputSlot(override val index: Int, override val x: Int, override val y: Int) extends CustomSlot(index, x, y, _ => true)
   private case class LimitedSlot(override val index: Int, override val x: Int, override val y: Int, override val mayPlace: ItemStack => Boolean) extends CustomSlot(index, x, y, mayPlace)
   private case class OutputSlot(override val index: Int, override val x: Int, override val y: Int) extends CustomSlot(index, x, y, _ => false)
   // format: on

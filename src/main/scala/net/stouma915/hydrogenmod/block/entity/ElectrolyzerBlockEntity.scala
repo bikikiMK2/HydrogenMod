@@ -3,8 +3,8 @@ package net.stouma915.hydrogenmod.block.entity
 import io.netty.buffer.Unpooled
 import net.minecraft.core.{BlockPos, Direction, NonNullList}
 import net.minecraft.nbt.CompoundTag
-import net.minecraft.network.chat.{Component, TextComponent}
 import net.minecraft.network.FriendlyByteBuf
+import net.minecraft.network.chat.{Component, TextComponent}
 import net.minecraft.world.entity.player.Inventory
 import net.minecraft.world.inventory.AbstractContainerMenu
 import net.minecraft.world.item.ItemStack

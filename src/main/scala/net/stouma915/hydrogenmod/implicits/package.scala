@@ -25,6 +25,8 @@ package object implicits {
 
   implicit class ItemStackOps(itemStack: ItemStack) {
 
+    def toGeneralItemStack: ItemStack = itemStack.getItem.toGeneralItemStack
+
     def destroyItem(livingEntity: LivingEntity): Unit =
       itemStack.hurtAndBreak(
         itemStack.getMaxDamage,
