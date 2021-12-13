@@ -12,21 +12,7 @@ import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu
 
 import scala.collection.immutable.HashMap
 
-object ElectrolyzerScreen {
-
-  private val texture = new ResourceLocation(
-    "hydrogenmod:textures/gui/electrolyzer_menu.png"
-  )
-
-  private[gui] def newInstance(
-      container: ElectrolyzerMenu,
-      inventory: Inventory,
-      text: Component
-  ): ElectrolyzerScreen = new ElectrolyzerScreen(container, inventory, text)
-
-}
-
-sealed class ElectrolyzerScreen private (
+sealed class ElectrolyzerScreen private[gui] (
     container: ElectrolyzerMenu,
     inventory: Inventory,
     text: Component
@@ -68,7 +54,12 @@ sealed class ElectrolyzerScreen private (
   ): Unit = {
     RenderSystem.setShader(() => GameRenderer.getPositionTexShader)
     RenderSystem.setShaderColor(1, 1, 1, 1)
-    RenderSystem.setShaderTexture(0, ElectrolyzerScreen.texture)
+    RenderSystem.setShaderTexture(
+      0,
+      new ResourceLocation(
+        "hydrogenmod:textures/gui/electrolyzer_menu.png"
+      )
+    )
 
     val x = (width - imageWidth) / 2
     val y = (height - imageHeight) / 2

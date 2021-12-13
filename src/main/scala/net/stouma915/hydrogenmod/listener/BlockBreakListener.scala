@@ -37,7 +37,7 @@ class BlockBreakListener {
             HydrogenHoeItem()
           ).contains(itemInMainHand.getItem)
         ) {
-          if (!event.getPlayer.isCreative) {
+          if (!event.getPlayer.isCreative && !event.getPlayer.isSpectator) {
             if (itemInMainHand.getItem.canDestroy)
               itemInMainHand.destroyItem(event.getPlayer)
             else
@@ -50,7 +50,7 @@ class BlockBreakListener {
         }
 
         if (itemInMainHand.getItem == BatteryItem()) {
-          if (!event.getPlayer.isCreative)
+          if (!event.getPlayer.isCreative && !event.getPlayer.isSpectator)
             itemInMainHand.destroyItem(event.getPlayer)
           Util.performBatteryExplosion(
             event.getPlayer.level,

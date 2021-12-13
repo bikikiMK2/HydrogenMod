@@ -37,7 +37,7 @@ class LivingDamageListener {
         boots == HydrogenBootsArmorItem()
       ) {
         event.getEntityLiving match {
-          case player: Player if !player.isCreative =>
+          case player: Player if !player.isCreative && !player.isSpectator =>
             if (helmet == HydrogenHelmetArmorItem())
               event.getEntityLiving
                 .getItemBySlot(HEAD)

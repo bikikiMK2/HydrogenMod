@@ -39,7 +39,7 @@ class PlayerInteractListener {
             HydrogenHoeItem()
           ).contains(itemInMainHand.getItem)
         ) {
-          if (!event.getPlayer.isCreative) {
+          if (!event.getPlayer.isCreative && !event.getPlayer.isSpectator) {
             if (itemInMainHand.getItem.canDestroy)
               itemInMainHand.destroyItem(event.getEntityLiving)
             else
@@ -49,7 +49,7 @@ class PlayerInteractListener {
         }
 
         if (itemInMainHand.getItem == BatteryItem()) {
-          if (!event.getPlayer.isCreative)
+          if (!event.getPlayer.isCreative && !event.getPlayer.isSpectator)
             itemInMainHand.destroyItem(event.getEntityLiving)
           Util.performBatteryExplosion(event.getWorld, event.getPos)
         }

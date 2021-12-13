@@ -65,7 +65,7 @@ sealed class ElectrolyzerBlock private ()
         .noOcclusion()
         .destroyTime(0.45f)
         .requiresCorrectToolForDrops()
-        .lightLevel((_: BlockState) => 1)
+        .lightLevel(_ => 1)
     )
     with EntityBlock {
 

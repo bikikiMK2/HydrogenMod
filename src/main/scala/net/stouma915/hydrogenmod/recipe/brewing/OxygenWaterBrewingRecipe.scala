@@ -12,7 +12,7 @@ sealed class OxygenWaterBrewingRecipe extends IBrewingRecipe {
   override def getOutput(input: ItemStack, ingredient: ItemStack): ItemStack =
     if (isInput(input) && isIngredient(ingredient))
       PotionUtils.setPotion(
-        new ItemStack(input.getItem),
+        input.getItem.toGeneralItemStack,
         OxygenWaterPotion()
       )
     else
@@ -25,6 +25,6 @@ sealed class OxygenWaterBrewingRecipe extends IBrewingRecipe {
   }
 
   override def isIngredient(ingredient: ItemStack): Boolean =
-    ingredient.sameItem(OxygenItem().toGeneralItemStack)
+    ingredient.getItem == OxygenItem()
 
 }

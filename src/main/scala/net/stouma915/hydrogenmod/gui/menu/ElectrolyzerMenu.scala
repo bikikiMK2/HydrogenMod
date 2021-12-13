@@ -5,14 +5,11 @@ import net.minecraft.world.entity.player.{Inventory, Player}
 import net.minecraft.world.inventory.{MenuType, Slot}
 import net.minecraft.world.item.ItemStack
 import net.minecraft.world.level.block.state.properties.Property
-import net.minecraftforge.items.{
-  CapabilityItemHandler,
-  IItemHandler,
-  SlotItemHandler
-}
+import net.minecraftforge.items.{CapabilityItemHandler, SlotItemHandler}
 import net.minecraftforge.network.IContainerFactory
 import net.stouma915.hydrogenmod.HydrogenMod
 import net.stouma915.hydrogenmod.block.ElectrolyzerBlock
+import net.stouma915.hydrogenmod.gui.menu.ElectrolyzerMenu.instance
 import net.stouma915.hydrogenmod.implicits.*
 import net.stouma915.hydrogenmod.item.BatteryItem
 import net.stouma915.hydrogenmod.meta.gui.menu.GUIMenu
@@ -25,9 +22,9 @@ object ElectrolyzerMenu {
     val menuType = new MenuType[ElectrolyzerMenu](
       (
           (
-              id: Int,
-              inventory: Inventory,
-              extraData: FriendlyByteBuf
+              id,
+              inventory,
+              extraData
           ) => new ElectrolyzerMenu(id, inventory, extraData)
       ): IContainerFactory[ElectrolyzerMenu]
     )
@@ -47,18 +44,18 @@ sealed class ElectrolyzerMenu private[hydrogenmod] (
 ) extends GUIMenu(id, inventory, extraData, ElectrolyzerMenu()) {
 
   private val customSlots = mutable.Map[Int, Slot]()
+
   private val blockPos = extraData.readBlockPos()
-  private var iItemHandler: IItemHandler = _
+  private val player = inventory.player
+  private val level = player.level
 
-  inventory.player.level
-    .getBlockEntity(blockPos)
-    .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
-    .ifPresent { capability =>
-      iItemHandler = capability
-    }
-
-  if (iItemHandler.isNull)
-    throw new IllegalStateException("Couldn't get the inventory capability.")
+  private val iItemHandler =
+    level
+      .getBlockEntity(blockPos)
+      .getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null)
+      .orElseThrow(() =>
+        new IllegalStateException("Couldn't get the inventory capability.")
+      )
 
   // format: off
   private class CustomSlot(val index: Int, val x: Int, val y: Int, val mayPlace: ItemStack => Boolean)
@@ -117,7 +114,7 @@ sealed class ElectrolyzerMenu private[hydrogenmod] (
   override def get(): Map[Int, Slot] = immutable.Map.from(customSlots)
 
   private[gui] def getProgress: Int = {
-    val blockEntity = inventory.player.level.getBlockEntity(blockPos)
+    val blockEntity = level.getBlockEntity(blockPos)
     blockEntity.getBlockState.getValue(
       ElectrolyzerBlock.ProgressProperty.asInstanceOf[Property[Nothing]]
     )

@@ -35,8 +35,7 @@ object ElectrolyzerBlockEntity {
   private val instance: BlockEntityType[_] =
     BlockEntityType.Builder
       .of(
-        (blockPos: BlockPos, blockState: BlockState) =>
-          new ElectrolyzerBlockEntity(blockPos, blockState),
+        new ElectrolyzerBlockEntity(_, _),
         ElectrolyzerBlock()
       )
       .build(null)
@@ -75,8 +74,6 @@ sealed class ElectrolyzerBlockEntity private[block] (
     if (!trySaveLootTable(p_187461_))
       ContainerHelper.saveAllItems(p_187461_, itemStacks, false)
   }
-
-  override def isEmpty: Boolean = itemStacks.asScala.forall(_.isEmpty)
 
   override def getMaxStackSize: Int = 64
 
